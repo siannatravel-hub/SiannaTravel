@@ -23,41 +23,43 @@ export default function PackageCard({ pkg }) {
   const imageSrc = PLACEHOLDER_IMAGES[pkg.id] || `https://images.unsplash.com/photo-1488085061387-422e29b40080?w=600&q=80`;
 
   return (
-    <article className={styles.card}>
-      <div className={styles.imageWrapper}>
-        <img
-          src={imageSrc}
-          alt={pkg.title}
-          className={styles.image}
-          loading="lazy"
-          decoding="async"
-          width="600"
-          height="450"
-        />
-        {pkg.featured && <span className={styles.badge}>Destacado</span>}
-        <span className={styles.typeBadge}>{TYPE_LABELS[pkg.type] || pkg.type}</span>
-      </div>
-
-      <div className={styles.body}>
-        <span className={styles.destination}>{pkg.destination}</span>
-        <h3 className={styles.title}>{pkg.title}</h3>
-        <div className={styles.meta}>
-          <span className={styles.rating}>⭐ {pkg.rating}</span>
-          <span>{pkg.duration}</span>
+    <Link to={`/paquetes/${pkg.id}`} className={styles.cardLink}>
+      <article className={styles.card}>
+        <div className={styles.imageWrapper}>
+          <img
+            src={imageSrc}
+            alt={pkg.title}
+            className={styles.image}
+            loading="lazy"
+            decoding="async"
+            width="600"
+            height="450"
+          />
+          {pkg.featured && <span className={styles.badge}>Destacado</span>}
+          <span className={styles.typeBadge}>{TYPE_LABELS[pkg.type] || pkg.type}</span>
         </div>
-        <p className={styles.description}>{pkg.description}</p>
-      </div>
 
-      <div className={styles.footer}>
-        <div>
-          <span className={styles.price}>${pkg.price.toLocaleString()}</span>
-          <span className={styles.priceLabel}>USD / persona</span>
+        <div className={styles.body}>
+          <span className={styles.destination}>{pkg.destination}</span>
+          <h3 className={styles.title}>{pkg.title}</h3>
+          <div className={styles.meta}>
+            <span className={styles.rating}>⭐ {pkg.rating}</span>
+            <span>{pkg.duration}</span>
+          </div>
+          <p className={styles.description}>{pkg.description}</p>
         </div>
-        <Link to={`/paquetes/${pkg.id}`} className={styles.detailBtn}>
-          Ver detalle
-          <span>→</span>
-        </Link>
-      </div>
-    </article>
+
+        <div className={styles.footer}>
+          <div>
+            <span className={styles.price}>${pkg.price.toLocaleString()}</span>
+            <span className={styles.priceLabel}>USD / persona</span>
+          </div>
+          <span className={styles.detailBtn}>
+            Ver detalle
+            <span>→</span>
+          </span>
+        </div>
+      </article>
+    </Link>
   );
 }
