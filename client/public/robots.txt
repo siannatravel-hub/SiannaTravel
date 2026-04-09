@@ -1,0 +1,19 @@
+# Robots.txt for Sianna Travel
+# https://siannatravel.com
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://siannatravel.com/sitemap.xml
+
+# Disallow admin routes
+Disallow: /admin/
+Disallow: /admin/*
+
+# Allow all crawlers to index images
+User-agent: Googlebot-Image
+Allow: /images/
+
+User-agent: Bingbot
+Allow: /

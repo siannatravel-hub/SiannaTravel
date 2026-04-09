@@ -1,0 +1,429 @@
+/* Category Pages (Beach, Cultural, Adventure) */
+
+.page {
+  min-height: 100vh;
+  background: #fff;
+}
+
+/* ================================ */
+/* HERO                             */
+/* ================================ */
+
+.hero {
+  position: relative;
+  height: 85vh;
+  min-height: 600px;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0, 0, 0, 0.3) 0%,
+    rgba(0, 0, 0, 0.5) 50%,
+    rgba(0, 0, 0, 0.7) 100%
+  );
+}
+
+.heroContent {
+  position: relative;
+  z-index: 10;
+  text-align: center;
+  color: #fff;
+  max-width: 800px;
+  padding: 0 2rem;
+}
+
+.heroTag {
+  display: inline-block;
+  padding: 0.5rem 1.25rem;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(10px);
+  border-radius: 30px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 1.5rem;
+}
+
+.heroTitle {
+  font-size: clamp(2.5rem, 6vw, 4rem);
+  font-weight: 800;
+  line-height: 1.1;
+  margin-bottom: 1.5rem;
+  text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.heroSubtitle {
+  font-size: clamp(1.1rem, 2vw, 1.35rem);
+  line-height: 1.7;
+  opacity: 0.95;
+  margin-bottom: 2.5rem;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.heroBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 1rem 2.5rem;
+  background: linear-gradient(135deg, #0f6fec 0%, #0052cc 100%);
+  color: #fff;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 30px rgba(15, 111, 236, 0.4);
+}
+
+.heroBtn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 12px 40px rgba(15, 111, 236, 0.5);
+}
+
+/* ================================ */
+/* INTRO                            */
+/* ================================ */
+
+.intro {
+  padding: 6rem 2rem;
+  background: #f8fafc;
+}
+
+.introContent {
+  max-width: 800px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.introTitle {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 1.5rem;
+}
+
+.introText {
+  font-size: 1.15rem;
+  line-height: 1.9;
+  color: #475569;
+}
+
+/* ================================ */
+/* EXPERIENCES                      */
+/* ================================ */
+
+.experiences {
+  padding: 6rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.sectionTitle {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #0f172a;
+  text-align: center;
+  margin-bottom: 3rem;
+}
+
+.expGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2rem;
+}
+
+.expCard {
+  background: #fff;
+  border-radius: 20px;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transition: all 0.3s ease;
+}
+
+.expCard:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+}
+
+.expImage {
+  height: 220px;
+  background-size: cover;
+  background-position: center;
+}
+
+.expContent {
+  padding: 1.75rem;
+}
+
+.expContent h3 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 0.75rem;
+}
+
+.expContent p {
+  color: #64748b;
+  line-height: 1.7;
+  font-size: 0.95rem;
+}
+
+/* ================================ */
+/* DESTINATIONS                     */
+/* ================================ */
+
+.destinations {
+  padding: 6rem 2rem;
+  background: linear-gradient(180deg, #f8fafc 0%, #fff 100%);
+}
+
+.destGrid {
+  max-width: 1200px;
+  margin: 0 auto;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1.5rem;
+}
+
+.destCard {
+  position: relative;
+  border-radius: 16px;
+  overflow: hidden;
+  aspect-ratio: 3/4;
+  cursor: pointer;
+}
+
+.destCard img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+
+.destCard:hover img {
+  transform: scale(1.08);
+}
+
+.destInfo {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem;
+  background: linear-gradient(to top, rgba(0,0,0,0.85) 0%, transparent 100%);
+  color: #fff;
+}
+
+.destInfo h3 {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin-bottom: 0.25rem;
+}
+
+.destInfo p {
+  font-size: 0.85rem;
+  opacity: 0.9;
+  line-height: 1.5;
+}
+
+/* ================================ */
+/* TESTIMONIAL                      */
+/* ================================ */
+
+.testimonial {
+  padding: 6rem 2rem;
+  background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%);
+  text-align: center;
+}
+
+.quote {
+  max-width: 900px;
+  margin: 0 auto 2rem;
+  font-size: clamp(1.25rem, 2.5vw, 1.75rem);
+  font-style: italic;
+  line-height: 1.8;
+  color: #fff;
+  position: relative;
+}
+
+.quote::before {
+  content: '"';
+  font-size: 5rem;
+  position: absolute;
+  top: -2rem;
+  left: -1rem;
+  color: rgba(255, 255, 255, 0.15);
+  font-family: Georgia, serif;
+}
+
+.cite {
+  color: rgba(255, 255, 255, 0.7);
+  font-size: 1rem;
+  font-style: normal;
+}
+
+/* ================================ */
+/* SAFETY (Adventure page only)     */
+/* ================================ */
+
+.safety {
+  padding: 4rem 2rem;
+  background: #fff;
+}
+
+.safetyContent {
+  max-width: 800px;
+  margin: 0 auto;
+  background: linear-gradient(135deg, #f0fdf4 0%, #dcfce7 100%);
+  border-radius: 20px;
+  padding: 2.5rem;
+  border-left: 5px solid #22c55e;
+}
+
+.safetyTitle {
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #166534;
+  margin-bottom: 1rem;
+}
+
+.safetyText {
+  color: #15803d;
+  line-height: 1.8;
+  font-size: 1.05rem;
+}
+
+/* ================================ */
+/* CTA                              */
+/* ================================ */
+
+.cta {
+  padding: 6rem 2rem;
+  background: #f8fafc;
+  text-align: center;
+}
+
+.ctaTitle {
+  font-size: 2.25rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 1rem;
+}
+
+.ctaText {
+  font-size: 1.15rem;
+  color: #64748b;
+  max-width: 600px;
+  margin: 0 auto 2.5rem;
+  line-height: 1.7;
+}
+
+.ctaButtons {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.ctaBtnPrimary {
+  padding: 1rem 2.5rem;
+  background: linear-gradient(135deg, #0f6fec 0%, #0052cc 100%);
+  color: #fff;
+  font-size: 1.05rem;
+  font-weight: 600;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(15, 111, 236, 0.3);
+}
+
+.ctaBtnPrimary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(15, 111, 236, 0.4);
+}
+
+.ctaBtnSecondary {
+  padding: 1rem 2.5rem;
+  background: #fff;
+  color: #0f6fec;
+  font-size: 1.05rem;
+  font-weight: 600;
+  border-radius: 50px;
+  border: 2px solid #0f6fec;
+  transition: all 0.3s ease;
+}
+
+.ctaBtnSecondary:hover {
+  background: #0f6fec;
+  color: #fff;
+}
+
+/* ================================ */
+/* RESPONSIVE                       */
+/* ================================ */
+
+@media (max-width: 1024px) {
+  .expGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .destGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .hero {
+    height: 70vh;
+    min-height: 500px;
+  }
+  
+  .heroTitle {
+    font-size: 2rem;
+  }
+  
+  .intro,
+  .experiences,
+  .destinations,
+  .testimonial,
+  .cta {
+    padding: 4rem 1.5rem;
+  }
+  
+  .introTitle,
+  .ctaTitle {
+    font-size: 1.75rem;
+  }
+  
+  .sectionTitle {
+    font-size: 1.5rem;
+  }
+  
+  .destGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .destCard {
+    aspect-ratio: 16/9;
+  }
+  
+  .ctaButtons {
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .ctaBtnPrimary,
+  .ctaBtnSecondary {
+    width: 100%;
+    max-width: 300px;
+  }
+}

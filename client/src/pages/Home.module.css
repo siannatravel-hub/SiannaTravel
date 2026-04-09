@@ -1,0 +1,142 @@
+.featuredSection {
+  padding: var(--space-3xl) 0;
+}
+
+.packagesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+  gap: var(--space-xl);
+}
+
+.viewAll {
+  text-align: center;
+  margin-top: var(--space-2xl);
+}
+
+/* CTA Section */
+.cta {
+  background: linear-gradient(135deg, #0f172a, #1e3a5f);
+  color: var(--color-white);
+  text-align: center;
+  padding: var(--space-3xl) var(--space-lg);
+}
+
+.ctaTitle {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 700;
+  margin-bottom: var(--space-md);
+}
+
+.ctaSubtitle {
+  font-size: 1.1rem;
+  color: rgba(255, 255, 255, 0.75);
+  margin-bottom: var(--space-xl);
+  max-width: 500px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.ctaActions {
+  display: flex;
+  gap: var(--space-md);
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+/* WhatsApp CTA Band */
+.whatsappCta {
+  background: linear-gradient(135deg, #075E54 0%, #128C7E 100%);
+  padding: 2.5rem 2rem;
+}
+
+.whatsappCtaInner {
+  max-width: 900px;
+  margin: 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+}
+
+.whatsappCtaTitle {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.35rem;
+}
+
+.whatsappCtaDesc {
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.75);
+}
+
+.whatsappCtaBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.9rem 1.8rem;
+  background: #25D366;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1rem;
+  border-radius: 50px;
+  white-space: nowrap;
+  transition: all 0.3s ease;
+  box-shadow: 0 4px 15px rgba(37, 211, 102, 0.3);
+}
+
+.whatsappCtaBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(37, 211, 102, 0.45);
+  background: #20c45e;
+}
+
+/* Features section */
+.features {
+  padding: var(--space-3xl) 0;
+}
+
+.featuresGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: var(--space-xl);
+}
+
+.feature {
+  text-align: center;
+  padding: var(--space-xl);
+}
+
+.featureIcon {
+  font-size: 2.5rem;
+  margin-bottom: var(--space-md);
+}
+
+.featureTitle {
+  font-weight: 700;
+  font-size: 1.05rem;
+  margin-bottom: var(--space-sm);
+  color: var(--color-gray-900);
+}
+
+.featureDesc {
+  font-size: 0.9rem;
+  color: var(--color-gray-500);
+  line-height: 1.6;
+}
+
+@media (max-width: 768px) {
+  .packagesGrid {
+    grid-template-columns: 1fr;
+  }
+
+  .ctaTitle {
+    font-size: 1.7rem;
+  }
+
+  .whatsappCtaInner {
+    flex-direction: column;
+    text-align: center;
+  }
+}

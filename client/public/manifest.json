@@ -1,0 +1,26 @@
+{
+  "name": "Sianna Travel - Viajes Increíbles",
+  "short_name": "Sianna Travel",
+  "description": "Tu agencia de viajes de confianza. Descubre paquetes turísticos a los mejores destinos de México.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0f6fec",
+  "orientation": "portrait-primary",
+  "icons": [
+    {
+      "src": "/images/logos/logoisotipo.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/images/logos/logoisotipo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["travel", "lifestyle"],
+  "lang": "es-MX"
+}

@@ -1,0 +1,429 @@
+/* ======================== */
+/* HEADER                   */
+/* ======================== */
+.header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+  height: 70px;
+}
+
+.headerInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 1.5rem;
+}
+
+/* Logo */
+.logo {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  font-size: 1.7rem;
+  font-weight: 700;
+  color: #1e293b;
+}
+
+.logoIcon {
+  height: 52px;
+  width: auto;
+  object-fit: contain;
+}
+
+.logoText {
+  display: flex;
+  gap: 0;
+}
+
+.logoAccent {
+  color: #0f6fec;
+}
+
+/* ======================== */
+/* DESKTOP NAV              */
+/* ======================== */
+.navDesktop {
+  display: flex;
+  align-items: center;
+  gap: 2rem;
+}
+
+.navLink {
+  font-weight: 500;
+  font-size: 0.9rem;
+  color: #64748b;
+  padding: 0.5rem 0;
+  position: relative;
+}
+
+.navLink:hover,
+.navLinkActive {
+  color: #1e293b;
+}
+
+.navLink::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #0f6fec;
+  transition: width 0.2s;
+}
+
+.navLink:hover::after,
+.navLinkActive::after {
+  width: 100%;
+}
+
+.ctaBtn {
+  padding: 0.65rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, #0f6fec 0%, #0052cc 100%);
+  color: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(15, 111, 236, 0.3);
+}
+
+.ctaBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(15, 111, 236, 0.4);
+}
+
+/* ======================== */
+/* HAMBURGER (Mobile)       */
+/* ======================== */
+.hamburger {
+  position: absolute;
+  left: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  transition: background 0.2s;
+  z-index: 10;
+}
+
+.hamburger:hover {
+  background: rgba(0, 0, 0, 0.06);
+}
+
+.hamburgerLine {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #1e293b;
+  border-radius: 2px;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+  transform-origin: center;
+}
+
+.hamburgerOpen .hamburgerLine:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+
+.hamburgerOpen .hamburgerLine:nth-child(2) {
+  opacity: 0;
+  transform: scaleX(0);
+}
+
+.hamburgerOpen .hamburgerLine:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* ======================== */
+/* DRAWER (Mobile)          */
+/* ======================== */
+.drawerOverlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.3s ease;
+  z-index: 9998;
+}
+
+.drawerOverlayActive {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.drawer {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 280px;
+  height: 100%;
+  background: linear-gradient(180deg, #0f172a 0%, #1e3a5f 100%);
+  transform: translateX(-100%);
+  transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+  z-index: 9999;
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
+  border-radius: 0 20px 20px 0;
+  box-shadow: 4px 0 32px rgba(0, 0, 0, 0.35);
+}
+
+.drawerOpen {
+  transform: translateX(0);
+}
+
+/* Blob menu head */
+.blobMenuHead {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 1.25rem 1.5rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.blobLogoImg {
+  width: 32px;
+  height: 32px;
+  object-fit: contain;
+}
+
+.blobLogoText {
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #fff;
+  flex: 1;
+}
+
+.blobLogoText span {
+  color: #0f6fec;
+}
+
+.blobCloseBtn {
+  width: 36px;
+  height: 36px;
+  background: rgba(255, 255, 255, 0.1);
+  border: none;
+  border-radius: 8px;
+  color: #fff;
+  font-size: 1.2rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s;
+}
+
+.blobCloseBtn:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+/* Blob nav links */
+.blobNav {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 0;
+  flex: 1;
+}
+
+.blobLink {
+  display: flex;
+  align-items: center;
+  padding: 1rem 1.5rem;
+  font-size: 1.05rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+  transition: all 0.25s ease;
+}
+
+.blobLink:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: #fff;
+  padding-left: 2rem;
+}
+
+.blobLinkActive {
+  color: #fff;
+  background: rgba(15, 111, 236, 0.2);
+  border-left: 3px solid #0f6fec;
+}
+
+.blobDivider {
+  padding: 1rem 1.5rem 0.5rem;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1.5px;
+  color: rgba(255, 255, 255, 0.35);
+}
+
+.blobIcon {
+  margin-right: 0.6rem;
+  font-size: 1.1rem;
+}
+
+.blobCta {
+  display: block;
+  margin: 1rem 1.25rem;
+  padding: 0.9rem;
+  text-align: center;
+  font-size: 0.95rem;
+  font-weight: 600;
+  background: linear-gradient(135deg, #0f6fec 0%, #0052cc 100%);
+  color: #fff;
+  border-radius: 10px;
+  transition: all 0.2s;
+}
+
+.blobCta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 15px rgba(15, 111, 236, 0.3);
+}
+
+/* ======================== */
+/* DROPDOWN (Desktop)       */
+/* ======================== */
+.dropdown {
+  position: relative;
+  cursor: pointer;
+}
+
+/* Puente invisible que cubre el gap entre el trigger y el menú flotante
+   evitando que onMouseLeave se dispare al cruzar el espacio */
+.dropdown::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: -1rem;
+  right: -1rem;
+  height: 0.6rem;
+  background: transparent;
+}
+
+/* Botón trigger: reseta estilos de <button> y adopta los del navLink */
+.dropdownTrigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  background: none;
+  border: none;
+  padding: 0.5rem 0;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #64748b;
+  cursor: pointer;
+  line-height: inherit;
+}
+
+.dropdownTrigger:hover,
+.dropdownTriggerOpen {
+  color: #1e293b;
+}
+
+.dropdownTrigger::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: #0f6fec;
+  transition: width 0.2s;
+}
+
+.dropdownTrigger:hover::after,
+.dropdownTriggerOpen::after {
+  width: 100%;
+}
+
+.dropdownArrow {
+  display: inline-block;
+  transition: transform 0.2s ease;
+  font-size: 0.75em;
+}
+
+.dropdownTriggerOpen .dropdownArrow {
+  transform: rotate(180deg);
+}
+
+.dropdownMenu {
+  position: absolute;
+  top: calc(100% + 0.6rem);
+  left: 50%;
+  transform: translateX(-50%);
+  min-width: 200px;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.15);
+  padding: 0.5rem;
+  animation: dropFadeIn 0.18s ease;
+  z-index: 200;
+}
+
+@keyframes dropFadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(-50%) translateY(-6px);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+  }
+}
+
+.dropdownItem {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 0.75rem 1rem;
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: #475569;
+  border-radius: 8px;
+  transition: all 0.2s;
+}
+
+.dropdownItem:hover {
+  background: #f1f5f9;
+  color: #0f6fec;
+}
+
+.dropdownIcon {
+  font-size: 1.1rem;
+}
+
+/* ======================== */
+/* RESPONSIVE               */
+/* ======================== */
+@media (max-width: 768px) {
+  .navDesktop {
+    display: none;
+  }
+
+  .headerInner {
+    justify-content: center;
+    position: relative;
+  }
+
+  .logoText {
+    display: none;
+  }
+
+  .logoIcon {
+    height: 46px;
+  }
+}

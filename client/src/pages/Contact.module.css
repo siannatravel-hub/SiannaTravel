@@ -1,0 +1,241 @@
+.page {
+  padding: var(--space-2xl) 0 var(--space-3xl);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-3xl);
+  align-items: flex-start;
+}
+
+.infoSection h1 {
+  font-family: var(--font-display);
+  font-size: 2.2rem;
+  font-weight: 700;
+  color: var(--color-gray-900);
+  margin-bottom: var(--space-md);
+}
+
+.infoSection p {
+  color: var(--color-gray-500);
+  font-size: 1.05rem;
+  line-height: 1.7;
+  margin-bottom: var(--space-2xl);
+}
+
+.contactMethods {
+  display: grid;
+  gap: var(--space-lg);
+}
+
+.contactMethod {
+  display: flex;
+  align-items: center;
+  gap: var(--space-md);
+  padding: var(--space-lg);
+  background: var(--color-gray-50);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--color-gray-100);
+}
+
+.contactIcon {
+  font-size: 1.5rem;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-primary-light);
+  border-radius: var(--radius-md);
+}
+
+.contactLabel {
+  font-weight: 600;
+  color: var(--color-gray-900);
+  margin-bottom: 2px;
+}
+
+.contactValue {
+  font-size: 0.9rem;
+  color: var(--color-gray-500);
+}
+
+/* Form */
+.formCard {
+  background: var(--color-white);
+  border: 1px solid var(--color-gray-200);
+  border-radius: var(--radius-xl);
+  padding: var(--space-2xl);
+  box-shadow: var(--shadow-lg);
+}
+
+.formTitle {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--color-gray-900);
+  margin-bottom: var(--space-xl);
+}
+
+.successCard {
+  text-align: center;
+  padding: var(--space-2xl);
+}
+
+.successIcon {
+  font-size: 3rem;
+  margin-bottom: var(--space-md);
+}
+
+.successTitle {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: var(--space-sm);
+  color: var(--color-gray-900);
+}
+
+.successText {
+  color: var(--color-gray-500);
+}
+
+.errorMsg {
+  background: #fef2f2;
+  color: var(--color-error);
+  padding: var(--space-md);
+  border-radius: var(--radius-md);
+  font-size: 0.9rem;
+  margin-bottom: var(--space-md);
+}
+
+.contactIconWa {
+  font-size: 1.5rem;
+  width: 48px;
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #dcfce7;
+  color: #16a34a;
+  border-radius: var(--radius-md);
+  flex-shrink: 0;
+}
+
+.contactValueLink {
+  font-size: 0.9rem;
+  color: #16a34a;
+  font-weight: 600;
+  text-decoration: none;
+}
+
+.contactValueLink:hover {
+  text-decoration: underline;
+}
+
+/* ── Banner inferior ───────────────────────────── */
+.heroBanner {
+  position: relative;
+  height: 420px;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 5rem;
+}
+
+.bannerBg {
+  position: absolute;
+  inset: -10%;
+  background-image: url('https://images.unsplash.com/photo-1488085061387-422e29b40080?w=1600&q=85');
+  background-size: cover;
+  background-position: center;
+  animation: bannerDrift 18s ease-in-out infinite alternate;
+  will-change: transform;
+}
+
+@keyframes bannerDrift {
+  0%   { transform: scale(1.12) translate(0, 0); }
+  33%  { transform: scale(1.15) translate(-1.5%, 1%); }
+  66%  { transform: scale(1.12) translate(1%, -1%); }
+  100% { transform: scale(1.14) translate(-0.5%, 0.5%); }
+}
+
+.bannerOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(10, 40, 100, 0.82) 0%,
+    rgba(15, 111, 236, 0.70) 50%,
+    rgba(8, 30, 80, 0.85) 100%
+  );
+  z-index: 1;
+}
+
+.bannerContent {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  color: #fff;
+  padding: 2rem 1.5rem;
+  animation: bannerFadeUp 0.9s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes bannerFadeUp {
+  from { opacity: 0; transform: translateY(24px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+.bannerTag {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: #93c5fd;
+  margin-bottom: 1rem;
+}
+
+.bannerTitle {
+  font-family: var(--font-impact, 'Anton', sans-serif);
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: 900;
+  line-height: 1.1;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.01em;
+}
+
+.bannerSub {
+  font-size: 1.05rem;
+  color: rgba(255,255,255,0.75);
+  margin-bottom: 2rem;
+}
+
+.bannerBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+  padding: 0.9rem 2rem;
+  background: #25d366;
+  color: #fff;
+  border-radius: 100px;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  transition: all 0.25s;
+  box-shadow: 0 4px 20px rgba(37,211,102,0.4);
+}
+
+.bannerBtn:hover {
+  background: #22c55e;
+  transform: translateY(-3px);
+  box-shadow: 0 8px 30px rgba(37,211,102,0.5);
+}
+
+@media (max-width: 768px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+  .heroBanner {
+    height: 320px;
+  }
+}

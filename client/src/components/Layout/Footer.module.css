@@ -1,0 +1,114 @@
+.footer {
+  background: linear-gradient(to bottom, #0a0f1a, #0d1421);
+  color: var(--color-gray-300);
+  padding: var(--space-3xl) 0 var(--space-lg);
+  position: relative;
+}
+
+.footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+}
+
+.footerGrid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: var(--space-2xl);
+  margin-bottom: var(--space-2xl);
+}
+
+.footerBrand {
+  display: block;
+  margin-bottom: var(--space-md);
+}
+
+.footerLogo {
+  height: 50px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+}
+
+.footerBrandAccent {
+  background: linear-gradient(135deg, var(--color-secondary), #fcd34d);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.footerDesc {
+  font-size: 0.9rem;
+  line-height: 1.8;
+  max-width: 300px;
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.footerTitle {
+  font-weight: 600;
+  color: var(--color-white);
+  margin-bottom: var(--space-lg);
+  font-size: 0.875rem;
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+}
+
+.footerLink {
+  display: block;
+  font-size: 0.9rem;
+  color: rgba(255, 255, 255, 0.55);
+  padding: 0.375rem 0;
+  transition: all 0.2s ease;
+}
+
+.footerLink:hover {
+  color: var(--color-white);
+  transform: translateX(4px);
+}
+
+.footerBottom {
+  border-top: 1px solid rgba(255, 255, 255, 0.08);
+  padding-top: var(--space-lg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.8125rem;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+@media (max-width: 768px) {
+  .footerGrid {
+    grid-template-columns: 1fr 1fr;
+    gap: var(--space-xl);
+  }
+
+  .footerBottom {
+    flex-direction: column;
+    gap: var(--space-sm);
+    text-align: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .footerGrid {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+    text-align: center;
+  }
+
+  .footerBrand {
+    justify-content: center;
+  }
+
+  .footerDesc {
+    margin: 0 auto;
+  }
+
+  .footerLink:hover {
+    transform: none;
+  }
+}

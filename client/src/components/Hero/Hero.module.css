@@ -1,0 +1,209 @@
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  color: var(--color-white);
+}
+
+.heroBg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transform: scale(1.05);
+  animation: slowZoom 20s ease-in-out infinite alternate;
+}
+
+@keyframes slowZoom {
+  0% { transform: scale(1.05); }
+  100% { transform: scale(1.15); }
+}
+
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    135deg,
+    rgba(0, 60, 90, 0.82) 0%,
+    rgba(0, 100, 130, 0.70) 50%,
+    rgba(0, 150, 160, 0.55) 100%
+  );
+}
+
+/* Línea punteada decorativa */
+.dashedCurve {
+  position: absolute;
+  right: 2%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 220px;
+  height: 400px;
+  pointer-events: none;
+  opacity: 0.55;
+}
+
+.heroContent {
+  position: relative;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-3xl) var(--space-lg);
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.heroText {
+  max-width: 780px;
+  animation: fadeInUp 0.8s ease-out;
+}
+
+/* Título principal usando Anton para el estilo impactante */
+.heroTitle {
+  font-family: var(--font-impact);
+  font-size: clamp(3.5rem, 8vw, 7rem);
+  font-weight: 400; /* Anton no necesita bold extra */
+  line-height: 1.0;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #fff;
+  margin-bottom: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 0.1em;
+}
+
+.heroLine {
+  display: block;
+}
+
+.heroLineFlex {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Badge "CONFIANZA" estilo pill con borde magenta/rosa */
+.heroBadge {
+  display: inline-block;
+  font-family: var(--font-impact);
+  font-size: clamp(1rem, 2.5vw, 1.6rem);
+  font-weight: 400;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #fff;
+  border: 2.5px solid #e91e8c;
+  border-radius: var(--radius-full);
+  padding: 0.25em 1.1em;
+  white-space: nowrap;
+}
+
+/* Ícono avión */
+.planeIcon {
+  display: inline-block;
+  font-size: 0.75em;
+  transform: rotate(-10deg);
+  margin-left: 0.1em;
+}
+
+/* Subtítulo "¿Te ayudamos?" */
+.heroSubtitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.3rem, 2.5vw, 2rem);
+  font-weight: 400;
+  color: rgba(255, 255, 255, 0.92);
+  margin-bottom: var(--space-lg);
+  letter-spacing: 0.01em;
+}
+
+/* Botón Escríbenos */
+.heroActions {
+  margin-bottom: var(--space-xl);
+  animation: fadeInUp 0.8s ease-out 0.3s backwards;
+}
+
+.btnEscribenos {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fff;
+  border: 2px solid #e91e8c;
+  border-radius: var(--radius-full);
+  padding: 0.6em 2.2em;
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  transition: background var(--transition-fast), color var(--transition-fast);
+  background: transparent;
+}
+
+.btnEscribenos:hover {
+  background: #e91e8c;
+  color: #fff;
+}
+
+/* Números de teléfono */
+.heroPhones {
+  display: flex;
+  gap: var(--space-2xl);
+  flex-wrap: wrap;
+  animation: fadeInUp 0.8s ease-out 0.4s backwards;
+}
+
+.heroPhone {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: color var(--transition-fast);
+}
+
+.heroPhone:hover {
+  color: #fff;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 768px) {
+  .heroContent {
+    padding: var(--space-3xl) var(--space-md);
+  }
+
+  .heroTitle {
+    font-size: clamp(3rem, 12vw, 5rem);
+  }
+
+  .heroBadge {
+    font-size: clamp(0.85rem, 3vw, 1.2rem);
+  }
+
+  .dashedCurve {
+    display: none;
+  }
+
+  .heroPhones {
+    gap: var(--space-lg);
+  }
+}
+
+@media (max-width: 480px) {
+  .heroPhones {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+}
+
