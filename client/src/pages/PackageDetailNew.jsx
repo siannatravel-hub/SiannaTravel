@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { getPackageById } from '../services/packageService';
+import { getPackageById } from '../lib/packages';
 import BookingModal from '../components/BookingModal';
 import { useSEO } from '../hooks/useSEO';
 import styles from './PackageDetailNew.module.css';
@@ -125,8 +125,7 @@ export default function PackageDetailNew() {
     async function loadPackage() {
       try {
         setLoading(true);
-        const result = await getPackageById(id);
-        const data = result?.data ?? result;
+        const data = await getPackageById(id);
 
         if (!data) {
           setError('Paquete no encontrado');
@@ -136,7 +135,6 @@ export default function PackageDetailNew() {
         const mergedPackage = {
           ...DEFAULT_PACKAGE_DETAILS,
           ...data,
-          // Normalizar: la API usa 'benefits', el detalle muestra 'includes'
           includes: data.includes || data.benefits || DEFAULT_PACKAGE_DETAILS.includes,
           gallery: data.gallery?.length ? data.gallery : DEFAULT_GALLERY,
           flight_includes: data.flight_includes || DEFAULT_PACKAGE_DETAILS.flight_includes,

@@ -5,13 +5,20 @@ import PackageCard from '../components/PackageCard/PackageCard';
 import Testimonials from '../components/Testimonials/Testimonials';
 import WhyUs from '../components/WhyUs/WhyUs';
 import Spinner from '../components/ui/Spinner';
-import { useFetch } from '../hooks/useFetch';
+import { useState, useEffect } from 'react';
 import { useSEO } from '../hooks/useSEO';
-import { getFeaturedPackages as getApiPackages } from '../services/packageService';
+import { getPackages } from '../lib/packages';
 import styles from './Home.module.css';
 
 export default function Home() {
-  const { data: packages, loading } = useFetch(getApiPackages, []);
+  const [packages, setPackages] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    getPackages().then(data => {
+      setPackages(data?.slice(0, 6) || []);
+    }).finally(() => setLoading(false));
+  }, []);
 
   useSEO({
     title: 'Agencia de Viajes en Tulancingo | Tours y Paquetes Vacacionales',
