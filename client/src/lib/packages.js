@@ -231,12 +231,31 @@ export async function updatePackage(id, updates, userEmail = 'admin') {
   }
 
   // Actualizar el paquete (buscar por slug)
-  const { data, error } = await supabase
+  const { data: updateData, error: updateError, count } = await supabase
     .from('packages')
     .update(updates)
     .eq('slug', id)
     .select()
     .single();
+
+  // Si no encontró ninguna fila (paquete no está en BD aún), hacer upsert con datos por defecto + updates
+  if (updateError?.code === 'PGRST116' || (!updateData && !updateError)) {
+    const defaultPkg = DEFAULT_PACKAGES.find(p => p.id === id);
+    if (defaultPkg) {
+      const { id: _id, ...defaultWithoutId } = defaultPkg;
+      const upsertPayload = { ...defaultWithoutId, slug: id, ...updates };
+      const { data: upserted, error: upsertError } = await supabase
+        .from('packages')
+        .upsert(upsertPayload, { onConflict: 'slug' })
+        .select()
+        .single();
+      if (upsertError) throw upsertError;
+      return upserted ? { ...upserted, id: upserted.slug || String(upserted.id) } : null;
+    }
+  }
+
+  const error = updateError;
+  const data = updateData;
 
   if (error) {
     if (error.message === 'Failed to fetch') {
