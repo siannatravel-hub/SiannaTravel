@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useParams, Link } from 'react-router-dom';
-import { getPackageById } from '../lib/packages';
+import { getPackageById } from '../services/packageService';
 import BookingModal from '../components/BookingModal';
 import { useSEO } from '../hooks/useSEO';
 import styles from './PackageDetailNew.module.css';
@@ -125,25 +125,32 @@ export default function PackageDetailNew() {
     async function loadPackage() {
       try {
         setLoading(true);
-        const data = await getPackageById(id);
-        
+        const result = await getPackageById(id);
+        const data = result?.data ?? result;
+
+        if (!data) {
+          setError('Paquete no encontrado');
+          return;
+        }
+
         const mergedPackage = {
           ...DEFAULT_PACKAGE_DETAILS,
           ...data,
-          gallery: data?.gallery || DEFAULT_GALLERY,
-          flight_includes: data?.flight_includes || DEFAULT_PACKAGE_DETAILS.flight_includes,
-          includes: data?.includes || DEFAULT_PACKAGE_DETAILS.includes,
-          transfers_included: data?.transfers_included || DEFAULT_PACKAGE_DETAILS.transfers_included,
-          itinerary: data?.itinerary || DEFAULT_PACKAGE_DETAILS.itinerary,
-          important_info: data?.important_info || DEFAULT_PACKAGE_DETAILS.important_info,
-          terms_conditions: data?.terms_conditions || DEFAULT_PACKAGE_DETAILS.terms_conditions,
-          payment_options: data?.payment_options || DEFAULT_PACKAGE_DETAILS.payment_options,
+          // Normalizar: la API usa 'benefits', el detalle muestra 'includes'
+          includes: data.includes || data.benefits || DEFAULT_PACKAGE_DETAILS.includes,
+          gallery: data.gallery?.length ? data.gallery : DEFAULT_GALLERY,
+          flight_includes: data.flight_includes || DEFAULT_PACKAGE_DETAILS.flight_includes,
+          transfers_included: data.transfers_included || DEFAULT_PACKAGE_DETAILS.transfers_included,
+          itinerary: data.itinerary || DEFAULT_PACKAGE_DETAILS.itinerary,
+          important_info: data.important_info || DEFAULT_PACKAGE_DETAILS.important_info,
+          terms_conditions: data.terms_conditions || DEFAULT_PACKAGE_DETAILS.terms_conditions,
+          payment_options: data.payment_options || DEFAULT_PACKAGE_DETAILS.payment_options,
         };
-        
+
         setPkg(mergedPackage);
       } catch (err) {
         console.error('Error loading package:', err);
-        setPkg({ ...DEFAULT_PACKAGE_DETAILS, id });
+        setError('No se pudo cargar el paquete');
       } finally {
         setLoading(false);
       }
