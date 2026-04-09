@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Sianna Travel - Tu agencia de viajes de confianza. Tours, vuelos, hoteles y más con las mejores promociones.">
+    <title>Sianna Travel - Agencia de Viajes</title>
+    <link rel="icon" type="image/svg+xml" href="logo.svg">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="top-bar">
+            <div class="container">
+                <div class="contact-info">
+                    <a href="https://wa.me/527757525171?text=Hola%2C%20me%20interesa%20obtener%20información%20sobre%20sus%20servicios%20de%20viaje" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i> 775 752 5171</a>
+                    <a href="#blog"><i class="fas fa-blog"></i> Nuestro Blog</a>
+                    <a href="#sucursales"><i class="fas fa-store"></i> Sucursales Sianna Travel</a>
+                </div>
+            </div>
+        </div>
+        
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-wrapper">
+                    <div class="logo">
+                        <a href="/">
+                            <img src="logofull.png" alt="Sianna Travel" class="logo-full">
+                            <img src="isotipo.png" alt="Sianna" class="logo-mobile">
+                        </a>
+                    </div>
+                    
+                    <button class="mobile-menu-toggle" id="mobileMenuToggle">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                    
+                    <ul class="nav-menu" id="navMenu">
+                        <li><a href="#tours"><i class="fas fa-sign"></i> Tours</a></li>
+                        <li><a href="#seguros"><i class="fas fa-shield-alt"></i> Seguros</a></li>
+                        <li><a href="#vuelos"><i class="fas fa-plane"></i> Vuelos</a></li>
+                        <li><a href="#hoteles"><i class="fas fa-hotel"></i> Hoteles</a></li>
+                        <li><a href="#avion-hotel"><i class="fas fa-globe"></i> Avión + Hotel</a></li>
+                        <li><a href="#mexico"><i class="fas fa-map-marked-alt"></i> México</a></li>
+                        <li><a href="#ofertas"><i class="fas fa-bolt"></i> Ofertas Irresistibles</a></li>
+                        <li><a href="#playas"><i class="fas fa-umbrella-beach"></i> Playas</a></li>
+                        <li><a href="#cruceros"><i class="fas fa-ship"></i> Cruceros</a></li>
+                        <li><a href="#parques"><i class="fas fa-magic"></i> Parques</a></li>
+                        <li><a href="#actividades"><i class="fas fa-ticket-alt"></i> Actividades</a></li>
+                        <li><a href="#grupos"><i class="fas fa-users"></i> Grupos</a></li>
+                        <li><a href="#estudios"><i class="fas fa-graduation-cap"></i> Estudios en el extranjero</a></li>
+                        <li><a href="#productos"><i class="fas fa-shopping-bag"></i> Otros productos</a></li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Hero Carousel Section -->
+    <section class="hero-carousel">
+        <div class="carousel-container">
+            <!-- Slide 1 -->
+            <div class="carousel-slide active">
+                <div class="slide-background" style="background-image: linear-gradient(135deg, rgba(93, 173, 226, 0.9) 0%, rgba(77, 173, 201, 0.9) 50%, rgba(44, 95, 124, 0.95) 100%), url('https://images.unsplash.com/photo-1488646953014-85cb44e25828?w=1920&q=80');">
+                    <div class="container">
+                        <div class="slide-content">
+                            <div class="slide-text">
+                                <h1 class="slide-title animate-fade-in">Descubre el Mundo</h1>
+                                <p class="slide-subtitle animate-fade-in-delay">Los mejores destinos te están esperando</p>
+                                <div class="slide-badges animate-fade-in-delay-2">
+                                    <span class="promo-badge"><i class="fas fa-percentage"></i> Hasta 50% OFF</span>
+                                    <span class="promo-badge"><i class="fas fa-credit-card"></i> 24 MSI</span>
+                                    <span class="promo-badge accent"><i class="fas fa-fire"></i> 2x1 Tours</span>
+                                </div>
+                                <div class="slide-actions animate-fade-in-delay-3">
+                                    <a href="#tours" class="btn-hero primary">Ver Tours</a>
+                                    <a href="#contacto" class="btn-hero secondary">Contactar</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="carousel-slide">
+                <div class="slide-background" style="background-image: linear-gradient(135deg, rgba(77, 173, 201, 0.9) 0%, rgba(44, 95, 124, 0.9) 50%, rgba(30, 77, 102, 0.95) 100%), url('https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1920&q=80');">
+                    <div class="container">
+                        <div class="slide-content">
+                            <div class="slide-text">
+                                <h1 class="slide-title animate-fade-in">Europa Inolvidable</h1>
+                                <p class="slide-subtitle animate-fade-in-delay">Vive la magia de los destinos europeos</p>
+                                <div class="slide-badges animate-fade-in-delay-2">
+                                    <span class="promo-badge"><i class="fas fa-plane"></i> Vuelos Incluidos</span>
+                                    <span class="promo-badge"><i class="fas fa-hotel"></i> Hoteles 4★</span>
+                                </div>
+                                <div class="slide-actions animate-fade-in-delay-3">
+                                    <a href="#tours" class="btn-hero primary">Explorar Europa</a>
+                                    <a href="#contacto" class="btn-hero secondary">Más Info</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="carousel-slide">
+                <div class="slide-background" style="background-image: linear-gradient(135deg, rgba(93, 173, 226, 0.9) 0%, rgba(77, 173, 201, 0.9) 50%, rgba(44, 95, 124, 0.95) 100%), url('https://images.unsplash.com/photo-1559827260-dc66d52bef19?w=1920&q=80');">
+                    <div class="container">
+                        <div class="slide-content">
+                            <div class="slide-text">
+                                <h1 class="slide-title animate-fade-in">Playas Paradisíacas</h1>
+                                <p class="slide-subtitle animate-fade-in-delay">Descansa en los mejores destinos del Caribe</p>
+                                <div class="slide-badges animate-fade-in-delay-2">
+                                    <span class="promo-badge accent"><i class="fas fa-umbrella-beach"></i> All Inclusive</span>
+                                    <span class="promo-badge"><i class="fas fa-cocktail"></i> Resort 5★</span>
+                                </div>
+                                <div class="slide-actions animate-fade-in-delay-3">
+                                    <a href="#tours" class="btn-hero primary">Ver Playas</a>
+                                    <a href="#contacto" class="btn-hero secondary">Cotizar</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Carousel Controls -->
+            <button class="carousel-control prev" id="carouselPrev">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="carousel-control next" id="carouselNext">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+
+            <!-- Carousel Indicators -->
+            <div class="carousel-indicators">
+                <button class="indicator active" data-slide="0"></button>
+                <button class="indicator" data-slide="1"></button>
+                <button class="indicator" data-slide="2"></button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Search Section -->
+    <section class="search-section">
+        <div class="container">
+            <div class="tabs">
+                <button class="tab-btn" data-tab="vuelos"><i class="fas fa-plane"></i> Vuelos</button>
+                <button class="tab-btn" data-tab="seguros"><i class="fas fa-shield-alt"></i> Seguros</button>
+                <button class="tab-btn active" data-tab="tours"><i class="fas fa-sign"></i> Tours</button>
+                <button class="tab-btn" data-tab="vuelo-hotel"><i class="fas fa-globe"></i> Vuelo + Hotel</button>
+                <button class="tab-btn" data-tab="hoteles"><i class="fas fa-hotel"></i> Hoteles</button>
+            </div>
+            
+            <div class="search-content">
+                <h2>Encuentra tu tour ideal</h2>
+                
+                <form class="search-form" id="searchForm">
+                    <div class="form-group">
+                        <label for="region">
+                            <i class="fas fa-globe"></i>
+                            <select id="region" name="region" required>
+                                <option value="">Región</option>
+                                <option value="mexico">México</option>
+                                <option value="caribe">Caribe</option>
+                                <option value="sudamerica">Sudamérica</option>
+                                <option value="europa">Europa</option>
+                                <option value="asia">Asia</option>
+                                <option value="africa">África</option>
+                                <option value="oceania">Oceanía</option>
+                                <option value="norteamerica">Norteamérica</option>
+                            </select>
+                        </label>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="mes">
+                            <i class="far fa-calendar"></i>
+                            <select id="mes" name="mes">
+                                <option value="">Mes</option>
+                                <option value="03">Marzo</option>
+                                <option value="04">Abril</option>
+                                <option value="05">Mayo</option>
+                                <option value="06">Junio</option>
+                                <option value="07">Julio</option>
+                                <option value="08">Agosto</option>
+                                <option value="09">Septiembre</option>
+                                <option value="10">Octubre</option>
+                                <option value="11">Noviembre</option>
+                                <option value="12">Diciembre</option>
+                            </select>
+                        </label>
+                    </div>
+                    
+                    <button type="submit" class="btn-search">Buscar</button>
+                </form>
+                
+                <p class="search-note">* Selecciona al menos 1 opción, haciendo click en "Buscar" acepto las condiciones de uso.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Tours Section -->
+    <section class="featured-section">
+        <div class="container">
+            <h2 class="section-title">¡Encuentra tu viaje al mejor precio!</h2>
+            <p class="section-subtitle">Encuentra lo más destacado y mucho más.</p>
+            
+            <div class="tours-grid">
+                <div class="tour-card">
+                    <div class="tour-image">
+                        <img src="https://images.unsplash.com/photo-1518509562904-e7ef99cdcc86?w=600" alt="Europa">
+                        <span class="tour-badge">Oferta</span>
+                    </div>
+                    <div class="tour-info">
+                        <h3>Europa Clásica</h3>
+                        <p class="tour-duration"><i class="far fa-clock"></i> 15 días / 14 noches</p>
+                        <p class="tour-description">Conoce las ciudades más emblemáticas de Europa</p>
+                        <div class="tour-price">
+                            <span class="price-from">Desde</span>
+                            <span class="price">$45,999</span>
+                            <span class="price-currency">MXN</span>
+                        </div>
+                        <button class="btn-tour">Ver más</button>
+                    </div>
+                </div>
+
+                <div class="tour-card">
+                    <div class="tour-image">
+                        <img src="https://images.unsplash.com/photo-1601600576337-c1d8a0d1373c?w=600" alt="Caribe">
+                        <span class="tour-badge hot">Hot</span>
+                    </div>
+                    <div class="tour-info">
+                        <h3>Caribe Mágico</h3>
+                        <p class="tour-duration"><i class="far fa-clock"></i> 7 días / 6 noches</p>
+                        <p class="tour-description">Disfruta de las mejores playas del Caribe</p>
+                        <div class="tour-price">
+                            <span class="price-from">Desde</span>
+                            <span class="price">$18,999</span>
+                            <span class="price-currency">MXN</span>
+                        </div>
+                        <button class="btn-tour">Ver más</button>
+                    </div>
+                </div>
+
+                <div class="tour-card">
+                    <div class="tour-image">
+                        <img src="https://images.unsplash.com/photo-1583037189850-1921ae7c6c22?w=600" alt="Japón">
+                        <span class="tour-badge">2x1</span>
+                    </div>
+                    <div class="tour-info">
+                        <h3>Japón Imperial</h3>
+                        <p class="tour-duration"><i class="far fa-clock"></i> 12 días / 11 noches</p>
+                        <p class="tour-description">Cultura milenaria y tecnología moderna</p>
+                        <div class="tour-price">
+                            <span class="price-from">Desde</span>
+                            <span class="price">$68,999</span>
+                            <span class="price-currency">MXN</span>
+                        </div>
+                        <button class="btn-tour">Ver más</button>
+                    </div>
+                </div>
+
+                <div class="tour-card">
+                    <div class="tour-image">
+                        <img src="https://images.unsplash.com/photo-1531968455001-5c5272a41129?w=600" alt="México">
+                        <span class="tour-badge">Nuevo</span>
+                    </div>
+                    <div class="tour-info">
+                        <h3>México Mágico</h3>
+                        <p class="tour-duration"><i class="far fa-clock"></i> 5 días / 4 noches</p>
+                        <p class="tour-description">Descubre los tesoros de México</p>
+                        <div class="tour-price">
+                            <span class="price-from">Desde</span>
+                            <span class="price">$12,999</span>
+                            <span class="price-currency">MXN</span>
+                        </div>
+                        <button class="btn-tour">Ver más</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-section">
+        <div class="container">
+            <h2 class="section-title">Nuestros Servicios</h2>
+            <div class="services-grid">
+                <div class="service-item">
+                    <i class="fas fa-plane-departure"></i>
+                    <h3>Vuelos</h3>
+                    <p>Las mejores tarifas en vuelos nacionales e internacionales</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-hotel"></i>
+                    <h3>Hoteles</h3>
+                    <p>Reservaciones en los mejores hoteles del mundo</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-shield-alt"></i>
+                    <h3>Seguros</h3>
+                    <p>Viaja seguro con nuestros seguros de viaje</p>
+                </div>
+                <div class="service-item">
+                    <i class="fas fa-bus"></i>
+                    <h3>Tours</h3>
+                    <p>Paquetes completos a destinos increíbles</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-col">
+                    <h3>Sianna Travel</h3>
+                    <p>Tu agencia de viajes de confianza. Años de experiencia haciendo realidad tus sueños de viaje.</p>
+                    <div class="social-links">
+                        <a href="https://www.facebook.com/SiannaTravel" target="_blank" rel="noopener noreferrer"><i class="fab fa-facebook"></i></a>
+                        <a href="https://www.instagram.com/agenciadeviajes_sianna/" target="_blank" rel="noopener noreferrer"><i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/527757525171?text=Hola%2C%20me%20interesa%20obtener%20información%20sobre%20sus%20servicios%20de%20viaje" target="_blank" rel="noopener noreferrer"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Enlaces Rápidos</h4>
+                    <ul>
+                        <li><a href="#tours">Tours</a></li>
+                        <li><a href="#vuelos">Vuelos</a></li>
+                        <li><a href="#hoteles">Hoteles</a></li>
+                        <li><a href="#seguros">Seguros</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Información</h4>
+                    <ul>
+                        <li><a href="#about">Acerca de</a></li>
+                        <li><a href="#blog">Blog</a></li>
+                        <li><a href="#sucursales">Sucursales</a></li>
+                        <li><a href="#contacto">Contacto</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-col">
+                    <h4>Contacto</h4>
+                    <ul>
+                        <li><a href="tel:+527759743355" style="color: inherit; text-decoration: none;"><i class="fas fa-phone"></i> 775 974 3355</a></li>
+                        <li><a href="https://wa.me/527757525171?text=Hola%2C%20me%20interesa%20obtener%20información%20sobre%20sus%20servicios%20de%20viaje" target="_blank" rel="noopener noreferrer" style="color: inherit; text-decoration: none;"><i class="fab fa-whatsapp"></i> 775 752 5171</a></li>
+                        <li><i class="fas fa-envelope"></i> info@siannatravel.com</li>
+                        <li><i class="fas fa-map-marker-alt"></i> Ciudad de México</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 Sianna Travel. Todos los derechos reservados.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Chatbot -->
+    <div class="chatbot" id="chatbot">
+        <div class="chatbot-header" id="chatbotHeader">
+            <div class="chatbot-title">
+                <i class="fas fa-comments"></i>
+                <span>Asistente Virtual</span>
+            </div>
+            <button class="chatbot-toggle" id="chatbotToggle">
+                <i class="fas fa-minus"></i>
+            </button>
+        </div>
+        
+        <div class="chatbot-body" id="chatbotBody">
+            <div class="chatbot-messages" id="chatbotMessages">
+                <div class="message bot-message">
+                    <p>¡Hola! 👋 Soy tu asistente virtual de Sianna Travel. ¿En qué puedo ayudarte hoy?</p>
+                </div>
+            </div>
+            
+            <form class="chatbot-input-form" id="chatbotForm">
+                <input 
+                    type="text" 
+                    id="chatbotInput" 
+                    placeholder="Escribe tu mensaje..." 
+                    autocomplete="off"
+                >
+                <button type="submit">
+                    <i class="fas fa-paper-plane"></i>
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <button class="chatbot-launcher" id="chatbotLauncher">
+        <i class="fas fa-comments"></i>
+    </button>
+
+    <script src="script.js"></script>
+</body>
+</html>

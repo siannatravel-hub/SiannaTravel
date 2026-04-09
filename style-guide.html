@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Guía de Estilo - Sianna Travel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            padding: 40px;
+            background: #f5f5f5;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            padding: 40px;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        
+        h1 {
+            color: #2C5F7C;
+            margin-bottom: 10px;
+            font-size: 36px;
+        }
+        
+        h2 {
+            color: #4DADC9;
+            margin-top: 40px;
+            margin-bottom: 20px;
+            font-size: 28px;
+        }
+        
+        h3 {
+            color: #2C5F7C;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        
+        .subtitle {
+            color: #666;
+            margin-bottom: 40px;
+            font-size: 18px;
+        }
+        
+        .colors-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+            margin-bottom: 40px;
+        }
+        
+        .color-card {
+            border: 1px solid #e0e0e0;
+            border-radius: 8px;
+            overflow: hidden;
+        }
+        
+        .color-swatch {
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 14px;
+        }
+        
+        .color-info {
+            padding: 15px;
+            background: #fafafa;
+        }
+        
+        .color-name {
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 5px;
+        }
+        
+        .color-code {
+            font-family: 'Courier New', monospace;
+            font-size: 12px;
+            color: #666;
+        }
+        
+        .usage {
+            margin-top: 5px;
+            font-size: 12px;
+            color: #999;
+        }
+        
+        .logo-showcase {
+            background: linear-gradient(135deg, #5DADE2 0%, #4DADC9 50%, #2C5F7C 100%);
+            padding: 60px;
+            border-radius: 10px;
+            text-align: center;
+            margin: 30px 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .logo-showcase::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-image: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 400"><g opacity="0.1"><circle cx="200" cy="150" r="80" fill="white"/><circle cx="600" cy="200" r="100" fill="white"/><circle cx="1000" cy="180" r="90" fill="white"/></g></svg>');
+            background-size: cover;
+            opacity: 0.3;
+        }
+        
+        .logo-text {
+            font-size: 64px;
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            z-index: 1;
+        }
+        
+        .logo-text .travel {
+            font-style: italic;
+            font-weight: 300;
+        }
+        
+        .typography-example {
+            padding: 20px;
+            background: #f9f9f9;
+            border-left: 4px solid #4DADC9;
+            margin: 15px 0;
+        }
+        
+        .button-showcase {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 20px 0;
+        }
+        
+        .btn {
+            padding: 12px 30px;
+            border: none;
+            border-radius: 6px;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .btn-primary {
+            background-color: #4DADC9;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #2C5F7C;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(77, 173, 201, 0.3);
+        }
+        
+        .btn-accent {
+            background-color: #E74C3C;
+            color: white;
+        }
+        
+        .btn-accent:hover {
+            background-color: #C0392B;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(231, 76, 60, 0.3);
+        }
+        
+        .btn-secondary {
+            background-color: white;
+            color: #4DADC9;
+            border: 2px solid #4DADC9;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #4DADC9;
+            color: white;
+        }
+        
+        code {
+            background: #f5f5f5;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 14px;
+        }
+        
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #4DADC9;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        
+        .back-link:hover {
+            color: #2C5F7C;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a href="index.html" class="back-link">← Volver al sitio</a>
+        
+        <h1>Guía de Estilo - Sianna Travel</h1>
+        <p class="subtitle">Paleta de colores y elementos de diseño</p>
+        
+        <!-- Logo -->
+        <h2>Logo</h2>
+        <div class="logo-showcase">
+            <div class="logo-text">
+                Sianna <span class="travel">travel</span>
+            </div>
+        </div>
+        
+        <!-- Colores Principales -->
+        <h2>Paleta de Colores</h2>
+        
+        <h3>Colores Principales (Azul/Turquesa)</h3>
+        <div class="colors-grid">
+            <div class="color-card">
+                <div class="color-swatch" style="background-color: #5DADE2;">
+                    Principal
+                </div>
+                <div class="color-info">
+                    <div class="color-name">Turquesa Claro</div>
+                    <div class="color-code">#5DADE2</div>
+                    <div class="color-code">rgb(93, 173, 226)</div>
+                    <div class="usage">Gradientes, fondos</div>
+                </div>
+            </div>
+            
+            <div class="color-card">
+                <div class="color-swatch" style="background-color: #4DADC9;">
+                    Principal
+                </div>
+                <div class="color-info">
+                    <div class="color-name">Azul Turquesa</div>
+                    <div class="color-code">#4DADC9</div>
+                    <div class="color-code">rgb(77, 173, 201)</div>
+                    <div class="usage">Botones, enlaces</div>
+                </div>
+            </div>
+            
+            <div class="color-card">
+                <div class="color-swatch" style="background-color: #2C5F7C;">
+                    Contraste
+                </div>
+                <div class="color-info">
+                    <div class="color-name">Azul Oscuro</div>
+                    <div class="color-code">#2C5F7C</div>
+                    <div class="color-code">rgb(44, 95, 124)</div>
+                    <div class="usage">Textos, hover</div>
+                </div>
+            </div>
+            
+            <div class="color-card">
+                <div class="color-swatch" style="background-color: #1E4D66;">
+                    Profundo
+                </div>
+                <div class="color-info">
+                    <div class="color-name">Azul Profundo</div>
+                    <div class="color-code">#1E4D66</div>
+                    <div class="color-code">rgb(30, 77, 102)</div>
+                    <div class="usage">Elementos destacados</div>
+                </div>
+            </div>
+        </div>
+        
+        <h3>Color de Acento (Solo para detalles importantes)</h3>
+        <div class="colors-grid">
+            <div class="color-card">
+                <div class="color-swatch" style="background-color: #E74C3C;">
+                    Acento
+                </div>
+                <div class="color-info">
+                    <div class="color-name">Rojo de Acento</div>
+                    <div class="color-code">#E74C3C</div>
+                    <div class="color-code">rgb(231, 76, 60)</div>
+                    <div class="usage">CTAs, ofertas especiales</div>
+                </div>
+            </div>
+            
+            <div class="color-card">
+                <div class="color-swatch" style="background-color: #C0392B;">
+                    Hover
+                </div>
+                <div class="color-info">
+                    <div class="color-name">Rojo Oscuro</div>
+                    <div class="color-code">#C0392B</div>
+                    <div class="color-code">rgb(192, 57, 43)</div>
+                    <div class="usage">Hover de botones rojos</div>
+                </div>
+            </div>
+        </div>
+        
+        <h3>Colores Neutros</h3>
+        <div class="colors-grid">
+            <div class="color-card">
+                <div class="color-swatch" style="background-color: #FFFFFF; color: #333; border: 1px solid #e0e0e0;">
+                    Blanco
+                </div>
+                <div class="color-info">
+                    <div class="color-name">Blanco</div>
+                    <div class="color-code">#FFFFFF</div>
+                    <div class="usage">Fondos, tarjetas</div>
+                </div>
+            </div>
+            
+            <div class="color-card">
+                <div class="color-swatch" style="background-color: #F5F5F5; color: #333;">
+                    Gris Claro
+                </div>
+                <div class="color-info">
+                    <div class="color-name">Gris Claro</div>
+                    <div class="color-code">#F5F5F5</div>
+                    <div class="usage">Fondos alternos</div>
+                </div>
+            </div>
+            
+            <div class="color-card">
+                <div class="color-swatch" style="background-color: #9E9E9E;">
+                    Gris Medio
+                </div>
+                <div class="color-info">
+                    <div class="color-name">Gris Medio</div>
+                    <div class="color-code">#9E9E9E</div>
+                    <div class="usage">Textos secundarios</div>
+                </div>
+            </div>
+            
+            <div class="color-card">
+                <div class="color-swatch" style="background-color: #424242;">
+                    Gris Oscuro
+                </div>
+                <div class="color-info">
+                    <div class="color-name">Gris Oscuro</div>
+                    <div class="color-code">#424242</div>
+                    <div class="usage">Textos principales</div>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Botones -->
+        <h2>Componentes</h2>
+        
+        <h3>Botones</h3>
+        <div class="button-showcase">
+            <button class="btn btn-primary">Botón Principal</button>
+            <button class="btn btn-accent">Llamada a la Acción</button>
+            <button class="btn btn-secondary">Botón Secundario</button>
+        </div>
+        
+        <!-- Tipografía -->
+        <h2>Tipografía</h2>
+        
+        <div class="typography-example">
+            <h1 style="margin: 0 0 10px 0;">Encabezado H1</h1>
+            <p style="margin: 0; color: #666;">Font: Segoe UI | Size: 36px | Weight: Bold</p>
+        </div>
+        
+        <div class="typography-example">
+            <h2 style="margin: 0 0 10px 0;">Encabezado H2</h2>
+            <p style="margin: 0; color: #666;">Font: Segoe UI | Size: 28px | Weight: Bold</p>
+        </div>
+        
+        <div class="typography-example">
+            <p style="margin: 0; font-size: 16px; line-height: 1.6;">
+                Texto de párrafo normal. Lorem ipsum dolor sit amet, consectetur adipiscing elit. 
+                Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.
+            </p>
+            <p style="margin: 10px 0 0 0; color: #666;">Font: Segoe UI | Size: 16px | Line-height: 1.6</p>
+        </div>
+        
+        <!-- Uso de Colores -->
+        <h2>Guía de Uso</h2>
+        
+        <h3>Esquema de Colores</h3>
+        <ul style="line-height: 1.8; color: #424242;">
+            <li><strong>Azul Turquesa (#4DADC9, #5DADE2)</strong>: Color principal de la marca. Usar en:
+                <ul>
+                    <li>Logo y branding</li>
+                    <li>Navegación y menús</li>
+                    <li>Botones principales</li>
+                    <li>Enlaces</li>
+                    <li>Hero section (gradientes)</li>
+                </ul>
+            </li>
+            <li><strong>Azul Oscuro (#2C5F7C, #1E4D66)</strong>: Para contraste y profundidad. Usar en:
+                <ul>
+                    <li>Títulos importantes</li>
+                    <li>Estados hover</li>
+                    <li>Elementos destacados</li>
+                    <li>Footer</li>
+                </ul>
+            </li>
+            <li><strong>Rojo de Acento (#E74C3C)</strong>: SOLO para detalles críticos. Usar en:
+                <ul>
+                    <li>Botones de "Llamada a la Acción" (CTA)</li>
+                    <li>Ofertas especiales</li>
+                    <li>Descuentos y promociones</li>
+                    <li>Elementos que requieren atención inmediata</li>
+                </ul>
+            </li>
+        </ul>
+        
+        <h3>Código CSS</h3>
+        <div class="typography-example">
+            <code>
+                :root {<br>
+                &nbsp;&nbsp;--primary-blue: #4DADC9;<br>
+                &nbsp;&nbsp;--primary-turquoise: #5DADE2;<br>
+                &nbsp;&nbsp;--dark-blue: #2C5F7C;<br>
+                &nbsp;&nbsp;--deep-blue: #1E4D66;<br>
+                &nbsp;&nbsp;--accent-red: #E74C3C;<br>
+                }
+            </code>
+        </div>
+        
+        <div style="margin-top: 40px; padding: 20px; background: #f9f9f9; border-radius: 8px;">
+            <h3 style="margin-top: 0;">Principios de Diseño</h3>
+            <ul style="line-height: 1.8; color: #424242;">
+                <li>✈️ <strong>Profesional y Confiable</strong>: Los tonos azules transmiten confianza y profesionalismo</li>
+                <li>🌍 <strong>Aventura Global</strong>: El mapa del mundo en el fondo evoca viajes internacionales</li>
+                <li>🎯 <strong>CTAs Claros</strong>: El rojo se usa estratégicamente solo donde se necesita acción</li>
+                <li>💻 <strong>Responsive</strong>: El diseño se adapta perfectamente a todos los dispositivos</li>
+                <li>⚡ <strong>Moderno</strong>: Gradientes suaves y animaciones crean una experiencia contemporánea</li>
+            </ul>
+        </div>
+    </div>
+</body>
+</html>

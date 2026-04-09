@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vista Previa - Sianna Travel</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #5DADE2 0%, #4DADC9 100%);
+            padding: 40px 20px;
+            min-height: 100vh;
+        }
+        
+        .preview-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        .preview-header {
+            background: linear-gradient(135deg, #1E4D66 0%, #2C5F7C 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .preview-header h1 {
+            font-size: 48px;
+            margin-bottom: 15px;
+            font-weight: 700;
+        }
+        
+        .preview-header p {
+            font-size: 20px;
+            opacity: 0.9;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 50px;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            border: 2px solid #e0e0e0;
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(77, 173, 201, 0.3);
+            border-color: #4DADC9;
+        }
+        
+        .feature-icon {
+            font-size: 48px;
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            font-size: 24px;
+            color: #2C5F7C;
+            margin-bottom: 15px;
+        }
+        
+        .feature-card p {
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .feature-list {
+            list-style: none;
+            margin-top: 15px;
+        }
+        
+        .feature-list li {
+            padding: 8px 0;
+            color: #444;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .feature-list li::before {
+            content: "✓";
+            color: #4DADC9;
+            font-weight: bold;
+            font-size: 18px;
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, #4DADC9 0%, #2C5F7C 100%);
+            padding: 60px;
+            text-align: center;
+            color: white;
+        }
+        
+        .cta-section h2 {
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+        
+        .btn-container {
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 30px;
+        }
+        
+        .btn {
+            padding: 18px 40px;
+            font-size: 18px;
+            font-weight: 600;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-primary {
+            background-color: #E74C3C;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background-color: #C0392B;
+            transform: translateY(-3px);
+            box-shadow: 0 6px 20px rgba(231, 76, 60, 0.4);
+        }
+        
+        .btn-secondary {
+            background-color: white;
+            color: #2C5F7C;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #f0f0f0;
+            transform: translateY(-3px);
+        }
+        
+        .changelog {
+            background: #f8f9fa;
+            padding: 50px;
+        }
+        
+        .changelog h2 {
+            font-size: 32px;
+            color: #2C5F7C;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        
+        .changelog-item {
+            background: white;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 10px;
+            border-left: 4px solid #4DADC9;
+        }
+        
+        .changelog-item h3 {
+            color: #2C5F7C;
+            margin-bottom: 10px;
+            font-size: 20px;
+        }
+        
+        .changelog-item ul {
+            margin-left: 20px;
+            color: #666;
+        }
+        
+        .changelog-item ul li {
+            margin: 8px 0;
+            line-height: 1.6;
+        }
+        
+        @media (max-width: 768px) {
+            .preview-header h1 {
+                font-size: 32px;
+            }
+            
+            .features-grid {
+                padding: 30px 20px;
+            }
+            
+            .cta-section {
+                padding: 40px 20px;
+            }
+            
+            .changelog {
+                padding: 30px 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="preview-container">
+        <div class="preview-header">
+            <h1>🌍 Sianna Travel</h1>
+            <p>Sitio Web Completamente Renovado</p>
+        </div>
+        
+        <div class="features-grid">
+            <div class="feature-card">
+                <div class="feature-icon">🎠</div>
+                <h3>Hero Carrusel</h3>
+                <p>Sistema de carrusel automático con 3 slides impactantes:</p>
+                <ul class="feature-list">
+                    <li>Transiciones suaves y automáticas</li>
+                    <li>Controles de navegación</li>
+                    <li>Soporte táctil para móvil</li>
+                    <li>Indicadores visuales</li>
+                    <li>Animaciones de fade-in</li>
+                </ul>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🎨</div>
+                <h3>Logo Real Integrado</h3>
+                <p>Tu logo está perfectamente implementado:</p>
+                <ul class="feature-list">
+                    <li>Logo completo en desktop</li>
+                    <li>Isotipo en móvil</li>
+                    <li>Efecto hover elegante</li>
+                    <li>Favicon actualizado</li>
+                </ul>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🔗</div>
+                <h3>Navegación Mejorada</h3>
+                <p>Links perfectamente alineados y organizados:</p>
+                <ul class="feature-list">
+                    <li>14 categorías bien espaciadas</li>
+                    <li>Efectos hover suaves</li>
+                    <li>Responsive perfecto</li>
+                    <li>Menú hamburguesa en móvil</li>
+                </ul>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">💎</div>
+                <h3>Diseño Premium</h3>
+                <p>Aspecto profesional y moderno:</p>
+                <ul class="feature-list">
+                    <li>Gradientes elegantes</li>
+                    <li>Sombras suaves</li>
+                    <li>Border de marca en navbar</li>
+                    <li>Animaciones fluidas</li>
+                </ul>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">🎯</div>
+                <h3>CTAs Optimizados</h3>
+                <p>Botones de llamada a la acción mejorados:</p>
+                <ul class="feature-list">
+                    <li>Gradientes en botones</li>
+                    <li>Efectos hover 3D</li>
+                    <li>Rojo solo para acciones críticas</li>
+                    <li>Texto en mayúsculas</li>
+                </ul>
+            </div>
+            
+            <div class="feature-card">
+                <div class="feature-icon">📱</div>
+                <h3>100% Responsive</h3>
+                <p>Funciona perfecto en todos los dispositivos:</p>
+                <ul class="feature-list">
+                    <li>Desktop optimizado</li>
+                    <li>Tablet adaptado</li>
+                    <li>Móvil touch-friendly</li>
+                    <li>Swipe en carrusel</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="changelog">
+            <h2>📋 Cambios Implementados</h2>
+            
+            <div class="changelog-item">
+                <h3>✅ Hero Section Carrusel</h3>
+                <ul>
+                    <li>Carrusel automático con 3 slides de destinos</li>
+                    <li>Imágenes de fondo de alta calidad (Unsplash)</li>
+                    <li>Botones de navegación prev/next</li>
+                    <li>Indicadores de slide activo</li>
+                    <li>Auto-play cada 5 segundos con pausa en hover</li>
+                    <li>Soporte de teclado (flechas)</li>
+                    <li>Soporte táctil (swipe) para móviles</li>
+                </ul>
+            </div>
+            
+            <div class="changelog-item">
+                <h3>✅ Logos Reales Implementados</h3>
+                <ul>
+                    <li>logofull.png en el header para desktop</li>
+                    <li>isotipo.png para vista móvil</li>
+                    <li>logo.svg como favicon</li>
+                    <li>Transición suave en hover</li>
+                </ul>
+            </div>
+            
+            <div class="changelog-item">
+                <h3>✅ Navegación Optimizada</h3>
+                <ul>
+                    <li>Links perfectamente alineados y espaciados</li>
+                    <li>Borde turquesa en navbar para resaltar marca</li>
+                    <li>Hover con efecto de elevación</li>
+                    <li>Font-weight y tamaños mejorados</li>
+                    <li>Menú móvil con transición suave</li>
+                </ul>
+            </div>
+            
+            <div class="changelog-item">
+                <h3>✅ Mejoras de Diseño</h3>
+                <ul>
+                    <li>Sección de búsqueda con offset negativo para mejor integración</li>
+                    <li>Formulario con sombras y bordes mejorados</li>
+                    <li>Tarjetas de tours con gradientes y efectos 3D</li>
+                    <li>Sección de servicios con fondo degradado azul</li>
+                    <li>Iconos más grandes con animación en hover</li>
+                    <li>Botones con gradientes y efectos de elevación</li>
+                </ul>
+            </div>
+            
+            <div class="changelog-item">
+                <h3>✅ JavaScript del Carrusel</h3>
+                <ul>
+                    <li>Sistema completo de navegación</li>
+                    <li>Auto-play inteligente</li>
+                    <li>Manejo de eventos táctiles</li>
+                    <li>Navegación por teclado</li>
+                    <li>Pausa automática en hover</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="cta-section">
+            <h2>🚀 ¡Todo Listo para Ver!</h2>
+            <p style="font-size: 18px; margin-top: 10px; opacity: 0.9;">
+                Abre el sitio principal para ver todas las mejoras en acción
+            </p>
+            <div class="btn-container">
+                <a href="index.html" class="btn btn-primary">Ver Sitio Principal</a>
+                <a href="style-guide.html" class="btn btn-secondary">Guía de Estilos</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
