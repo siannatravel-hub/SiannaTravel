@@ -89,10 +89,15 @@ export async function updateFeaturedPackage(id, updates) {
     return { error: 'Supabase no configurado' };
   }
 
+  const numericId = parseInt(id, 10);
+  if (isNaN(numericId)) {
+    return { error: { message: 'El paquete aún no existe en la base de datos. Guarda primero para crearlo.' } };
+  }
+
   const { data, error } = await supabase
     .from('featured_packages')
     .update(updates)
-    .eq('id', id)
+    .eq('id', numericId)
     .select()
     .single();
 
@@ -120,10 +125,16 @@ export async function deleteFeaturedPackage(id) {
     return { error: 'Supabase no configurado' };
   }
 
+  const numericId = parseInt(id, 10);
+  if (isNaN(numericId)) {
+    // Package only exists in local defaults, nothing to delete from DB
+    return { error: null };
+  }
+
   const { error } = await supabase
     .from('featured_packages')
     .delete()
-    .eq('id', id);
+    .eq('id', numericId);
 
   return { error };
 }

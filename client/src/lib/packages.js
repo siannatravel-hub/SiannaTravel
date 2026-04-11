@@ -165,8 +165,8 @@ export async function getPackages() {
       .order('order_index', { ascending: true });
     
     if (error) throw error;
-    // Normalizar: usar slug como id para el enrutamiento si existe
-    const normalized = (data || []).map(p => ({ ...p, id: p.slug || String(p.id) }));
+    // Normalizar: usar slug como id para el enrutamiento si existe, pero conservar el id numérico
+    const normalized = (data || []).map(p => ({ ...p, id: p.slug || String(p.id), _db_id: p.id }));
     return normalized.length > 0 ? normalized : DEFAULT_PACKAGES;
   } catch (error) {
     console.warn('Error fetching packages, using defaults:', error.message);
@@ -187,7 +187,7 @@ export async function getPackageById(id) {
       .single();
     
     if (error) throw error;
-    return data ? { ...data, id: data.slug || String(data.id) } : null;
+    return data ? { ...data, id: data.slug || String(data.id), _db_id: data.id } : null;
   } catch (error) {
     console.warn('Error fetching package, searching defaults:', error.message);
     return DEFAULT_PACKAGES.find(p => p.id === id) || null;
@@ -219,12 +219,14 @@ export async function updatePackage(id, updates, userEmail = 'admin') {
   }
 
   // Guardar historial de cada campo cambiado (solo campos escalares)
-  if (currentPackage) {
+  // Solo si tenemos el id numérico real de la BD (package_history.package_id es BIGINT)
+  const dbNumericId = currentPackage?._db_id ?? null;
+  if (currentPackage && dbNumericId) {
     const scalarFields = Object.entries(updates).filter(([, v]) => typeof v !== 'object');
     const historyPromises = scalarFields
       .filter(([field, newValue]) => currentPackage[field] !== newValue && field !== 'updated_at')
       .map(([field, newValue]) =>
-        addToHistory(id, field, String(currentPackage[field] ?? ''), String(newValue ?? ''), userEmail)
+        addToHistory(dbNumericId, field, String(currentPackage[field] ?? ''), String(newValue ?? ''), userEmail)
           .catch(() => {}) // ignorar errores de historial
       );
     await Promise.all(historyPromises);
@@ -299,10 +301,22 @@ export async function addToHistory(packageId, fieldChanged, oldValue, newValue, 
 }
 
 export async function getPackageHistory(packageId) {
+  // package_history.package_id es BIGINT: resolver slug → id numérico si es necesario
+  let numericId = typeof packageId === 'number' ? packageId : parseInt(packageId, 10);
+  if (isNaN(numericId)) {
+    const { data: pkg } = await supabase
+      .from('packages')
+      .select('id')
+      .eq('slug', packageId)
+      .maybeSingle();
+    numericId = pkg?.id ?? null;
+  }
+  if (!numericId) return [];
+
   const { data, error } = await supabase
     .from('package_history')
     .select('*')
-    .eq('package_id', packageId)
+    .eq('package_id', numericId)
     .order('changed_at', { ascending: false })
     .limit(3);
   

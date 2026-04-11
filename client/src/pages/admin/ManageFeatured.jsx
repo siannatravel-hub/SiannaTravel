@@ -122,7 +122,14 @@ export default function ManageFeatured() {
 
     let result;
     if (editingPkg) {
-      result = await updateFeaturedPackage(editingPkg.id, packageData);
+      // If the package only exists in the local defaults (string id), create it in the DB
+      const numericId = parseInt(editingPkg.id, 10);
+      const hasRealDbId = !isNaN(numericId) && String(numericId) === String(editingPkg.id);
+      if (hasRealDbId) {
+        result = await updateFeaturedPackage(numericId, packageData);
+      } else {
+        result = await createFeaturedPackage(packageData);
+      }
     } else {
       result = await createFeaturedPackage(packageData);
     }
