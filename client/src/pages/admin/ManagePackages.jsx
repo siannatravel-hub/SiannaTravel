@@ -55,7 +55,7 @@ export default function ManagePackages() {
   }
 
   async function handleSyncToDatabase() {
-    if (!confirm('¿Sincronizar los paquetes del código con Supabase?\nEsto actualizará (upsert) todos los paquetes definidos en el código hacia la base de datos. Los cambios que hayas hecho en el admin NO se perderán si el id coincide.')) return;
+    if (!confirm('¿Sincronizar los paquetes del código con Supabase?\nEsto SOLO inserta paquetes nuevos que no existan aún en la base de datos. Los cambios que hayas hecho en el admin (imágenes, contenido, etc.) NO se sobreescriben.')) return;
     setSyncing(true);
     setSyncMessage('');
     try {

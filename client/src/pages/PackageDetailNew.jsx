@@ -136,7 +136,7 @@ export default function PackageDetailNew() {
           ...DEFAULT_PACKAGE_DETAILS,
           ...data,
           includes: data.includes || data.benefits || DEFAULT_PACKAGE_DETAILS.includes,
-          gallery: data.gallery?.length ? data.gallery : DEFAULT_GALLERY,
+          gallery: data.gallery?.length ? data.gallery : (data.image ? [data.image] : DEFAULT_GALLERY),
           flight_includes: data.flight_includes || DEFAULT_PACKAGE_DETAILS.flight_includes,
           transfers_included: data.transfers_included || DEFAULT_PACKAGE_DETAILS.transfers_included,
           itinerary: data.itinerary || DEFAULT_PACKAGE_DETAILS.itinerary,

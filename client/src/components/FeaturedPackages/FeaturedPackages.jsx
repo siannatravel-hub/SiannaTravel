@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { getFeaturedPackages } from '../../lib/featuredPackages';
+import { getPackages } from '../../lib/packages';
 import styles from './FeaturedPackages.module.css';
 
 export default function FeaturedPackages() {
@@ -9,9 +9,15 @@ export default function FeaturedPackages() {
 
   useEffect(() => {
     async function loadPackages() {
-      const { data } = await getFeaturedPackages();
-      setPackages(data || []);
-      setLoading(false);
+      try {
+        const data = await getPackages();
+        const featured = (data || []).filter(p => p.is_featured && p.is_active !== false);
+        setPackages(featured);
+      } catch (err) {
+        console.error('Error loading featured packages:', err);
+      } finally {
+        setLoading(false);
+      }
     }
     loadPackages();
   }, []);

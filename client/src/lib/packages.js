@@ -447,20 +447,39 @@ export async function initializePackages() {
   return getPackages();
 }
 
-// Sincroniza (upsert) los paquetes por defecto del código hacia Supabase.
-// Insertar si no existe el id, actualizar si ya existe.
+// Sincroniza los paquetes por defecto del código hacia Supabase.
+// Solo inserta los que NO existen aún (nunca sobreescribe cambios del admin).
 export async function syncDefaultsToDatabase() {
   if (!isSupabaseConfigured()) {
     throw new Error('Supabase no configurado');
   }
 
-  // Mapear id (slug de texto) → campo slug en la BD
-  // Excluir columnas que pueden no existir aún en la BD (itinerary_pdf, etc.)
-  const packagesToSync = DEFAULT_PACKAGES.map(({ id, itinerary_pdf, ...rest }) => ({ slug: id, ...rest }));
+  // Obtener slugs ya existentes en la BD
+  const { data: existing, error: fetchError } = await supabase
+    .from('packages')
+    .select('slug')
+    .not('slug', 'is', null);
+
+  if (fetchError) {
+    if (fetchError.message === 'Failed to fetch') {
+      throw new Error('No se pudo conectar con Supabase. Verifica que el proyecto esté activo.');
+    }
+    throw fetchError;
+  }
+
+  const existingSlugs = new Set((existing || []).map(p => p.slug));
+  const toInsert = DEFAULT_PACKAGES
+    .filter(p => !existingSlugs.has(p.id))
+    .map(({ id, ...rest }) => ({ slug: id, ...rest }));
+
+  if (toInsert.length === 0) {
+    return [];
+  }
 
   const { data, error } = await supabase
     .from('packages')
-    .upsert(packagesToSync, { onConflict: 'slug' });
+    .insert(toInsert)
+    .select();
 
   if (error) {
     if (error.message === 'Failed to fetch') {
