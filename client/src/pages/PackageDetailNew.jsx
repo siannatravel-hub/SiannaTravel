@@ -23,6 +23,7 @@ const DEFAULT_PACKAGE_DETAILS = {
   gallery: DEFAULT_GALLERY,
   price: 1299,
   original_price: 1599,
+  currency: 'MXN',
   duration: '5 días / 4 noches',
   persons: 2,
   service_type: 'paquete',
@@ -188,7 +189,7 @@ export default function PackageDetailNew() {
       offers: {
         '@type': 'Offer',
         price: pkg.price,
-        priceCurrency: 'USD',
+        priceCurrency: pkg.currency || 'MXN',
         availability: 'https://schema.org/InStock',
         url: `https://siannatravel.com/paquetes/${pkg.id}`,
         seller: {
@@ -309,7 +310,7 @@ export default function PackageDetailNew() {
               </span>
             </div>
             <div className={styles.stat}>
-              <span className={styles.statLabel}>Personas</span>
+              <span className={styles.statLabel}>Máx. de personas</span>
               <span className={styles.statValue}>{pkg.persons || 2}</span>
             </div>
           </div>
@@ -456,7 +457,7 @@ export default function PackageDetailNew() {
               )}
               <div className={styles.currentPrice}>
                 <span className={styles.priceAmount}>${(pkg.price || 0).toLocaleString()}</span>
-                <span className={styles.priceCurrency}>USD</span>
+                <span className={styles.priceCurrency}>{pkg.currency || 'MXN'}</span>
               </div>
               <span className={styles.priceNote}>por persona</span>
               {discount > 0 && (

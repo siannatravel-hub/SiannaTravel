@@ -213,7 +213,7 @@ export default function ManagePackages() {
         'title', 'destination', 'country', 'region', 'description',
         'price', 'original_price', 'discount', 'duration', 'nights',
         'image', 'category', 'rating', 'reviews_count', 'is_featured',
-        'airline', 'flight_type', 'service_type', 'persons',
+        'airline', 'flight_type', 'service_type', 'persons', 'currency',
         'hotel_name', 'hotel_stars', 'room_type', 'accommodation_type',
         'itinerary_pdf', 'dates', 'contact_whatsapp', 'cancellation_policy'
       ];
@@ -393,7 +393,7 @@ export default function ManagePackages() {
                 
                 <div className={styles.packageMeta}>
                   <div className={styles.packagePrice}>
-                    ${pkg.price?.toLocaleString()}
+                    ${pkg.price?.toLocaleString()} <small>{pkg.currency || 'MXN'}</small>
                     {pkg.original_price && (
                       <span>${pkg.original_price?.toLocaleString()}</span>
                     )}
@@ -579,6 +579,14 @@ export default function ManagePackages() {
                   <div className={styles.formGroup}>
                     <label>Personas</label>
                     <input type="number" value={editForm.persons || ''} onChange={e => handleInputChange('persons', e.target.value)} placeholder="ej: 2" min="1" />
+                  </div>
+                  <div className={styles.formGroup}>
+                    <label>Moneda</label>
+                    <select value={editForm.currency || 'MXN'} onChange={e => handleInputChange('currency', e.target.value)}>
+                      <option value="MXN">MXN (Peso Mexicano)</option>
+                      <option value="USD">USD (Dólar)</option>
+                      <option value="EUR">EUR (Euro)</option>
+                    </select>
                   </div>
                   <div className={`${styles.formGroup} ${styles.fullWidth}`}>
                     <label>Incluye en el vuelo</label>

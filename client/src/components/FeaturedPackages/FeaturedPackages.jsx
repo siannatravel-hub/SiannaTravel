@@ -90,6 +90,7 @@ export default function FeaturedPackages() {
                 <div className={styles.cardPricing}>
                   <span className={styles.cardPrice}>
                     ${pkg.price?.toLocaleString()}
+                    <small className={styles.cardCurrency}>{pkg.currency || 'MXN'}</small>
                   </span>
                   {pkg.original_price > pkg.price && (
                     <span className={styles.cardOriginalPrice}>

@@ -52,7 +52,7 @@ export default function PackageCard({ pkg }) {
         <div className={styles.footer}>
           <div>
             <span className={styles.price}>${pkg.price.toLocaleString()}</span>
-            <span className={styles.priceLabel}>USD / persona</span>
+            <span className={styles.priceLabel}>{pkg.currency || 'MXN'} / persona</span>
           </div>
           <span className={styles.detailBtn}>
             Ver detalle

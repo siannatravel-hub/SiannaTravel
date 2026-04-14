@@ -179,6 +179,15 @@
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35rem;
+}
+
+.cardCurrency {
+  font-size: 0.75rem;
+  font-weight: 600;
+  -webkit-text-fill-color: rgba(255, 255, 255, 0.6);
 }
 
 .cardOriginalPrice {
