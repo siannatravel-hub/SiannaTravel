@@ -207,10 +207,13 @@ export async function getBlogPostBySlug(slug) {
 }
 
 export async function createBlogPost(postData) {
+  if (!isSupabaseConfigured()) {
+    throw new Error('Supabase no está configurado. Ejecuta el SQL blog_posts.sql en Supabase.');
+  }
   const slug = postData.slug || generateSlug(postData.title);
   const { data, error } = await supabase
     .from('blog_posts')
-    .insert([{ ...postData, slug }])
+    .insert([{ ...postData, slug, is_published: true, published_at: new Date().toISOString() }])
     .select()
     .single();
 
@@ -219,6 +222,9 @@ export async function createBlogPost(postData) {
 }
 
 export async function updateBlogPost(id, updates) {
+  if (!isSupabaseConfigured()) {
+    throw new Error('Supabase no está configurado. Ejecuta el SQL blog_posts.sql en Supabase.');
+  }
   if (updates.title && !updates.slug) {
     updates.slug = generateSlug(updates.title);
   }
@@ -235,6 +241,9 @@ export async function updateBlogPost(id, updates) {
 }
 
 export async function deleteBlogPost(id) {
+  if (!isSupabaseConfigured()) {
+    throw new Error('Supabase no está configurado.');
+  }
   const { error } = await supabase
     .from('blog_posts')
     .delete()

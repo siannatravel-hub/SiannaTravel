@@ -138,7 +138,7 @@ export default function ManageBlog() {
       closeEditor();
     } catch (err) {
       console.error('Error saving post:', err);
-      alert('Error al guardar la publicación');
+      alert('Error al guardar la publicación:\n' + (err.message || err));
     } finally {
       setSaving(false);
     }
