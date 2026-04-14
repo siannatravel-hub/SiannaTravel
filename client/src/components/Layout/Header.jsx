@@ -71,9 +71,6 @@ export default function Header() {
 
           <Link to="/" className={styles.logo}>
             <img src="/images/logos/logo-sianna-rf.png" alt="Sianna Travel" className={styles.logoIcon} />
-            <span className={styles.logoText}>
-              Sianna<span className={styles.logoAccent}>Travel</span>
-            </span>
           </Link>
 
           <nav className={styles.navDesktop}>

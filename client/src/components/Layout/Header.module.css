@@ -35,7 +35,7 @@
 }
 
 .logoIcon {
-  height: 56px;
+  height: 52px;
   width: auto;
   object-fit: contain;
 }
@@ -45,7 +45,7 @@
 }
 
 .logoAccent {
-  color: #0f6fec;
+  display: none;
 }
 
 /* ======================== */
