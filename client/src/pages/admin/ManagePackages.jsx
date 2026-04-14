@@ -4,6 +4,7 @@ import { useAuth } from '../../context/AuthContext';
 import {
   getPackages,
   updatePackage,
+  deletePackage,
   getPackageHistory,
   togglePackageStatus,
   fieldLabels,
@@ -269,6 +270,17 @@ export default function ManagePackages() {
     }
   }
 
+  async function handleDeletePackage(pkg) {
+    if (!confirm(`¿Eliminar permanentemente el paquete "${pkg.title || '(sin título)'}"?\n\nEsta acción no se puede deshacer.`)) return;
+    try {
+      await deletePackage(pkg.id);
+      await loadPackages();
+    } catch (error) {
+      console.error('Error deleting package:', error);
+      alert('Error al eliminar el paquete:\n' + (error.message || error));
+    }
+  }
+
   async function openHistoryModal(pkg) {
     setShowHistory(pkg);
     setLoadingHistory(true);
@@ -409,6 +421,13 @@ export default function ManagePackages() {
                     onClick={() => handleToggleStatus(pkg)}
                   >
                     {pkg.is_active ? '🔴' : '🟢'}
+                  </button>
+                  <button
+                    className={styles.deleteBtn}
+                    onClick={() => handleDeletePackage(pkg)}
+                    title="Eliminar paquete permanentemente"
+                  >
+                    🗑️
                   </button>
                 </div>
               </div>

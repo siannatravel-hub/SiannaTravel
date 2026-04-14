@@ -241,7 +241,7 @@
   gap: 0.5rem;
 }
 
-.editBtn, .historyBtn, .toggleBtn {
+.editBtn, .historyBtn, .toggleBtn, .deleteBtn {
   flex: 1;
   padding: 0.65rem;
   border: none;
@@ -286,6 +286,28 @@
   background: rgba(239, 68, 68, 0.2);
   color: #ef4444;
   border: 1px solid rgba(239, 68, 68, 0.3);
+}
+
+.deleteBtn {
+  flex: 0 0 auto;
+  padding: 0.65rem 0.8rem;
+  background: rgba(239, 68, 68, 0.15);
+  color: #f87171;
+  border: 1px solid rgba(239, 68, 68, 0.35);
+  border-radius: 8px;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.deleteBtn:hover {
+  background: rgba(239, 68, 68, 0.35);
+  border-color: rgba(239, 68, 68, 0.7);
+  transform: scale(1.05);
+  box-shadow: 0 4px 15px rgba(239, 68, 68, 0.3);
 }
 
 /* Modal */

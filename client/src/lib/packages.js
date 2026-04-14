@@ -120,7 +120,9 @@ export async function getPackages() {
     
     if (error) throw error;
     // Normalizar: usar slug como id para el enrutamiento si existe, pero conservar el id numérico
-    const normalized = (data || []).map(p => ({ ...p, id: p.slug || String(p.id), _db_id: p.id }));
+    const normalized = (data || [])
+      .filter(p => p.title && p.title.trim() !== '' && p.title !== 'undefined')
+      .map(p => ({ ...p, id: p.slug || String(p.id), _db_id: p.id }));
     return normalized.length > 0 ? normalized : DEFAULT_PACKAGES;
   } catch (error) {
     console.warn('Error fetching packages, using defaults:', error.message);
@@ -134,14 +136,28 @@ export async function getPackageById(id) {
   }
   
   try {
-    const { data, error } = await supabase
+    // Try by slug first
+    const { data: bySlug, error: slugError } = await supabase
       .from('packages')
       .select('*')
       .eq('slug', id)
-      .single();
+      .maybeSingle();
     
-    if (error) throw error;
-    return data ? { ...data, id: data.slug || String(data.id), _db_id: data.id } : null;
+    if (bySlug) return { ...bySlug, id: bySlug.slug || String(bySlug.id), _db_id: bySlug.id };
+
+    // Fallback: try by numeric DB id
+    const numericId = parseInt(id, 10);
+    if (!isNaN(numericId)) {
+      const { data: byId, error: idError } = await supabase
+        .from('packages')
+        .select('*')
+        .eq('id', numericId)
+        .maybeSingle();
+      if (byId) return { ...byId, id: byId.slug || String(byId.id), _db_id: byId.id };
+    }
+
+    // Final fallback: default packages
+    return DEFAULT_PACKAGES.find(p => p.id === id) || null;
   } catch (error) {
     console.warn('Error fetching package, searching defaults:', error.message);
     return DEFAULT_PACKAGES.find(p => p.id === id) || null;
@@ -223,11 +239,25 @@ export async function updatePackage(id, updates, userEmail = 'admin') {
 }
 
 export async function deletePackage(id) {
-  const { error } = await supabase
-    .from('packages')
-    .delete()
-    .eq('slug', id);
-  
+  // id can be a slug (string) or a stringified numeric DB id
+  const numericId = parseInt(id, 10);
+  const isNumericOnly = !isNaN(numericId) && String(numericId) === String(id);
+
+  let error;
+  if (isNumericOnly) {
+    // Delete by numeric DB id directly
+    ({ error } = await supabase
+      .from('packages')
+      .delete()
+      .eq('id', numericId));
+  } else {
+    // Delete by slug
+    ({ error } = await supabase
+      .from('packages')
+      .delete()
+      .eq('slug', id));
+  }
+
   if (error) throw error;
   return true;
 }
