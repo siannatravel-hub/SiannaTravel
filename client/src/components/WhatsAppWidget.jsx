@@ -42,7 +42,7 @@ export default function WhatsAppWidget() {
           <div className={styles.chatHeader}>
             <div className={styles.chatHeaderInfo}>
               <div className={styles.chatAvatar}>
-                <img src="/images/logos/logoisotipo.png" alt="Sianna Travel" />
+                <img src="/images/logos/logosianna.png" alt="Sianna Travel" />
               </div>
               <div>
                 <div className={styles.chatName}>Sianna Travel</div>

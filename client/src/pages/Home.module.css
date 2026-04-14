@@ -31,6 +31,13 @@
   box-shadow: 0 2px 12px rgba(0,0,0,0.06);
 }
 
+.exploreLogo {
+  height: 44px;
+  width: auto;
+  object-fit: contain;
+  flex-shrink: 0;
+}
+
 .exploreText {
   flex: 1;
   min-width: 200px;
@@ -75,6 +82,16 @@
   color: var(--color-white);
   text-align: center;
   padding: var(--space-3xl) var(--space-lg);
+}
+
+.ctaLogo {
+  height: 56px;
+  width: auto;
+  object-fit: contain;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 12px;
+  padding: 6px 18px;
+  margin-bottom: var(--space-lg);
 }
 
 .ctaTitle {
@@ -194,5 +211,20 @@
   .whatsappCtaInner {
     flex-direction: column;
     text-align: center;
+  }
+
+  .exploreLogo {
+    height: 36px;
+  }
+
+  .ctaLogo {
+    height: 46px;
+    padding: 5px 14px;
+  }
+
+  .exploreInner {
+    flex-direction: column;
+    text-align: center;
+    padding: 1.5rem;
   }
 }

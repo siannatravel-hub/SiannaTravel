@@ -40,6 +40,7 @@ export default function Home() {
       <section className={styles.exploreSection}>
         <div className="container">
           <div className={styles.exploreInner}>
+            <img src="/images/logos/logosianna.png" alt="Sianna Travel" className={styles.exploreLogo} />
             <div className={styles.exploreText}>
               <h2 className={styles.exploreTitle}>¿Quieres ver todos los destinos?</h2>
               <p className={styles.exploreSubtitle}>Tenemos paquetes nacionales e internacionales para todos los gustos y presupuestos.</p>
@@ -82,6 +83,7 @@ export default function Home() {
 
       {/* CTA */}
       <section className={styles.cta}>
+        <img src="/images/logos/logosianna.png" alt="Sianna Travel" className={styles.ctaLogo} />
         <h2 className={styles.ctaTitle}>¿Listo para tu próxima aventura?</h2>
         <p className={styles.ctaSubtitle}>
           Contáctanos hoy y diseñaremos el viaje perfecto para ti
