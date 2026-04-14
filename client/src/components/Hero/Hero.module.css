@@ -179,14 +179,10 @@
 
 /* Logo en Hero */
 .heroLogo {
-  height: 70px;
+  height: 80px;
   width: auto;
   object-fit: contain;
-  background: rgba(255, 255, 255, 0.95);
-  border-radius: 12px;
-  padding: 8px 20px;
   margin-bottom: var(--space-lg);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
   animation: fadeInUp 0.8s ease-out;
 }
 
@@ -213,8 +209,7 @@
   }
 
   .heroLogo {
-    height: 55px;
-    padding: 6px 16px;
+    height: 60px;
   }
 }
 
@@ -225,8 +220,7 @@
   }
 
   .heroLogo {
-    height: 48px;
-    padding: 5px 14px;
+    height: 52px;
   }
 }
 

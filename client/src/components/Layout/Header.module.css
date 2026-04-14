@@ -195,12 +195,9 @@
 }
 
 .blobLogoImg {
-  height: 36px;
+  height: 40px;
   width: auto;
   object-fit: contain;
-  background: #fff;
-  border-radius: 8px;
-  padding: 4px 10px;
 }
 
 .blobLogoText {
