@@ -235,7 +235,13 @@ export async function updateBlogPost(id, updates) {
     .select();
 
   if (error) throw error;
-  return data?.[0] || null;
+
+  // Si no se actualizó ninguna fila (post por defecto que no está en BD), crear uno nuevo
+  if (!data || data.length === 0) {
+    return await createBlogPost(updates);
+  }
+
+  return data[0];
 }
 
 export async function deleteBlogPost(id) {

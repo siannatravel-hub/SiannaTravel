@@ -266,6 +266,10 @@ export async function togglePackageStatus(id, isActive) {
   return updatePackage(id, { is_active: isActive });
 }
 
+export async function togglePackageFeatured(id, isFeatured) {
+  return updatePackage(id, { is_featured: isFeatured });
+}
+
 // ==========================================
 // Historial de Cambios (máximo 3 por paquete)
 // ==========================================
