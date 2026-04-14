@@ -63,7 +63,8 @@ export default function ImageUpload({
       setProgress(100);
       onChange(result.url);
     } catch (err) {
-      setError('Error al subir archivo. Usa la opción de URL.');
+      console.error('Upload error:', err);
+      setError('Error al subir: ' + (err.message || 'desconocido'));
       setShowUrlInput(true);
     } finally {
       clearInterval(progressInterval);
