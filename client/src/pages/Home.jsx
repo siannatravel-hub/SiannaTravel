@@ -1,25 +1,12 @@
 import { Link } from 'react-router-dom';
 import Hero from '../components/Hero/Hero';
 import FeaturedPackages from '../components/FeaturedPackages/FeaturedPackages';
-import PackageCard from '../components/PackageCard/PackageCard';
 import Testimonials from '../components/Testimonials/Testimonials';
 import WhyUs from '../components/WhyUs/WhyUs';
-import Spinner from '../components/ui/Spinner';
-import { useState, useEffect } from 'react';
 import { useSEO } from '../hooks/useSEO';
-import { getPackages } from '../lib/packages';
 import styles from './Home.module.css';
 
 export default function Home() {
-  const [packages, setPackages] = useState([]);
-  const [loading, setLoading] = useState(true);
-
-  useEffect(() => {
-    getPackages().then(data => {
-      setPackages(data?.slice(0, 6) || []);
-    }).finally(() => setLoading(false));
-  }, []);
-
   useSEO({
     title: 'Agencia de Viajes en Tulancingo | Tours y Paquetes Vacacionales',
     description: 'Sianna Travel — agencia de viajes en Tulancingo, Hidalgo. Paquetes vacacionales, tours turísticos y experiencias únicas por México y el mundo. Viaja con confianza.',
@@ -49,26 +36,15 @@ export default function Home() {
       {/* Promociones Destacadas - Editables desde Admin */}
       <FeaturedPackages />
 
-      {/* More Packages */}
-      <section className={styles.featuredSection}>
+      {/* CTA para ver todos los paquetes */}
+      <section className={styles.exploreSection}>
         <div className="container">
-          <h2 className="section-title">Más Destinos Populares</h2>
-          <p className="section-subtitle">
-            Explora nuestra colección completa de paquetes de viaje
-          </p>
-
-          {loading ? (
-            <Spinner />
-          ) : (
-            <div className={styles.packagesGrid}>
-              {packages?.map((pkg) => (
-                <PackageCard key={pkg.id} pkg={pkg} />
-              ))}
+          <div className={styles.exploreInner}>
+            <div className={styles.exploreText}>
+              <h2 className={styles.exploreTitle}>¿Quieres ver todos los destinos?</h2>
+              <p className={styles.exploreSubtitle}>Tenemos paquetes nacionales e internacionales para todos los gustos y presupuestos.</p>
             </div>
-          )}
-
-          <div className={styles.viewAll}>
-            <Link to="/paquetes" className="btn btn-outline btn-lg">
+            <Link to="/paquetes" className={styles.exploreBtn}>
               Ver todos los paquetes →
             </Link>
           </div>

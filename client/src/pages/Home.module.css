@@ -13,6 +13,62 @@
   margin-top: var(--space-2xl);
 }
 
+.exploreSection {
+  padding: var(--space-2xl) 0;
+  background: #f8fafc;
+}
+
+.exploreInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+  background: #fff;
+  border: 1px solid #e2e8f0;
+  border-radius: 16px;
+  padding: 2rem 2.5rem;
+  box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+}
+
+.exploreText {
+  flex: 1;
+  min-width: 200px;
+}
+
+.exploreTitle {
+  font-size: 1.4rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 0.4rem;
+}
+
+.exploreSubtitle {
+  color: #64748b;
+  font-size: 0.95rem;
+  margin: 0;
+}
+
+.exploreBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.85rem 2rem;
+  background: #0f172a;
+  color: #fff;
+  border-radius: 10px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  text-decoration: none;
+  white-space: nowrap;
+  transition: background 0.2s ease, transform 0.2s ease;
+}
+
+.exploreBtn:hover {
+  background: #1e3a5f;
+  transform: translateX(4px);
+}
+
 /* CTA Section */
 .cta {
   background: linear-gradient(135deg, #0f172a, #1e3a5f);

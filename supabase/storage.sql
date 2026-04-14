@@ -10,7 +10,7 @@ VALUES (
   'package-images',
   'package-images',
   true,
-  5242880,  -- 5MB
+  5242880,
   ARRAY['image/jpeg','image/jpg','image/png','image/webp','image/gif']
 )
 ON CONFLICT (id) DO UPDATE SET
@@ -23,27 +23,24 @@ DROP POLICY IF EXISTS "Authenticated users can upload" ON storage.objects;
 DROP POLICY IF EXISTS "Authenticated users can update" ON storage.objects;
 DROP POLICY IF EXISTS "Authenticated users can delete" ON storage.objects;
 
--- 3. Habilitar RLS en storage.objects (por si acaso)
-ALTER TABLE storage.objects ENABLE ROW LEVEL SECURITY;
-
--- 4. Política: lectura pública (cualquiera puede ver las imágenes)
+-- 3. Política: lectura pública
 CREATE POLICY "Public Access" ON storage.objects
   FOR SELECT USING (bucket_id = 'package-images');
 
--- 5. Política: usuarios autenticados pueden subir
+-- 4. Política: usuarios autenticados pueden subir
 CREATE POLICY "Authenticated users can upload" ON storage.objects
   FOR INSERT TO authenticated
   WITH CHECK (bucket_id = 'package-images');
 
--- 6. Política: usuarios autenticados pueden actualizar
+-- 5. Política: usuarios autenticados pueden actualizar
 CREATE POLICY "Authenticated users can update" ON storage.objects
   FOR UPDATE TO authenticated
   USING (bucket_id = 'package-images');
 
--- 7. Política: usuarios autenticados pueden eliminar
+-- 6. Política: usuarios autenticados pueden eliminar
 CREATE POLICY "Authenticated users can delete" ON storage.objects
   FOR DELETE TO authenticated
   USING (bucket_id = 'package-images');
 
--- 8. Verificar que el bucket existe
+-- 7. Verificar bucket
 SELECT id, name, public, file_size_limit FROM storage.buckets WHERE id = 'package-images';
