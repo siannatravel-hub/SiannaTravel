@@ -214,11 +214,10 @@ export async function createBlogPost(postData) {
   const { data, error } = await supabase
     .from('blog_posts')
     .insert([{ ...postData, slug, is_published: true, published_at: new Date().toISOString() }])
-    .select()
-    .single();
+    .select();
 
   if (error) throw error;
-  return data;
+  return data?.[0] || null;
 }
 
 export async function updateBlogPost(id, updates) {
@@ -233,11 +232,10 @@ export async function updateBlogPost(id, updates) {
     .from('blog_posts')
     .update(updates)
     .eq('id', id)
-    .select()
-    .single();
+    .select();
 
   if (error) throw error;
-  return data;
+  return data?.[0] || null;
 }
 
 export async function deleteBlogPost(id) {

@@ -26,9 +26,18 @@ ALTER TABLE blog_posts ENABLE ROW LEVEL SECURITY;
 CREATE POLICY "Allow public read published posts" ON blog_posts
   FOR SELECT USING (is_published = true);
 
--- Política para usuarios autenticados (CRUD completo)
-CREATE POLICY "Allow authenticated full access" ON blog_posts
-  FOR ALL TO authenticated USING (true) WITH CHECK (true);
+-- Políticas individuales para usuarios autenticados
+CREATE POLICY "Allow authenticated select" ON blog_posts
+  FOR SELECT TO authenticated USING (true);
+
+CREATE POLICY "Allow authenticated insert" ON blog_posts
+  FOR INSERT TO authenticated WITH CHECK (true);
+
+CREATE POLICY "Allow authenticated update" ON blog_posts
+  FOR UPDATE TO authenticated USING (true) WITH CHECK (true);
+
+CREATE POLICY "Allow authenticated delete" ON blog_posts
+  FOR DELETE TO authenticated USING (true);
 
 -- Trigger para actualizar automáticamente updated_at
 CREATE TRIGGER update_blog_posts_updated_at
