@@ -105,6 +105,7 @@
   text-transform: uppercase;
   letter-spacing: 0.05em;
   box-shadow: 0 4px 15px rgba(245, 158, 11, 0.4);
+  pointer-events: none;
 }
 
 .cardDiscount {
@@ -118,6 +119,7 @@
   border-radius: 0.5rem;
   font-size: 0.8rem;
   font-weight: 700;
+  pointer-events: none;
 }
 
 .cardContent {
@@ -128,6 +130,7 @@
   z-index: 2;
   padding: 1.5rem;
   color: #fff;
+  pointer-events: none;
 }
 
 .cardDestination {
@@ -203,6 +206,7 @@
   gap: 0.6rem;
   margin-top: 1rem;
   flex-wrap: wrap;
+  pointer-events: auto;
 }
 
 .cardDetailBtn {

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useParams, Link } from 'react-router-dom';
+import { useParams, Link, useNavigate } from 'react-router-dom';
 import { getPackageById } from '../lib/packages';
 import BookingModal from '../components/BookingModal';
 import { useSEO } from '../hooks/useSEO';
@@ -115,6 +115,7 @@ function toEmbedUrl(url) {
 
 export default function PackageDetailNew() {
   const { id } = useParams();
+  const navigate = useNavigate();
   const [pkg, setPkg] = useState(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
@@ -252,12 +253,12 @@ export default function PackageDetailNew() {
             />
             <div className={styles.heroOverlay}></div>
             
-            <Link to="/paquetes" className={styles.backBtn}>
+            <button className={styles.backBtn} onClick={() => navigate(-1)}>
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                 <path d="M19 12H5M12 19l-7-7 7-7"/>
               </svg>
               Volver
-            </Link>
+            </button>
             
             <div className={styles.heroInfo}>
               <div className={styles.heroTags}>
