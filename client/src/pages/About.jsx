@@ -4,7 +4,7 @@ import styles from './StaticPage.module.css';
 export default function About() {
   useSEO({
     title: 'Nosotros – Quiénes Somos',
-    description: 'Conoce la historia de Sianna Travel, agencia de viajes fundada en Tulancingo, Hidalgo. Más de 10 años creando experiencias de viaje inolvidables por México y el mundo.',
+    description: 'Conoce la historia de Sianna Travel, agencia de viajes fundada en México. Desde 2016 creando experiencias de viaje personalizadas, accesibles y seguras.',
     url: '/nosotros',
   });
   return (
@@ -18,32 +18,41 @@ export default function About() {
         <section className={styles.section}>
           <h2 className={styles.sectionTitle}>Nuestra Historia</h2>
           <p className={styles.text}>
-            Sianna Travel nació en 2018 con una visión clara: hacer que viajar sea una experiencia 
-            accesible, memorable y libre de complicaciones. Fundada por un grupo de apasionados 
-            viajeros, nuestra agencia se ha convertido en un referente en el sector turístico mexicano.
+            Sianna Travel es una agencia de viajes especializada en diseñar experiencias 
+            personalizadas, accesibles y seguras, tanto en destinos nacionales como internacionales. 
+            Se enfoca en acompañar de forma cercana y constante a cada viajero, desde la planeación 
+            hasta el regreso, asegurando momentos memorables y libres de preocupaciones.
           </p>
           <p className={styles.text}>
-            Desde nuestros inicios, hemos gestionado más de 5,000 viajes exitosos, 
-            llevando a familias, parejas y grupos de amigos a descubrir los destinos 
-            más impresionantes de México y el mundo.
+            La agencia fue fundada e inspirada por su entorno familiar, decididos a asumir el reto 
+            de dirigir una agencia de viajes con el propósito de darle un giro emocional y 
+            personalizado al negocio. El nombre <strong>Sianna</strong> es un homenaje directo a ellos, 
+            ya que está formado por las iniciales de cada miembro de la familia.
+          </p>
+          <p className={styles.text}>
+            Pronto descubrieron que detrás de cada viaje hay sueños, emociones y personas que buscan 
+            seguridad, atención y confianza. Así nació el verdadero propósito de Sianna: facilitar 
+            el camino para que cualquier persona pueda vivir la experiencia de viajar con 
+            acompañamiento empático y profesional, sin importar sus circunstancias.
           </p>
         </section>
 
         <section className={styles.section}>
-          <h2 className={styles.sectionTitle}>Nuestra Misión</h2>
+          <h2 className={styles.sectionTitle}>¿A quién va dirigido?</h2>
           <p className={styles.text}>
-            Crear experiencias de viaje extraordinarias que superen las expectativas de nuestros 
-            clientes, combinando destinos espectaculares con un servicio personalizado y atención 
-            al detalle en cada paso del proceso.
+            Sianna Travel está dirigida a personas que desean viajar más de una vez al año, que 
+            valoran una atención cercana y el acompañamiento humano. Desde jubilados y familias 
+            hasta viajeros primerizos o grupos que se sienten más cómodos viajando en conjunto, 
+            el servicio está diseñado para adaptarse con flexibilidad y calidez a cada perfil.
           </p>
         </section>
 
         <section className={styles.section}>
-          <h2 className={styles.sectionTitle}>Nuestra Visión</h2>
+          <h2 className={styles.sectionTitle}>Nuestro Compromiso</h2>
           <p className={styles.text}>
-            Ser la agencia de viajes preferida en México, reconocida por nuestra excelencia 
-            en servicio, innovación en productos turísticos y compromiso con la satisfacción 
-            total del cliente.
+            Desde 2016, Sianna Travel ha operado desde México con alcance nacional e internacional, 
+            acompañando a sus clientes a recorrer el mundo con respaldo constante, planes de pago 
+            accesibles y una atención que no termina hasta que regresan a casa con el corazón lleno.
           </p>
         </section>
 
@@ -53,25 +62,25 @@ export default function About() {
             <div className={styles.card}>
               <h3 className={styles.cardTitle}>Confianza</h3>
               <p className={styles.cardText}>
-                Construimos relaciones duraderas basadas en la transparencia y honestidad.
+                Construimos relaciones duraderas basadas en la transparencia y cercanía.
               </p>
             </div>
             <div className={styles.card}>
-              <h3 className={styles.cardTitle}>Excelencia</h3>
+              <h3 className={styles.cardTitle}>Acompañamiento</h3>
               <p className={styles.cardText}>
-                Nos esforzamos por superar expectativas en cada viaje que organizamos.
+                Estamos contigo antes, durante y después de tu viaje. Nunca viajas solo.
               </p>
             </div>
             <div className={styles.card}>
-              <h3 className={styles.cardTitle}>Pasión</h3>
+              <h3 className={styles.cardTitle}>Calidez</h3>
               <p className={styles.cardText}>
-                Amamos lo que hacemos y eso se refleja en cada experiencia que creamos.
+                Cada viajero es único. Adaptamos cada experiencia con empatía y flexibilidad.
               </p>
             </div>
             <div className={styles.card}>
-              <h3 className={styles.cardTitle}>Compromiso</h3>
+              <h3 className={styles.cardTitle}>Accesibilidad</h3>
               <p className={styles.cardText}>
-                Estamos contigo antes, durante y después de tu viaje.
+                Planes de pago flexibles para que viajar esté al alcance de todos.
               </p>
             </div>
           </div>
@@ -80,22 +89,13 @@ export default function About() {
         <section className={styles.section}>
           <h2 className={styles.sectionTitle}>¿Por qué elegirnos?</h2>
           <ul className={styles.list}>
-            <li>Más de 8 años de experiencia en el sector turístico</li>
-            <li>Alianzas con los mejores hoteles y aerolíneas</li>
-            <li>Precios competitivos y promociones exclusivas</li>
-            <li>Atención personalizada 24/7</li>
-            <li>Garantía de satisfacción en todos nuestros paquetes</li>
-            <li>Asesores de viaje certificados</li>
+            <li>Más de 8 años de experiencia desde 2016</li>
+            <li>Acompañamiento personalizado en cada etapa del viaje</li>
+            <li>Destinos nacionales e internacionales</li>
+            <li>Planes de pago accesibles y flexibles</li>
+            <li>Atención humana, cercana y empática</li>
+            <li>Diseño de experiencias a la medida de cada viajero</li>
           </ul>
-        </section>
-
-        <section className={styles.section}>
-          <h2 className={styles.sectionTitle}>Nuestro Equipo</h2>
-          <p className={styles.text}>
-            Contamos con un equipo de más de 15 profesionales especializados en diferentes 
-            destinos y tipos de viaje. Desde expertos en luna de miel hasta especialistas 
-            en viajes de aventura, tenemos el asesor perfecto para ti.
-          </p>
         </section>
       </div>
     </div>

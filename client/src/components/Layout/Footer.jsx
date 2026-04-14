@@ -39,9 +39,10 @@ export default function Footer() {
 
           <div>
             <h4 className={styles.footerTitle}>Contacto</h4>
-            <span className={styles.footerLink}>info@siannatravel.com</span>
-            <span className={styles.footerLink}>+52 (55) 1234-5678</span>
-            <span className={styles.footerLink}>Ciudad de México, MX</span>
+            <a href="mailto:info@siannatravel.com" className={styles.footerLink}>info@siannatravel.com</a>
+            <a href="tel:+527752658513" className={styles.footerLink}>775 265 8513</a>
+            <a href="tel:+527757525171" className={styles.footerLink}>775 752 5171</a>
+            <span className={styles.footerLink}>Tulancingo, Hidalgo, MX</span>
           </div>
         </div>
 
