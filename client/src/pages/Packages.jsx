@@ -152,7 +152,7 @@ export default function Packages() {
                       <span className={styles.currentPrice}>
                         ${pkg.price?.toLocaleString()}
                       </span>
-                      <span className={styles.priceLabel}>USD</span>
+                      <span className={styles.priceLabel}>{pkg.currency || 'MXN'}</span>
                     </div>
                     
                     <span className={styles.cardBtn}>

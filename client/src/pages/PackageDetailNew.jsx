@@ -173,7 +173,7 @@ export default function PackageDetailNew() {
     description: pkg?.description
       ? pkg.description.slice(0, 155)
       : packageTitle
-        ? `Paquete ${packageTitle} desde $${pkg?.price?.toLocaleString()} USD. ${pkg?.duration}. Reserva con Sianna Travel.`
+        ? `Paquete ${packageTitle} desde $${pkg?.price?.toLocaleString()} ${pkg?.currency || 'MXN'}. ${pkg?.duration}. Reserva con Sianna Travel.`
         : '',
     url: `/paquetes/${id}`,
     image: packageImage,

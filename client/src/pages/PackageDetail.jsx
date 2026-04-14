@@ -121,7 +121,7 @@ export default function PackageDetail() {
               <div className={styles.priceTag}>
                 <div>
                   <span className={styles.priceAmount}>${pkg.price.toLocaleString()}</span>{' '}
-                  <span className={styles.priceCurrency}>USD</span>
+                  <span className={styles.priceCurrency}>{pkg.currency || 'MXN'}</span>
                 </div>
                 <div className={styles.pricePerPerson}>por persona</div>
               </div>
@@ -264,7 +264,7 @@ export default function PackageDetail() {
               <div className={styles.priceTag}>
                 <div>
                   <span className={styles.priceAmount}>${pkg.price.toLocaleString()}</span>{' '}
-                  <span className={styles.priceCurrency}>USD</span>
+                  <span className={styles.priceCurrency}>{pkg.currency || 'MXN'}</span>
                 </div>
                 <div className={styles.pricePerPerson}>por persona</div>
               </div>
