@@ -1,9 +1,9 @@
 -- ===========================================
 -- SETUP COMPLETO: Tabla packages + tus paquetes reales
--- Pega todo esto en Supabase → SQL Editor → New Query → Run
+-- Pega todo esto en Supabase -> SQL Editor -> New Query -> Run
 -- ===========================================
 
--- ── 1. Crear tabla packages ──────────────────────────────────
+-- ── 1. Crear tabla packages ─────────────────────────────────────────
 CREATE TABLE IF NOT EXISTS packages (
   id TEXT PRIMARY KEY,
   title TEXT NOT NULL,
@@ -22,8 +22,14 @@ CREATE TABLE IF NOT EXISTS packages (
   reviews_count INTEGER DEFAULT 0,
   includes JSONB DEFAULT '[]'::jsonb,
   highlights JSONB DEFAULT '[]'::jsonb,
-  gallery JSONB DEFAULT '[]'::jsonb,
+  is_featured BOOLEAN DEFAULT false,
+  is_active BOOLEAN DEFAULT true,
+  order_index INTEGER DEFAULT 0,
   flight_type TEXT DEFAULT 'internacional',
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
+  slug TEXT,
+  gallery JSONB DEFAULT '[]'::jsonb,
   flight_includes JSONB DEFAULT '[]'::jsonb,
   service_type TEXT DEFAULT 'paquete',
   persons INTEGER DEFAULT 2,
@@ -39,15 +45,10 @@ CREATE TABLE IF NOT EXISTS packages (
   payment_options JSONB DEFAULT '[]'::jsonb,
   contact_whatsapp TEXT,
   dates TEXT,
-  itinerary_pdf TEXT,
-  is_featured BOOLEAN DEFAULT false,
-  is_active BOOLEAN DEFAULT true,
-  order_index INTEGER DEFAULT 0,
-  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW(),
-  updated_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+  itinerary_pdf TEXT
 );
 
--- ── 1b. Agregar columnas faltantes si la tabla ya existe ─────
+-- ── 1b. Agregar columnas faltantes si la tabla ya existe ─────────────
 ALTER TABLE packages ADD COLUMN IF NOT EXISTS slug TEXT;
 ALTER TABLE packages ADD COLUMN IF NOT EXISTS gallery JSONB DEFAULT '[]'::jsonb;
 ALTER TABLE packages ADD COLUMN IF NOT EXISTS flight_includes JSONB DEFAULT '[]'::jsonb;
@@ -81,74 +82,59 @@ ALTER TABLE packages ALTER COLUMN highlights SET DEFAULT '[]'::jsonb;
 -- Índice único en slug para el upsert
 CREATE UNIQUE INDEX IF NOT EXISTS packages_slug_idx ON packages (slug);
 
--- ── 2. Row Level Security ─────────────────────────────────────
+-- ── 2. Row Level Security ────────────────────────────────────────────
 ALTER TABLE packages ENABLE ROW LEVEL SECURITY;
 
 -- Lectura pública
-DO $$ BEGIN
+DO $$
+BEGIN
   IF NOT EXISTS (
-    SELECT 1 FROM pg_policies WHERE tablename = 'packages' AND policyname = 'Allow public read access'
+    SELECT 1 FROM pg_policies WHERE tablename = 'packages' AND policyname = 'Packages are publicly readable'
   ) THEN
-    CREATE POLICY "Allow public read access" ON packages FOR SELECT USING (true);
+    CREATE POLICY "Packages are publicly readable"
+      ON packages FOR SELECT
+      USING (true);
   END IF;
 END $$;
 
 -- Escritura solo para autenticados
-DO $$ BEGIN
+DO $$
+BEGIN
   IF NOT EXISTS (
-    SELECT 1 FROM pg_policies WHERE tablename = 'packages' AND policyname = 'Allow authenticated insert'
+    SELECT 1 FROM pg_policies WHERE tablename = 'packages' AND policyname = 'Authenticated users can manage packages'
   ) THEN
-    CREATE POLICY "Allow authenticated insert" ON packages FOR INSERT TO authenticated WITH CHECK (true);
+    CREATE POLICY "Authenticated users can manage packages"
+      ON packages FOR ALL
+      USING (auth.role() = 'authenticated')
+      WITH CHECK (auth.role() = 'authenticated');
   END IF;
 END $$;
 
-DO $$ BEGIN
-  IF NOT EXISTS (
-    SELECT 1 FROM pg_policies WHERE tablename = 'packages' AND policyname = 'Allow authenticated update'
-  ) THEN
-    CREATE POLICY "Allow authenticated update" ON packages FOR UPDATE TO authenticated USING (true) WITH CHECK (true);
-  END IF;
-END $$;
-
-DO $$ BEGIN
-  IF NOT EXISTS (
-    SELECT 1 FROM pg_policies WHERE tablename = 'packages' AND policyname = 'Allow authenticated delete'
-  ) THEN
-    CREATE POLICY "Allow authenticated delete" ON packages FOR DELETE TO authenticated USING (true);
-  END IF;
-END $$;
-
--- ── 3. Crear tabla package_history ───────────────────────────
+-- ── 3. Crear tabla package_history ───────────────────────────────────
 CREATE TABLE IF NOT EXISTS package_history (
-  id BIGSERIAL PRIMARY KEY,
-  package_id TEXT REFERENCES packages(id) ON DELETE CASCADE,
-  field_changed TEXT NOT NULL,
-  old_value TEXT,
-  new_value TEXT,
-  changed_by TEXT DEFAULT 'admin',
-  changed_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
+  id UUID DEFAULT gen_random_uuid() PRIMARY KEY,
+  package_id TEXT NOT NULL,
+  action TEXT NOT NULL,
+  data JSONB,
+  user_id UUID REFERENCES auth.users(id),
+  created_at TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
 
 ALTER TABLE package_history ENABLE ROW LEVEL SECURITY;
 
-DO $$ BEGIN
+DO $$
+BEGIN
   IF NOT EXISTS (
-    SELECT 1 FROM pg_policies WHERE tablename = 'package_history' AND policyname = 'Public read history'
+    SELECT 1 FROM pg_policies WHERE tablename = 'package_history' AND policyname = 'Authenticated users can manage history'
   ) THEN
-    CREATE POLICY "Public read history" ON package_history FOR SELECT USING (true);
+    CREATE POLICY "Authenticated users can manage history"
+      ON package_history FOR ALL
+      USING (auth.role() = 'authenticated');
   END IF;
 END $$;
 
-DO $$ BEGIN
-  IF NOT EXISTS (
-    SELECT 1 FROM pg_policies WHERE tablename = 'package_history' AND policyname = 'Auth insert history'
-  ) THEN
-    CREATE POLICY "Auth insert history" ON package_history FOR INSERT TO authenticated WITH CHECK (true);
-  END IF;
-END $$;
-
--- ── 4. Insertar / actualizar tus paquetes reales ─────────────
--- Usa INSERT … ON CONFLICT (slug) DO UPDATE para no perder cambios futuros del admin.
+-- ── 4. Insertar / actualizar tus paquetes reales ─────────────────────
+-- Usa INSERT ... ON CONFLICT (slug) DO UPDATE para no perder cambios futuros del admin.
 
 INSERT INTO packages (
   slug, title, destination, country, region, description,
@@ -231,44 +217,6 @@ INSERT INTO packages (
   true, true, 3,
   'internacional',
   'https://drive.google.com/file/d/1EyUMnItwTFynJ0DBCNf17Xk_BGacm8RS/view'
-),
-
--- 5. Tokio Moderno
-(
-  'tokyo-moderno',
-  'Tokio Moderno',
-  'Tokio',
-  'Japón',
-  'Asia',
-  'Explora la fascinante mezcla de tradición y modernidad en la capital japonesa.',
-  3299, 3799, 13,
-  '8 días / 7 noches', 7,
-  'https://images.unsplash.com/photo-1540959733332-eab4deabeeaf?w=800&q=90',
-  'cultural', 4.7, 156,
-  '["Vuelos ida y vuelta","Hotel tradicional","JR Pass","Guía bilingüe"]'::jsonb,
-  '["Shibuya","Monte Fuji","Templo Senso-ji","Akihabara"]'::jsonb,
-  false, true, 4,
-  'internacional',
-  NULL
-),
-
--- 6. Bariloche Nieve & Chocolate
-(
-  'bariloche-nieve',
-  'Bariloche Nieve & Chocolate',
-  'Bariloche',
-  'Argentina',
-  'Sudamérica',
-  'Esquí, chocolate artesanal y paisajes de ensueño en la Patagonia argentina.',
-  1599, 1899, 16,
-  '5 días / 4 noches', 4,
-  'https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?w=800&q=90',
-  'aventura', 4.6, 198,
-  '["Vuelos ida y vuelta","Hotel 5 estrellas","Pase de esquí","Tour chocolaterías"]'::jsonb,
-  '["Cerro Catedral","Lago Nahuel Huapi","Circuito Chico","Chocolaterías"]'::jsonb,
-  false, true, 5,
-  'internacional',
-  NULL
 )
 
 ON CONFLICT (slug) DO UPDATE SET
@@ -295,7 +243,7 @@ ON CONFLICT (slug) DO UPDATE SET
   itinerary_pdf     = EXCLUDED.itinerary_pdf,
   updated_at        = NOW();
 
--- ── 5. Limpiar featured_packages y poner tus 4 reales ────────
+-- ── 5. Limpiar featured_packages y poner tus 4 reales ───────────────
 DELETE FROM featured_packages;
 
 INSERT INTO featured_packages (title, destination, price, original_price, discount, image, tag, nights, rating, link, order_index)
@@ -341,6 +289,6 @@ VALUES
     3
   );
 
--- ── Verificar ────────────────────────────────────────────────
+-- ── Verificar ─────────────────────────────────────────────────────────
 SELECT id, slug, title, price, is_featured, is_active FROM packages ORDER BY order_index;
 SELECT id, title, price FROM featured_packages ORDER BY order_index;
