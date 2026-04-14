@@ -70,7 +70,7 @@ export default function Header() {
           )}
 
           <Link to="/" className={styles.logo}>
-            <img src="/images/logos/logoisotipo.png" alt="Sianna Travel" className={styles.logoIcon} />
+            <img src="/images/logos/logo-sianna-rf.png" alt="Sianna Travel" className={styles.logoIcon} />
             <span className={styles.logoText}>
               Sianna<span className={styles.logoAccent}>Travel</span>
             </span>
@@ -127,7 +127,7 @@ export default function Header() {
 
           <div className={`${styles.drawer} ${menuOpen ? styles.drawerOpen : ''}`}>
             <div className={styles.blobMenuHead}>
-              <img src="/images/logos/logoisotipo.png" alt="" className={styles.blobLogoImg} />
+              <img src="/images/logos/logo-sianna-rf.png" alt="" className={styles.blobLogoImg} />
               <span className={styles.blobLogoText}>Sianna<span>Travel</span></span>
               <button className={styles.blobCloseBtn} onClick={closeMenu}>✕</button>
             </div>

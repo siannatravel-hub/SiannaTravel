@@ -35,14 +35,13 @@
 }
 
 .logoIcon {
-  height: 52px;
+  height: 44px;
   width: auto;
   object-fit: contain;
 }
 
 .logoText {
-  display: flex;
-  gap: 0;
+  display: none;
 }
 
 .logoAccent {
@@ -196,20 +195,17 @@
 }
 
 .blobLogoImg {
-  width: 32px;
-  height: 32px;
+  height: 40px;
+  width: auto;
   object-fit: contain;
+  background: #fff;
+  border-radius: 8px;
+  padding: 4px 8px;
+}
 }
 
 .blobLogoText {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: #fff;
-  flex: 1;
-}
-
-.blobLogoText span {
-  color: #0f6fec;
+  display: none;
 }
 
 .blobCloseBtn {
