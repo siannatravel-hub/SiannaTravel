@@ -9,7 +9,7 @@ export default function Footer() {
           <div>
             <Link to="/" className={styles.footerBrand}>
               <img 
-                src="/images/logos/logosianna.png" 
+                src="/images/logos/logosianna.png?v=3" 
                 alt="Sianna Travel" 
                 className={styles.footerLogo}
               />
