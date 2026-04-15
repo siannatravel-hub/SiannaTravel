@@ -60,11 +60,11 @@
   animation: fadeInUp 0.8s ease-out;
 }
 
-/* Título principal usando Anton para el estilo impactante */
+/* Título principal usando Clash Display para impacto */
 .heroTitle {
-  font-family: var(--font-impact);
+  font-family: var(--font-display);
   font-size: clamp(3.5rem, 8vw, 7rem);
-  font-weight: 400; /* Anton no necesita bold extra */
+  font-weight: 700;
   line-height: 1.0;
   letter-spacing: 0.02em;
   text-transform: uppercase;
@@ -88,9 +88,9 @@
 /* Badge "CONFIANZA" estilo pill con borde magenta/rosa */
 .heroBadge {
   display: inline-block;
-  font-family: var(--font-impact);
+  font-family: var(--font-display);
   font-size: clamp(1rem, 2.5vw, 1.6rem);
-  font-weight: 400;
+  font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.06em;
   color: #fff;
@@ -112,7 +112,7 @@
 .heroSubtitle {
   font-family: var(--font-display);
   font-size: clamp(1.3rem, 2.5vw, 2rem);
-  font-weight: 400;
+  font-weight: 600;
   color: rgba(255, 255, 255, 0.92);
   margin-bottom: var(--space-lg);
   letter-spacing: 0.01em;

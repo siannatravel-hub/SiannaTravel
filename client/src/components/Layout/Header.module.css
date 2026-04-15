@@ -106,7 +106,7 @@
 /* ======================== */
 .hamburger {
   position: absolute;
-  left: 16px;
+  right: 16px;
   display: flex;
   flex-direction: column;
   gap: 5px;
