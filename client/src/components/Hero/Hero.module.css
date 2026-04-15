@@ -126,22 +126,33 @@
 
 .btnEscribenos {
   display: inline-block;
+  position: relative;
   font-family: var(--font-display);
   font-size: 1.1rem;
   font-weight: 600;
   color: #fff;
-  border: 2px solid #e91e8c;
   border-radius: var(--radius-full);
-  padding: 0.6em 2.2em;
+  padding: 0.65em 2.4em;
   text-decoration: none;
   letter-spacing: 0.03em;
-  transition: background var(--transition-fast), color var(--transition-fast);
-  background: transparent;
+  overflow: hidden;
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+  background:
+    linear-gradient(135deg, rgba(14, 109, 130, 0.82) 0%, rgba(15, 23, 42, 0.75) 100%),
+    url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=600&q=80')
+    center / cover no-repeat;
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(2px);
 }
 
 .btnEscribenos:hover {
-  background: #e91e8c;
-  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
+  background:
+    linear-gradient(135deg, rgba(14, 109, 130, 0.65) 0%, rgba(15, 23, 42, 0.60) 100%),
+    url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=600&q=80')
+    center / cover no-repeat;
 }
 
 /* Números de teléfono */
