@@ -29,7 +29,7 @@ export default function Hero() {
       <div className={styles.heroContent}>
         {/* Texto principal */}
         <div className={styles.heroText}>
-          <img src="/images/logos/logosianna.png" alt="Sianna Travel" className={styles.heroLogo} />
+          <img src="/images/logos/logosianna-morado.png" alt="Sianna Travel" className={styles.heroLogo} />
           <h1 className={styles.heroTitle}>
             <span className={styles.heroLine}>VIAJA CON</span>
             <span className={styles.heroLineFlex}>

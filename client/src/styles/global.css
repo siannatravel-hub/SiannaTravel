@@ -1,3 +1,5 @@
+@import url('./fonts.css');
+
 /* ========== CSS Custom Properties ========== */
 :root {
   /* Colors - Elegant palette */
@@ -26,9 +28,9 @@
   --color-gray-900: #0f172a;
 
   /* Typography */
-  --font-sans: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-display: 'Montserrat', 'Inter', system-ui, sans-serif;
-  --font-impact: 'Anton', 'Montserrat', Impact, sans-serif;
+  --font-sans: 'Satoshi', 'Inter', system-ui, -apple-system, sans-serif;
+  --font-display: 'Satoshi', 'Montserrat', system-ui, sans-serif;
+  --font-impact: 'Anton', 'Satoshi', Impact, sans-serif;
 
   /* Spacing */
   --space-xs: 0.25rem;
