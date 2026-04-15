@@ -215,6 +215,37 @@
   box-shadow: 0 6px 20px rgba(26, 138, 158, 0.35);
 }
 
+/* Map button — hotels card */
+.cardBtnMap {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.8rem 1.5rem;
+  font-family: var(--font-sans);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--color-primary-dark);
+  background: transparent;
+  border: 2px solid var(--color-primary);
+  border-radius: var(--radius-md);
+  text-decoration: none;
+  transition: all var(--transition-base);
+}
+
+.cardBtnMap::before {
+  content: '📍';
+  font-size: 1rem;
+}
+
+.cardBtnMap:hover {
+  background: var(--color-primary);
+  color: #fff;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(26, 138, 158, 0.25);
+}
+
 /* ---- Airlines ---- */
 .airlines {
   text-align: center;

@@ -1,6 +1,6 @@
 import styles from './FlightHotelServices.module.css';
 
-const FLIGHTS_IMG = 'https://images.unsplash.com/photo-1436491865332-7a61a109db05?w=800&q=85';
+const FLIGHTS_IMG = 'https://images.unsplash.com/photo-1474302770737-173ee21bab63?w=800&q=85';
 const HOTELS_IMG = 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=800&q=85';
 
 export default function FlightHotelServices() {
@@ -70,7 +70,12 @@ export default function FlightHotelServices() {
                 <li>Mejores precios garantizados</li>
                 <li>Opciones para cada estilo y presupuesto</li>
               </ul>
-              <span className={styles.cardTag}>Próximamente: disponibilidad en línea</span>
+              <a
+                href="#mapa-hoteles"
+                className={styles.cardBtnMap}
+              >
+                Ver hoteles en el mapa
+              </a>
             </div>
           </div>
         </div>
