@@ -76,7 +76,7 @@
   align-items: center;
   gap: 0.5rem;
   padding: 1rem 2.5rem;
-  background: linear-gradient(135deg, #0f6fec 0%, #0052cc 100%);
+  background: linear-gradient(135deg, #1a8a9e 0%, #0e6d82 100%);
   color: #fff;
   font-size: 1.1rem;
   font-weight: 600;
@@ -337,7 +337,7 @@
 
 .ctaBtnPrimary {
   padding: 1rem 2.5rem;
-  background: linear-gradient(135deg, #0f6fec 0%, #0052cc 100%);
+  background: linear-gradient(135deg, #1a8a9e 0%, #0e6d82 100%);
   color: #fff;
   font-size: 1.05rem;
   font-weight: 600;
@@ -354,16 +354,16 @@
 .ctaBtnSecondary {
   padding: 1rem 2.5rem;
   background: #fff;
-  color: #0f6fec;
+  color: #1a8a9e;
   font-size: 1.05rem;
   font-weight: 600;
   border-radius: 50px;
-  border: 2px solid #0f6fec;
+  border: 2px solid #1a8a9e;
   transition: all 0.3s ease;
 }
 
 .ctaBtnSecondary:hover {
-  background: #0f6fec;
+  background: #1a8a9e;
   color: #fff;
 }
 

@@ -19,7 +19,7 @@
   width: 40px;
   height: 40px;
   border: 3px solid #e2e8f0;
-  border-top-color: #0f6fec;
+  border-top-color: #1a8a9e;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
@@ -40,7 +40,7 @@
 }
 
 .backLink {
-  color: #0f6fec;
+  color: #1a8a9e;
   font-weight: 500;
 }
 
@@ -178,7 +178,7 @@
 }
 
 .thumbActive {
-  border-color: #0f6fec;
+  border-color: #1a8a9e;
 }
 
 /* ================================ */
@@ -408,7 +408,7 @@
   flex-shrink: 0;
   width: 48px;
   height: 48px;
-  background: linear-gradient(135deg, #0f6fec 0%, #0052cc 100%);
+  background: linear-gradient(135deg, #1a8a9e 0%, #0e6d82 100%);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -569,7 +569,7 @@
 .priceAmount {
   font-size: 2.25rem;
   font-weight: 800;
-  color: #0f6fec;
+  color: #1a8a9e;
 }
 
 .priceCurrency {
@@ -620,7 +620,7 @@
 .btnPrimary {
   width: 100%;
   padding: 1rem;
-  background: linear-gradient(135deg, #0f6fec 0%, #0052cc 100%);
+  background: linear-gradient(135deg, #1a8a9e 0%, #0e6d82 100%);
   color: #fff;
   border: none;
   border-radius: 12px;

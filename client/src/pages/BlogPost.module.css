@@ -21,7 +21,7 @@
   width: 40px;
   height: 40px;
   border: 3px solid #e2e8f0;
-  border-top-color: #0f6fec;
+  border-top-color: #1a8a9e;
   border-radius: 50%;
   animation: spin 0.7s linear infinite;
 }
@@ -31,7 +31,7 @@
 }
 
 .backLink {
-  color: #0f6fec;
+  color: #1a8a9e;
   font-weight: 600;
 }
 
@@ -196,14 +196,14 @@
 }
 
 .footerLink {
-  color: #0f6fec;
+  color: #1a8a9e;
   font-weight: 600;
   font-size: 0.95rem;
 }
 
 .footerCta {
   padding: 0.75rem 1.5rem;
-  background: linear-gradient(135deg, #0f6fec 0%, #0052cc 100%);
+  background: linear-gradient(135deg, #1a8a9e 0%, #0e6d82 100%);
   color: #fff;
   font-weight: 600;
   font-size: 0.9rem;

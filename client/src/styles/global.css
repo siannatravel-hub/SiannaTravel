@@ -3,14 +3,14 @@
 /* ========== CSS Custom Properties ========== */
 :root {
   /* Colors - Elegant palette */
-  --color-primary: #0f6fec;
-  --color-primary-dark: #0a56b8;
-  --color-primary-light: #e8f4ff;
-  --color-primary-gradient: linear-gradient(135deg, #0f6fec 0%, #0ea5e9 100%);
+  --color-primary: #1a8a9e;
+  --color-primary-dark: #0e6d82;
+  --color-primary-light: #e6f5f8;
+  --color-primary-gradient: linear-gradient(135deg, #0e6d82 0%, #1fb8ce 100%);
   --color-secondary: #f59e0b;
   --color-secondary-dark: #d97706;
   --color-secondary-light: #fef3c7;
-  --color-accent: #06b6d4;
+  --color-accent: #14a3b8;
   --color-success: #10b981;
   --color-error: #ef4444;
 
@@ -51,7 +51,7 @@
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.08);
   --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.1);
   --shadow-xl: 0 20px 40px rgba(0, 0, 0, 0.12);
-  --shadow-glow: 0 0 40px rgba(15, 111, 236, 0.15);
+  --shadow-glow: 0 0 40px rgba(26, 138, 158, 0.15);
   --shadow-card: 0 2px 8px rgba(0, 0, 0, 0.04), 0 8px 24px rgba(0, 0, 0, 0.06);
   --shadow-card-hover: 0 12px 40px rgba(0, 0, 0, 0.12);
 

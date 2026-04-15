@@ -18,7 +18,7 @@
   width: 40px;
   height: 40px;
   border: 3px solid #e2e8f0;
-  border-top-color: #0f6fec;
+  border-top-color: #1a8a9e;
   border-radius: 50%;
   animation: spin 0.7s linear infinite;
 }
@@ -127,7 +127,7 @@
   margin-top: 1rem;
   font-size: 0.9rem;
   font-weight: 600;
-  color: #0f6fec;
+  color: #1a8a9e;
 }
 
 .postCard:hover .readMore {

@@ -54,13 +54,13 @@
 }
 
 .filterTab:hover {
-  border-color: #0f6fec;
-  color: #0f6fec;
+  border-color: #1a8a9e;
+  color: #1a8a9e;
   transform: translateY(-2px);
 }
 
 .filterTabActive {
-  background: linear-gradient(135deg, #0f6fec 0%, #0052cc 100%);
+  background: linear-gradient(135deg, #1a8a9e 0%, #0e6d82 100%);
   border-color: transparent;
   color: #fff;
   box-shadow: 0 4px 15px rgba(15, 111, 236, 0.35);
@@ -92,7 +92,7 @@
   width: 40px;
   height: 40px;
   border: 3px solid #e2e8f0;
-  border-top-color: #0f6fec;
+  border-top-color: #1a8a9e;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
   margin-bottom: 1rem;
@@ -189,7 +189,7 @@
 
 .cardDestination {
   font-size: 0.85rem;
-  color: #0f6fec;
+  color: #1a8a9e;
   font-weight: 500;
   margin-bottom: 0.5rem;
 }
@@ -248,7 +248,7 @@
 .currentPrice {
   font-size: 1.5rem;
   font-weight: 800;
-  color: #0f6fec;
+  color: #1a8a9e;
 }
 
 .priceLabel {
@@ -258,7 +258,7 @@
 
 .cardBtn {
   padding: 0.6rem 1.2rem;
-  background: linear-gradient(135deg, #0f6fec 0%, #0052cc 100%);
+  background: linear-gradient(135deg, #1a8a9e 0%, #0e6d82 100%);
   color: #fff;
   font-size: 0.85rem;
   font-weight: 600;
@@ -290,7 +290,7 @@
 
 .emptyBtn {
   padding: 0.875rem 1.75rem;
-  background: linear-gradient(135deg, #0f6fec 0%, #0052cc 100%);
+  background: linear-gradient(135deg, #1a8a9e 0%, #0e6d82 100%);
   color: #fff;
   font-size: 1rem;
   font-weight: 600;
