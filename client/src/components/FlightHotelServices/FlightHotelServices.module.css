@@ -1,44 +1,64 @@
+/* ========================================= */
+/* FLIGHTS & HOTELS — Editorial Design       */
+/* ========================================= */
+
 .services {
-  padding: var(--space-4xl) 0;
-  background: var(--color-gray-50);
+  padding-bottom: var(--space-4xl);
 }
 
-.header {
-  text-align: center;
+/* ---- Hero banner ---- */
+.heroBar {
+  position: relative;
+  background:
+    url('https://images.unsplash.com/photo-1500835556837-99ac94a94552?w=1600&q=80')
+    center / cover no-repeat;
+  padding: var(--space-4xl) 0;
   margin-bottom: var(--space-3xl);
+}
+
+.heroBarOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(135deg, rgba(14, 109, 130, 0.88) 0%, rgba(15, 23, 42, 0.82) 100%);
+}
+
+.heroBarContent {
+  position: relative;
+  text-align: center;
 }
 
 .badge {
   display: inline-block;
-  font-family: var(--font-display);
-  font-size: 0.8rem;
+  font-family: var(--font-sans);
+  font-size: 0.75rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.12em;
-  color: var(--color-primary);
-  background: var(--color-primary-light);
-  padding: 0.4em 1.2em;
+  letter-spacing: 0.18em;
+  color: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  padding: 0.45em 1.4em;
   border-radius: var(--radius-full);
-  margin-bottom: var(--space-md);
+  margin-bottom: var(--space-lg);
 }
 
 .title {
   font-family: var(--font-display);
-  font-size: 2.5rem;
+  font-size: clamp(2.2rem, 5vw, 3.2rem);
   font-weight: 700;
-  color: var(--color-gray-900);
+  color: #fff;
   margin-bottom: var(--space-sm);
+  letter-spacing: -0.01em;
 }
 
 .subtitle {
   font-size: 1.1rem;
-  color: var(--color-gray-500);
-  max-width: 600px;
+  color: rgba(255, 255, 255, 0.78);
+  max-width: 560px;
   margin: 0 auto;
-  line-height: 1.7;
+  line-height: 1.75;
 }
 
-/* Cards grid */
+/* ---- Cards grid ---- */
 .grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -49,33 +69,79 @@
 .card {
   background: var(--color-white);
   border-radius: var(--radius-xl);
-  padding: var(--space-2xl);
+  overflow: hidden;
   box-shadow: var(--shadow-card);
-  transition: box-shadow var(--transition-base), transform var(--transition-base);
-  border: 1px solid var(--color-gray-200);
+  transition: box-shadow var(--transition-slow), transform var(--transition-slow);
+  border: 1px solid var(--color-gray-100);
 }
 
 .card:hover {
   box-shadow: var(--shadow-card-hover);
-  transform: translateY(-4px);
+  transform: translateY(-6px);
 }
 
-.cardIcon {
-  font-size: 2.8rem;
-  margin-bottom: var(--space-lg);
+.card:hover .cardImage img {
+  transform: scale(1.06);
+}
+
+/* Card image */
+.cardImage {
+  position: relative;
+  height: 240px;
+  overflow: hidden;
+}
+
+.cardImage img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.cardImageOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to top,
+    rgba(15, 23, 42, 0.55) 0%,
+    rgba(15, 23, 42, 0) 60%
+  );
+}
+
+.cardLabel {
+  position: absolute;
+  bottom: 1rem;
+  left: 1.25rem;
+  font-family: var(--font-display);
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: #fff;
+  background: rgba(255, 255, 255, 0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  padding: 0.4em 1.1em;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+/* Card body */
+.cardBody {
+  padding: var(--space-xl) var(--space-xl) var(--space-2xl);
 }
 
 .cardTitle {
   font-family: var(--font-display);
-  font-size: 1.5rem;
+  font-size: 1.4rem;
   font-weight: 700;
   color: var(--color-gray-900);
-  margin-bottom: var(--space-md);
+  margin-bottom: var(--space-sm);
 }
 
 .cardDesc {
-  font-size: 1rem;
-  color: var(--color-gray-600);
+  font-size: 0.95rem;
+  color: var(--color-gray-500);
   line-height: 1.7;
   margin-bottom: var(--space-lg);
 }
@@ -86,50 +152,52 @@
   margin: 0 0 var(--space-lg) 0;
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: 0.55rem;
 }
 
 .cardList li {
   position: relative;
-  padding-left: 1.6rem;
-  font-size: 0.95rem;
-  color: var(--color-gray-700);
+  padding-left: 1.5rem;
+  font-size: 0.9rem;
+  color: var(--color-gray-600);
   line-height: 1.5;
 }
 
 .cardList li::before {
-  content: '✓';
+  content: '';
   position: absolute;
   left: 0;
-  color: var(--color-primary);
-  font-weight: 700;
+  top: 0.5em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--color-primary);
 }
 
 .cardTag {
   display: inline-block;
-  font-size: 0.8rem;
+  font-size: 0.78rem;
   font-weight: 600;
-  color: var(--color-secondary-dark);
-  background: var(--color-secondary-light);
+  color: var(--color-primary-dark);
+  background: var(--color-primary-light);
   padding: 0.35em 1em;
   border-radius: var(--radius-full);
+  letter-spacing: 0.02em;
 }
 
-/* Airlines placeholder */
+/* ---- Airlines ---- */
 .airlines {
   text-align: center;
   padding: var(--space-xl) 0;
   margin-bottom: var(--space-2xl);
-  border-top: 1px solid var(--color-gray-200);
-  border-bottom: 1px solid var(--color-gray-200);
 }
 
 .airlinesLabel {
-  font-family: var(--font-display);
-  font-size: 0.9rem;
+  font-family: var(--font-sans);
+  font-size: 0.78rem;
   font-weight: 600;
   text-transform: uppercase;
-  letter-spacing: 0.08em;
+  letter-spacing: 0.12em;
   color: var(--color-gray-400);
   margin-bottom: var(--space-md);
 }
@@ -144,12 +212,12 @@
 }
 
 .airlinePlaceholder {
-  font-size: 0.9rem;
-  color: var(--color-gray-400);
+  font-size: 0.85rem;
+  color: var(--color-gray-300);
   font-style: italic;
 }
 
-/* CTA Band */
+/* ---- CTA Band ---- */
 .ctaBand {
   display: flex;
   align-items: center;
@@ -157,14 +225,25 @@
   gap: var(--space-xl);
   background: linear-gradient(135deg, #0f172a 0%, #1e3a5f 100%);
   border-radius: var(--radius-xl);
-  padding: var(--space-xl) var(--space-2xl);
+  padding: var(--space-2xl) var(--space-2xl);
+}
+
+.ctaContent {
+  max-width: 520px;
+}
+
+.ctaTitle {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 0.4rem;
 }
 
 .ctaText {
-  font-size: 1.05rem;
-  color: rgba(255, 255, 255, 0.9);
-  max-width: 550px;
-  line-height: 1.6;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.72);
+  line-height: 1.65;
   margin: 0;
 }
 
@@ -172,37 +251,51 @@
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
-  padding: 0.85rem 2rem;
+  padding: 0.9rem 2.2rem;
   background: var(--color-primary);
   color: #fff;
   border-radius: var(--radius-full);
   font-weight: 700;
-  font-size: 1rem;
+  font-size: 0.95rem;
   white-space: nowrap;
   text-decoration: none;
   transition: all var(--transition-base);
-  box-shadow: 0 4px 15px rgba(26, 138, 158, 0.3);
+  box-shadow: 0 4px 18px rgba(26, 138, 158, 0.25);
 }
 
 .ctaBtn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 8px 25px rgba(26, 138, 158, 0.45);
+  box-shadow: 0 8px 28px rgba(26, 138, 158, 0.4);
   background: var(--color-primary-dark);
 }
 
-/* Responsive */
+/* ---- Responsive ---- */
 @media (max-width: 768px) {
+  .heroBar {
+    padding: var(--space-3xl) 0;
+  }
+
   .grid {
     grid-template-columns: 1fr;
   }
 
-  .title {
-    font-size: 2rem;
+  .cardImage {
+    height: 200px;
   }
 
   .ctaBand {
     flex-direction: column;
     text-align: center;
     padding: var(--space-xl);
+  }
+}
+
+@media (max-width: 480px) {
+  .cardImage {
+    height: 180px;
+  }
+
+  .cardBody {
+    padding: var(--space-lg);
   }
 }
