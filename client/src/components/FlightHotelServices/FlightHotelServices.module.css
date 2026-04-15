@@ -11,9 +11,16 @@
   position: relative;
   background:
     url('https://images.unsplash.com/photo-1500835556837-99ac94a94552?w=1600&q=80')
-    center / cover no-repeat;
+    center / cover no-repeat fixed;
   padding: var(--space-4xl) 0;
   margin-bottom: var(--space-3xl);
+}
+
+/* Fallback: iOS no soporta background-attachment:fixed */
+@supports (-webkit-touch-callout: none) {
+  .heroBar {
+    background-attachment: scroll;
+  }
 }
 
 .heroBarOverlay {
