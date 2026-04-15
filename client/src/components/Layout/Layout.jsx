@@ -1,8 +1,9 @@
-import { useEffect, useRef } from 'react';
+import { Suspense, useEffect, useRef } from 'react';
 import { useLocation, Outlet } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
 import WhatsAppWidget from '../WhatsAppWidget';
+import Spinner from '../ui/Spinner';
 
 export default function Layout({ children }) {
   const { pathname } = useLocation();
@@ -39,7 +40,9 @@ export default function Layout({ children }) {
     <>
       <Header />
       <main style={{ paddingTop: 'var(--header-height, 70px)' }}>
-        {children || <Outlet />}
+        <Suspense fallback={<Spinner />}>
+          {children || <Outlet />}
+        </Suspense>
       </main>
       <Footer />
       <WhatsAppWidget />

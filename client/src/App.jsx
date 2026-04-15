@@ -2,6 +2,7 @@ import { lazy, Suspense } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Layout from './components/Layout/Layout';
 import Spinner from './components/ui/Spinner';
+import ErrorBoundary from './components/ui/ErrorBoundary';
 import { AuthProvider } from './context/AuthContext';
 import ProtectedRoute from './components/ProtectedRoute';
 
@@ -29,11 +30,11 @@ const ManageBlog = lazy(() => import('./pages/admin/ManageBlog'));
 
 export default function App() {
   return (
-    <AuthProvider>
-      <BrowserRouter>
-        <Suspense fallback={<Spinner />}>
+    <ErrorBoundary>
+      <AuthProvider>
+        <BrowserRouter>
           <Routes>
-            {/* Public routes with layout */}
+            {/* Public routes with layout — Suspense is inside Layout */}
             <Route element={<Layout />}>
               <Route path="/" element={<Home />} />
               <Route path="/paquetes" element={<Packages />} />
@@ -50,12 +51,12 @@ export default function App() {
             </Route>
 
             {/* Admin routes without main layout */}
-            <Route path="/admin/login" element={<AdminLogin />} />
+            <Route path="/admin/login" element={<Suspense fallback={<Spinner />}><AdminLogin /></Suspense>} />
             <Route
               path="/admin"
               element={
                 <ProtectedRoute>
-                  <AdminDashboard />
+                  <Suspense fallback={<Spinner />}><AdminDashboard /></Suspense>
                 </ProtectedRoute>
               }
             />
@@ -63,7 +64,7 @@ export default function App() {
               path="/admin/featured"
               element={
                 <ProtectedRoute>
-                  <ManageFeatured />
+                  <Suspense fallback={<Spinner />}><ManageFeatured /></Suspense>
                 </ProtectedRoute>
               }
             />
@@ -71,7 +72,7 @@ export default function App() {
               path="/admin/packages"
               element={
                 <ProtectedRoute>
-                  <ManagePackages />
+                  <Suspense fallback={<Spinner />}><ManagePackages /></Suspense>
                 </ProtectedRoute>
               }
             />
@@ -79,7 +80,7 @@ export default function App() {
               path="/admin/blog"
               element={
                 <ProtectedRoute>
-                  <ManageBlog />
+                  <Suspense fallback={<Spinner />}><ManageBlog /></Suspense>
                 </ProtectedRoute>
               }
             />
@@ -87,8 +88,8 @@ export default function App() {
             {/* 404 */}
             <Route path="*" element={<Layout><NotFound /></Layout>} />
           </Routes>
-        </Suspense>
-      </BrowserRouter>
-    </AuthProvider>
+        </BrowserRouter>
+      </AuthProvider>
+    </ErrorBoundary>
   );
 }
