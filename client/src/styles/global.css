@@ -29,8 +29,8 @@
 
   /* Typography */
   --font-sans: 'Satoshi', 'Inter', system-ui, -apple-system, sans-serif;
-  --font-display: 'Satoshi', 'Montserrat', system-ui, sans-serif;
-  --font-impact: 'Anton', 'Satoshi', Impact, sans-serif;
+  --font-display: 'Clash Display', 'Satoshi', 'Montserrat', system-ui, sans-serif;
+  --font-impact: 'Clash Display', 'Anton', 'Satoshi', Impact, sans-serif;
 
   /* Spacing */
   --space-xs: 0.25rem;
@@ -135,6 +135,12 @@ textarea,
 select {
   font: inherit;
   color: inherit;
+}
+
+/* ========== Headings - Clash Display ========== */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
 }
 
 /* ========== Utility Classes ========== */
