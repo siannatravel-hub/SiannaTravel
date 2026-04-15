@@ -1,6 +1,7 @@
 import { Link } from 'react-router-dom';
 import Hero from '../components/Hero/Hero';
 import FeaturedPackages from '../components/FeaturedPackages/FeaturedPackages';
+import FlightHotelServices from '../components/FlightHotelServices/FlightHotelServices';
 import Testimonials from '../components/Testimonials/Testimonials';
 import WhyUs from '../components/WhyUs/WhyUs';
 import { useSEO } from '../hooks/useSEO';
@@ -51,6 +52,9 @@ export default function Home() {
           </div>
         </div>
       </section>
+
+      {/* Servicios de Vuelos y Hoteles */}
+      <FlightHotelServices />
 
       {/* Why Us */}
       <WhyUs />
