@@ -5,15 +5,19 @@ export default function Footer() {
   return (
     <footer className={styles.footer}>
       <div className="container">
+        {/* Logo centrado */}
+        <div className={styles.footerLogoCenter}>
+          <Link to="/">
+            <img 
+              src="/images/logos/logosianna-beige.png" 
+              alt="Sianna Travel" 
+              className={styles.footerLogo}
+            />
+          </Link>
+        </div>
+
         <div className={styles.footerGrid}>
           <div>
-            <Link to="/" className={styles.footerBrand}>
-              <img 
-                src="/images/logos/logosianna-beige.png" 
-                alt="Sianna Travel" 
-                className={styles.footerLogo}
-              />
-            </Link>
             <p className={styles.footerDesc}>
               Tu agencia de viajes de confianza. Creamos experiencias inolvidables
               en los mejores destinos del mundo con atención personalizada.

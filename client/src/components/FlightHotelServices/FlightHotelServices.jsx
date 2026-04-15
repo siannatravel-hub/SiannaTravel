@@ -40,7 +40,14 @@ export default function FlightHotelServices() {
                 <li>Tarifas competitivas y ofertas exclusivas</li>
                 <li>Asesoría personalizada en cada reserva</li>
               </ul>
-              <span className={styles.cardTag}>Próximamente: reserva en línea</span>
+              <a
+                href="https://wa.me/527753718942?text=Hola%2C%20me%20interesa%20cotizar%20un%20vuelo"
+                target="_blank"
+                rel="noopener noreferrer"
+                className={styles.cardBtn}
+              >
+                Cotiza ahora por WhatsApp
+              </a>
             </div>
           </div>
 
