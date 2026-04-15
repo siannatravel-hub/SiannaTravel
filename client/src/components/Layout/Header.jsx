@@ -70,7 +70,7 @@ export default function Header() {
           )}
 
           <Link to="/" className={styles.logo}>
-            <img src="/images/logos/azulbeige-logo.png" alt="Sianna Travel" className={styles.logoIcon} />
+            <img src="/images/logos/logosianna.png" alt="Sianna Travel" className={styles.logoIcon} />
           </Link>
 
           <nav className={styles.navDesktop}>
@@ -124,7 +124,7 @@ export default function Header() {
 
           <div className={`${styles.drawer} ${menuOpen ? styles.drawerOpen : ''}`}>
             <div className={styles.blobMenuHead}>
-              <img src="/images/logos/azulbeige-logo.png" alt="Sianna Travel" className={styles.blobLogoImg} />
+              <img src="/images/logos/logosianna-beige.png" alt="Sianna Travel" className={styles.blobLogoImg} />
               <button className={styles.blobCloseBtn} onClick={closeMenu}>✕</button>
             </div>
 
