@@ -1,0 +1,372 @@
+/* =========================================
+   HERO CAROUSEL — mismo diseño que Hero
+   ========================================= */
+
+.hero {
+  position: relative;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+  color: var(--color-white);
+}
+
+/* ── Backgrounds ── */
+.heroBg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transform: scale(1.05);
+  opacity: 0;
+  transition: opacity 0.8s ease;
+  will-change: opacity;
+}
+
+.heroBgActive {
+  opacity: 1;
+  animation: slowZoom 20s ease-in-out infinite alternate;
+}
+
+@keyframes slowZoom {
+  0%   { transform: scale(1.05); }
+  100% { transform: scale(1.15); }
+}
+
+/* ── Overlay ── */
+.heroOverlay {
+  position: absolute;
+  inset: 0;
+  transition: background 0.8s ease;
+  z-index: 1;
+}
+
+/* ── Línea punteada decorativa ── */
+.dashedCurve {
+  position: absolute;
+  right: 2%;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 220px;
+  height: 400px;
+  pointer-events: none;
+  opacity: 0.55;
+  z-index: 2;
+}
+
+/* ── Content ── */
+.heroContent {
+  position: relative;
+  z-index: 3;
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: var(--space-3xl) var(--space-lg);
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.heroText {
+  max-width: 780px;
+  transition: opacity 0.4s ease, transform 0.4s ease;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.heroTextFade {
+  opacity: 0;
+  transform: translateY(12px);
+}
+
+/* ── Logo ── */
+.heroLogo {
+  height: 80px;
+  width: auto;
+  object-fit: contain;
+  margin-bottom: var(--space-lg);
+  animation: fadeInUp 0.8s ease-out;
+}
+
+/* ── Promo tag (vuelos / hoteles) ── */
+.promoTag {
+  display: inline-block;
+  font-family: var(--font-sans);
+  font-size: 0.72rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: #1db8d1;
+  border: 1px solid rgba(29, 184, 209, 0.5);
+  border-radius: var(--radius-full);
+  padding: 0.35em 1.2em;
+  margin-bottom: var(--space-md);
+  backdrop-filter: blur(4px);
+  animation: fadeInUp 0.8s ease-out;
+}
+
+/* ── Título ── */
+.heroTitle {
+  font-family: var(--font-display);
+  font-size: clamp(3.5rem, 8vw, 7rem);
+  font-weight: 700;
+  line-height: 1.0;
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  color: #fff;
+  margin-bottom: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: 0.1em;
+}
+
+.heroLine {
+  display: block;
+}
+
+.heroLineFlex {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+/* Badge original magenta */
+.heroBadgePill {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 2.5vw, 1.6rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #fff;
+  border: 2.5px solid #e91e8c;
+  border-radius: var(--radius-full);
+  padding: 0.25em 1.1em;
+  white-space: nowrap;
+}
+
+/* Badge cyan para vuelos/hoteles */
+.heroBadgePillCyan {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: clamp(1rem, 2.5vw, 1.6rem);
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #1db8d1;
+  border: 2.5px solid #1db8d1;
+  border-radius: var(--radius-full);
+  padding: 0.25em 1.1em;
+  white-space: nowrap;
+}
+
+/* ── Ícono avión ── */
+.planeIcon {
+  display: inline-block;
+  font-size: 0.75em;
+  transform: rotate(-10deg);
+  margin-left: 0.1em;
+}
+
+/* ── Subtítulo ── */
+.heroSubtitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.1rem, 2vw, 1.6rem);
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.92);
+  margin-bottom: var(--space-lg);
+  letter-spacing: 0.01em;
+  max-width: 560px;
+  line-height: 1.45;
+}
+
+/* ── CTAs ── */
+.heroActions {
+  margin-bottom: var(--space-xl);
+  animation: fadeInUp 0.8s ease-out 0.3s backwards;
+}
+
+/* Botón glass (slide original) */
+.btnEscribenos {
+  display: inline-block;
+  position: relative;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #fff;
+  border-radius: var(--radius-full);
+  padding: 0.65em 2.4em;
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  overflow: hidden;
+  transition: transform var(--transition-base), box-shadow var(--transition-base);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.35);
+  background:
+    linear-gradient(135deg, rgba(14, 109, 130, 0.82) 0%, rgba(15, 23, 42, 0.75) 100%),
+    url('https://images.unsplash.com/photo-1469854523086-cc02fe5d8800?w=600&q=80')
+    center / cover no-repeat;
+  border: 1.5px solid rgba(255, 255, 255, 0.35);
+  backdrop-filter: blur(2px);
+}
+
+.btnEscribenos:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 28px rgba(0, 0, 0, 0.45);
+}
+
+/* Botón cyan (slides vuelos/hoteles) */
+.btnCyan {
+  display: inline-block;
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: #0a0a0a;
+  background: #1db8d1;
+  border-radius: var(--radius-full);
+  padding: 0.65em 2.4em;
+  text-decoration: none;
+  letter-spacing: 0.03em;
+  transition: transform var(--transition-base), box-shadow var(--transition-base), background var(--transition-base);
+  box-shadow: 0 4px 24px rgba(29, 184, 209, 0.4);
+  border: none;
+}
+
+.btnCyan:hover {
+  transform: translateY(-2px);
+  background: #17a5bb;
+  box-shadow: 0 8px 32px rgba(29, 184, 209, 0.55);
+}
+
+/* ── Teléfonos ── */
+.heroPhones {
+  display: flex;
+  gap: var(--space-2xl);
+  flex-wrap: wrap;
+  animation: fadeInUp 0.8s ease-out 0.4s backwards;
+}
+
+.heroPhone {
+  font-family: var(--font-display);
+  font-size: 1rem;
+  font-weight: 500;
+  color: rgba(255, 255, 255, 0.85);
+  text-decoration: none;
+  letter-spacing: 0.04em;
+  transition: color var(--transition-fast);
+}
+
+.heroPhone:hover {
+  color: #1db8d1;
+}
+
+/* ── Navegación: Flechas ── */
+.arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 4;
+  background: rgba(255, 255, 255, 0.12);
+  border: 1px solid rgba(255, 255, 255, 0.25);
+  backdrop-filter: blur(8px);
+  color: #fff;
+  font-size: 2.2rem;
+  line-height: 1;
+  width: 52px;
+  height: 52px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background 0.2s, transform 0.2s;
+  padding: 0;
+}
+
+.arrow:hover {
+  background: rgba(29, 184, 209, 0.35);
+  transform: translateY(-50%) scale(1.08);
+}
+
+.arrowLeft  { left: 2rem; }
+.arrowRight { right: 2rem; }
+
+/* ── Navegación: Dots ── */
+.dots {
+  position: absolute;
+  bottom: 2rem;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
+  display: flex;
+  gap: 0.6rem;
+}
+
+.dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.4);
+  border: none;
+  cursor: pointer;
+  transition: background 0.3s, transform 0.3s;
+  padding: 0;
+}
+
+.dotActive {
+  background: #1db8d1;
+  transform: scale(1.35);
+}
+
+/* ── Animación ── */
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* ── Responsive ── */
+@media (max-width: 768px) {
+  .heroContent {
+    padding: var(--space-3xl) var(--space-md);
+  }
+
+  .heroTitle {
+    font-size: clamp(3rem, 12vw, 5rem);
+  }
+
+  .heroBadgePill,
+  .heroBadgePillCyan {
+    font-size: clamp(0.85rem, 3vw, 1.2rem);
+  }
+
+  .dashedCurve {
+    display: none;
+  }
+
+  .heroPhones {
+    gap: var(--space-lg);
+  }
+
+  .heroLogo {
+    height: 60px;
+  }
+
+  .arrowLeft  { left: 0.75rem; }
+  .arrowRight { right: 0.75rem; }
+
+  .arrow {
+    width: 42px;
+    height: 42px;
+    font-size: 1.8rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .heroPhones {
+    flex-direction: column;
+    gap: var(--space-sm);
+  }
+
+  .heroLogo {
+    height: 52px;
+  }
+}

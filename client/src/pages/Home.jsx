@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import Hero from '../components/Hero/Hero';
+// import Hero from '../components/Hero/Hero'; // Original guardado como respaldo
+import Hero from '../components/Hero/HeroCarousel';
 import FeaturedPackages from '../components/FeaturedPackages/FeaturedPackages';
 import FlightHotelServices from '../components/FlightHotelServices/FlightHotelServices';
 import Testimonials from '../components/Testimonials/Testimonials';
