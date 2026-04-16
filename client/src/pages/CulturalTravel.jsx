@@ -56,7 +56,7 @@ export default function CulturalTravel() {
             </div>
           </div>
           <div className={styles.expCard}>
-            <div className={styles.expImage} style={{backgroundImage: 'url(https://images.unsplash.com/photo-1578632767115-351597cf2477?w=800)'}}></div>
+            <div className={styles.expImage} style={{backgroundImage: 'url(https://images.unsplash.com/photo-1599639957043-f3aa5c986398?w=800&q=80)'}}></div>
             <div className={styles.expContent}>
               <h3>Romance colonial</h3>
               <p>
