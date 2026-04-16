@@ -127,7 +127,7 @@
   display: block;
   width: 22px;
   height: 2px;
-  background: #1e293b;
+  background: #1db8d1;
   border-radius: 2px;
   transition: transform 0.3s ease, opacity 0.3s ease;
   transform-origin: center;
@@ -198,7 +198,6 @@
   height: 40px;
   width: auto;
   object-fit: contain;
-  filter: drop-shadow(0 0 6px rgba(255, 255, 255, 0.4)) drop-shadow(0 0 12px rgba(255, 255, 255, 0.15));
 }
 
 .blobLogoText {

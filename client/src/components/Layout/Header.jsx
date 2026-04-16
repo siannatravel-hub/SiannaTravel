@@ -124,7 +124,7 @@ export default function Header() {
 
           <div className={`${styles.drawer} ${menuOpen ? styles.drawerOpen : ''}`}>
             <div className={styles.blobMenuHead}>
-              <img src="/images/logos/logosianna-beige.png" alt="Sianna Travel" className={styles.blobLogoImg} />
+              <img src="/images/logos/logosianna-beige-blanco.png" alt="Sianna Travel" className={styles.blobLogoImg} />
               <button className={styles.blobCloseBtn} onClick={closeMenu}>✕</button>
             </div>
 
