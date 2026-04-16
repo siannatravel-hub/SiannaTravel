@@ -7,7 +7,7 @@ const SLIDES = [
     id: 'original',
     bg: 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=1400&q=80',
     overlay: 'linear-gradient(135deg, rgba(0,60,90,0.82) 0%, rgba(0,100,130,0.70) 50%, rgba(0,150,160,0.55) 100%)',
-    logo: '/images/logos/logosianna-morado.png',
+    logo: '/images/logos/logofooter.png',
     badge: null,
     badgeStyle: null,
     title: (
@@ -30,7 +30,7 @@ const SLIDES = [
     id: 'vuelos',
     bg: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1400&q=80',
     overlay: 'linear-gradient(135deg, rgba(0,50,80,0.88) 0%, rgba(0,90,120,0.78) 50%, rgba(0,130,150,0.62) 100%)',
-    logo: '/images/logos/logosianna-morado.png',
+    logo: '/images/logos/logofooter.png',
     badge: 'VUELOS 2025',
     badgeColor: '#1db8d1',
     title: (
@@ -53,7 +53,7 @@ const SLIDES = [
     id: 'hoteles',
     bg: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1400&q=80',
     overlay: 'linear-gradient(135deg, rgba(0,40,70,0.90) 0%, rgba(0,80,110,0.80) 50%, rgba(0,120,140,0.65) 100%)',
-    logo: '/images/logos/logosianna-morado.png',
+    logo: '/images/logos/logofooter.png',
     badge: 'HOSPEDAJE PREMIUM',
     badgeColor: '#1db8d1',
     title: (
