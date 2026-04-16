@@ -22,24 +22,24 @@
   font-weight: 700;
   letter-spacing: 0.2em;
   text-transform: uppercase;
-  color: #7ec8e3;
+  color: #1db8d1;
   margin-bottom: 1.25rem;
   padding: 0.35rem 1rem;
-  border: 1px solid rgba(126, 200, 227, 0.4);
+  border: 1px solid rgba(29, 184, 209, 0.4);
   border-radius: 100px;
 }
 
 .headerTitle {
   font-family: var(--font-impact, 'Anton', sans-serif);
   font-size: clamp(2.2rem, 5vw, 3.8rem);
-  color: #fff;
+  color: #1db8d1;
   line-height: 1.15;
   letter-spacing: -0.01em;
 }
 
 .headerTitle em {
   font-style: normal;
-  background: linear-gradient(135deg, #7ec8e3 0%, #b0e0f5 50%, #5aafd4 100%);
+  background: linear-gradient(135deg, #1db8d1 0%, #5dd8e8 50%, #0f9ab0 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -181,7 +181,7 @@
   font-weight: 700;
   letter-spacing: 0.18em;
   text-transform: uppercase;
-  color: #7ec8e3;
+  color: #1db8d1;
   margin-bottom: 1rem;
 }
 
@@ -189,7 +189,7 @@
   font-family: var(--font-display, 'Montserrat', sans-serif);
   font-size: clamp(1.6rem, 2.5vw, 2.4rem);
   font-weight: 800;
-  color: #fff;
+  color: #1db8d1;
   line-height: 1.2;
   margin-bottom: 1.25rem;
   letter-spacing: -0.02em;
@@ -207,7 +207,7 @@
   width: 48px;
   height: 3px;
   border-radius: 100px;
-  background: linear-gradient(90deg, #7ec8e3, #b0e0f5);
+  background: linear-gradient(90deg, #1db8d1, #5dd8e8);
 }
 
 /* ── Stagger delays for text child elements ──────── */
