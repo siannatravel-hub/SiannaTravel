@@ -2,6 +2,125 @@
   padding: var(--space-3xl) 0;
 }
 
+/* ── Intro / Quiénes somos ── */
+.introSection {
+  padding: var(--space-3xl) 0;
+  background: #fff;
+  border-bottom: 1px solid #e2e8f0;
+}
+
+.introInner {
+  display: flex;
+  align-items: center;
+  gap: 4rem;
+  flex-wrap: wrap;
+}
+
+.introText {
+  flex: 1;
+  min-width: 280px;
+}
+
+.introTag {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: #1db8d1;
+  border: 1px solid rgba(29, 184, 209, 0.35);
+  border-radius: 100px;
+  padding: 0.3em 1.1em;
+  margin-bottom: 1rem;
+}
+
+.introTitle {
+  font-family: var(--font-display);
+  font-size: clamp(1.7rem, 3vw, 2.4rem);
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.2;
+  margin-bottom: 1rem;
+  letter-spacing: -0.02em;
+}
+
+.introHighlight {
+  color: #1db8d1;
+}
+
+.introDesc {
+  font-size: 1rem;
+  color: #64748b;
+  line-height: 1.75;
+  max-width: 520px;
+  margin-bottom: 1.5rem;
+}
+
+.introLink {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #1db8d1;
+  text-decoration: none;
+  border-bottom: 1.5px solid rgba(29, 184, 209, 0.4);
+  padding-bottom: 0.1em;
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.introLink:hover {
+  color: #0f9ab0;
+  border-color: #0f9ab0;
+}
+
+.introStats {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  flex-shrink: 0;
+}
+
+.stat {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.statNumber {
+  font-family: var(--font-display);
+  font-size: 2.4rem;
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+
+.statLabel {
+  font-size: 0.82rem;
+  color: #94a3b8;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+
+@media (max-width: 768px) {
+  .introInner {
+    gap: 2.5rem;
+  }
+
+  .introStats {
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 1.5rem;
+    width: 100%;
+  }
+
+  .stat {
+    flex: 1;
+    min-width: 100px;
+    align-items: center;
+    text-align: center;
+  }
+}
+
 .packagesGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));

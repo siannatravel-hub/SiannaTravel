@@ -35,6 +35,41 @@ export default function Home() {
     <>
       <Hero />
 
+      {/* Quiénes somos — intro breve */}
+      <section className={styles.introSection}>
+        <div className="container">
+          <div className={styles.introInner}>
+            <div className={styles.introText}>
+              <span className={styles.introTag}>¿Quiénes somos?</span>
+              <h2 className={styles.introTitle}>
+                Una agencia de viajes <span className={styles.introHighlight}>hecha con propósito</span>
+              </h2>
+              <p className={styles.introDesc}>
+                Desde 2016, en Sianna Travel diseñamos experiencias personalizadas para familias, 
+                parejas y viajeros que buscan más que un destino. Nuestro nombre nace de nuestra 
+                familia — y ese mismo espíritu cercano lo llevamos a cada viaje que organizamos, 
+                con acompañamiento real antes, durante y después de tu aventura.
+              </p>
+              <Link to="/nosotros" className={styles.introLink}>Conoce nuestra historia →</Link>
+            </div>
+            <div className={styles.introStats}>
+              <div className={styles.stat}>
+                <span className={styles.statNumber}>+10</span>
+                <span className={styles.statLabel}>Años de experiencia</span>
+              </div>
+              <div className={styles.stat}>
+                <span className={styles.statNumber}>24/7</span>
+                <span className={styles.statLabel}>Asistencia en viaje</span>
+              </div>
+              <div className={styles.stat}>
+                <span className={styles.statNumber}>100%</span>
+                <span className={styles.statLabel}>Atención personalizada</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
       {/* Promociones Destacadas - Editables desde Admin */}
       <FeaturedPackages />
 
