@@ -20,7 +20,7 @@
   background-repeat: no-repeat;
   transform: scale(1.05);
   opacity: 0;
-  transition: opacity 0.8s ease;
+  transition: opacity 0.4s ease;
   will-change: opacity;
 }
 
@@ -38,7 +38,7 @@
 .heroOverlay {
   position: absolute;
   inset: 0;
-  transition: background 0.8s ease;
+  transition: background 0.4s ease;
   z-index: 1;
 }
 
@@ -69,14 +69,14 @@
 
 .heroText {
   max-width: 780px;
-  transition: opacity 0.4s ease, transform 0.4s ease;
+  transition: opacity 0.2s ease, transform 0.2s ease;
   opacity: 1;
   transform: translateY(0);
 }
 
 .heroTextFade {
   opacity: 0;
-  transform: translateY(12px);
+  transform: translateY(6px);
 }
 
 /* ── Logo ── */
@@ -85,7 +85,7 @@
   width: auto;
   object-fit: contain;
   margin-bottom: var(--space-lg);
-  animation: fadeInUp 0.8s ease-out;
+  animation: fadeInUp 0.4s ease-out;
 }
 
 /* ── Promo tag (vuelos / hoteles) ── */
@@ -102,7 +102,7 @@
   padding: 0.35em 1.2em;
   margin-bottom: var(--space-md);
   backdrop-filter: blur(4px);
-  animation: fadeInUp 0.8s ease-out;
+  animation: fadeInUp 0.4s ease-out;
 }
 
 /* ── Título ── */
@@ -183,7 +183,7 @@
 /* ── CTAs ── */
 .heroActions {
   margin-bottom: var(--space-xl);
-  animation: fadeInUp 0.8s ease-out 0.3s backwards;
+  animation: fadeInUp 0.4s ease-out 0.15s backwards;
 }
 
 /* Botón glass (slide original) */
@@ -242,7 +242,7 @@
   display: flex;
   gap: var(--space-2xl);
   flex-wrap: wrap;
-  animation: fadeInUp 0.8s ease-out 0.4s backwards;
+  animation: fadeInUp 0.4s ease-out 0.2s backwards;
 }
 
 .heroPhone {

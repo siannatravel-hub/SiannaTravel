@@ -5,7 +5,7 @@ import styles from './HeroCarousel.module.css';
 const SLIDES = [
   {
     id: 'original',
-    bg: 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=1920&q=90',
+    bg: 'https://images.unsplash.com/photo-1476514525535-07fb3b4ae5f1?w=1400&q=80',
     overlay: 'linear-gradient(135deg, rgba(0,60,90,0.82) 0%, rgba(0,100,130,0.70) 50%, rgba(0,150,160,0.55) 100%)',
     logo: '/images/logos/logosianna-morado.png',
     badge: null,
@@ -28,7 +28,7 @@ const SLIDES = [
   },
   {
     id: 'vuelos',
-    bg: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1920&q=90',
+    bg: 'https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=1400&q=80',
     overlay: 'linear-gradient(135deg, rgba(0,50,80,0.88) 0%, rgba(0,90,120,0.78) 50%, rgba(0,130,150,0.62) 100%)',
     logo: '/images/logos/logosianna-morado.png',
     badge: 'VUELOS 2025',
@@ -51,7 +51,7 @@ const SLIDES = [
   },
   {
     id: 'hoteles',
-    bg: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1920&q=90',
+    bg: 'https://images.unsplash.com/photo-1566073771259-6a8506099945?w=1400&q=80',
     overlay: 'linear-gradient(135deg, rgba(0,40,70,0.90) 0%, rgba(0,80,110,0.80) 50%, rgba(0,120,140,0.65) 100%)',
     logo: '/images/logos/logosianna-morado.png',
     badge: 'HOSPEDAJE PREMIUM',
@@ -74,31 +74,38 @@ const SLIDES = [
 
 export default function HeroCarousel() {
   const [current, setCurrent] = useState(0);
-  const [animating, setAnimating] = useState(false);
+  const [fading, setFading] = useState(false);
+  const animatingRef = useRef(false);
+  const currentRef = useRef(0);
   const timerRef = useRef(null);
 
   const goTo = useCallback((index) => {
-    if (animating) return;
-    setAnimating(true);
+    if (animatingRef.current) return;
+    animatingRef.current = true;
+    setFading(true);
     setTimeout(() => {
+      currentRef.current = index;
       setCurrent(index);
-      setAnimating(false);
-    }, 400);
-  }, [animating]);
+      setFading(false);
+      animatingRef.current = false;
+    }, 200);
+  }, []);
 
   const next = useCallback(() => {
-    goTo((current + 1) % SLIDES.length);
-  }, [current, goTo]);
+    goTo((currentRef.current + 1) % SLIDES.length);
+  }, [goTo]);
 
   const prev = useCallback(() => {
-    goTo((current - 1 + SLIDES.length) % SLIDES.length);
-  }, [current, goTo]);
+    goTo((currentRef.current - 1 + SLIDES.length) % SLIDES.length);
+  }, [goTo]);
 
-  // Auto-advance
+  // Auto-advance — se crea una sola vez
   useEffect(() => {
-    timerRef.current = setInterval(next, 6000);
+    timerRef.current = setInterval(() => {
+      goTo((currentRef.current + 1) % SLIDES.length);
+    }, 6000);
     return () => clearInterval(timerRef.current);
-  }, [next]);
+  }, [goTo]);
 
   const slide = SLIDES[current];
 
@@ -136,7 +143,7 @@ export default function HeroCarousel() {
 
       {/* Contenido */}
       <div className={styles.heroContent}>
-        <div className={`${styles.heroText} ${animating ? styles.heroTextFade : ''}`}>
+        <div className={`${styles.heroText} ${fading ? styles.heroTextFade : ''}`}>
           <img
             src={slide.logo}
             alt="Sianna Travel"
@@ -180,14 +187,14 @@ export default function HeroCarousel() {
       {/* Controles prev/next */}
       <button
         className={`${styles.arrow} ${styles.arrowLeft}`}
-        onClick={() => { clearInterval(timerRef.current); prev(); }}
+        onClick={prev}
         aria-label="Anterior"
       >
         ‹
       </button>
       <button
         className={`${styles.arrow} ${styles.arrowRight}`}
-        onClick={() => { clearInterval(timerRef.current); next(); }}
+        onClick={next}
         aria-label="Siguiente"
       >
         ›
@@ -199,7 +206,7 @@ export default function HeroCarousel() {
           <button
             key={s.id}
             className={`${styles.dot} ${i === current ? styles.dotActive : ''}`}
-            onClick={() => { clearInterval(timerRef.current); goTo(i); }}
+            onClick={() => goTo(i)}
             aria-label={`Ir a slide ${i + 1}`}
           />
         ))}
