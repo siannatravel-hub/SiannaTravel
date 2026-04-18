@@ -61,29 +61,42 @@
   font-weight: 500;
   font-size: 0.9rem;
   color: #64748b;
-  padding: 0.5rem 0;
+  padding: 0.45rem 0.85rem;
   position: relative;
+  border-radius: 8px;
+  transition: color 0.2s ease, background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+  letter-spacing: 0.01em;
 }
 
-.navLink:hover,
+.navLink:hover {
+  color: #0e6d82;
+  background: rgba(26, 138, 158, 0.09);
+  transform: translateY(-1px);
+  box-shadow: 0 2px 8px rgba(26, 138, 158, 0.12);
+}
+
+.navLink:active {
+  transform: scale(0.95) translateY(0);
+  background: rgba(26, 138, 158, 0.16);
+  box-shadow: none;
+}
+
 .navLinkActive {
-  color: #1e293b;
+  color: #0e6d82;
+  background: rgba(26, 138, 158, 0.12);
+  font-weight: 600;
 }
 
-.navLink::after {
+.navLinkActive::before {
   content: '';
   position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 2px;
+  bottom: 4px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 18px;
+  height: 2.5px;
   background: #1a8a9e;
-  transition: width 0.2s;
-}
-
-.navLink:hover::after,
-.navLinkActive::after {
-  width: 100%;
+  border-radius: 99px;
 }
 
 .ctaBtn {
@@ -234,17 +247,24 @@
 .blobLink {
   display: flex;
   align-items: center;
-  padding: 1rem 1.5rem;
+  padding: 0.9rem 1.2rem;
   font-size: 1.05rem;
   font-weight: 500;
   color: rgba(255, 255, 255, 0.85);
-  transition: all 0.25s ease;
+  border-radius: 10px;
+  margin: 0 0.5rem;
+  transition: all 0.22s ease;
 }
 
 .blobLink:hover {
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(255, 255, 255, 0.1);
   color: #fff;
-  padding-left: 2rem;
+  transform: translateX(4px);
+}
+
+.blobLink:active {
+  transform: scale(0.97) translateX(4px);
+  background: rgba(255, 255, 255, 0.16);
 }
 
 .blobLinkActive {
@@ -312,34 +332,27 @@
   gap: 0.3rem;
   background: none;
   border: none;
-  padding: 0.5rem 0;
+  padding: 0.45rem 0.85rem;
   font-family: inherit;
   font-size: 0.9rem;
   font-weight: 500;
   color: #64748b;
   cursor: pointer;
   line-height: inherit;
+  border-radius: 8px;
+  transition: color 0.2s ease, background 0.2s ease, transform 0.15s ease;
 }
 
 .dropdownTrigger:hover,
 .dropdownTriggerOpen {
-  color: #1e293b;
+  color: #0e6d82;
+  background: rgba(26, 138, 158, 0.09);
+  transform: translateY(-1px);
 }
 
-.dropdownTrigger::after {
-  content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 0;
-  height: 2px;
-  background: #1a8a9e;
-  transition: width 0.2s;
-}
-
-.dropdownTrigger:hover::after,
-.dropdownTriggerOpen::after {
-  width: 100%;
+.dropdownTrigger:active {
+  transform: scale(0.95) translateY(0);
+  background: rgba(26, 138, 158, 0.16);
 }
 
 .dropdownArrow {
@@ -386,12 +399,18 @@
   font-weight: 500;
   color: #475569;
   border-radius: 8px;
-  transition: all 0.2s;
+  transition: all 0.2s ease;
 }
 
 .dropdownItem:hover {
-  background: #f1f5f9;
-  color: #1a8a9e;
+  background: rgba(26, 138, 158, 0.08);
+  color: #0e6d82;
+  transform: translateX(3px);
+}
+
+.dropdownItem:active {
+  transform: scale(0.97) translateX(3px);
+  background: rgba(26, 138, 158, 0.14);
 }
 
 .dropdownIcon {

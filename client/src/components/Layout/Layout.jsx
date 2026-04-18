@@ -1,4 +1,4 @@
-import { Suspense, useEffect, useRef } from 'react';
+import { Suspense, useLayoutEffect, useRef } from 'react';
 import { useLocation, Outlet } from 'react-router-dom';
 import Header from './Header';
 import Footer from './Footer';
@@ -12,27 +12,28 @@ export default function Layout({ children }) {
   const prevPathname = useRef(pathname);
 
   // Save scroll position before navigating away, restore on popstate (back/forward)
-  useEffect(() => {
+  useLayoutEffect(() => {
     const onPop = () => { isPopRef.current = true; };
     window.addEventListener('popstate', onPop);
     return () => window.removeEventListener('popstate', onPop);
   }, []);
 
-  useEffect(() => {
+  useLayoutEffect(() => {
     // Save previous page scroll
     scrollPositions.current[prevPathname.current] = window.scrollY;
     prevPathname.current = pathname;
 
+    // Cancel any in-progress smooth scroll before jumping
+    document.documentElement.style.scrollBehavior = 'auto';
+
     if (isPopRef.current) {
       // Back/forward: restore saved position
       const saved = scrollPositions.current[pathname];
-      if (saved != null) {
-        requestAnimationFrame(() => window.scrollTo(0, saved));
-      }
+      window.scrollTo(0, saved != null ? saved : 0);
       isPopRef.current = false;
     } else {
-      // New navigation: scroll to top
-      window.scrollTo({ top: 0, left: 0, behavior: 'instant' });
+      // New navigation: scroll to top immediately
+      window.scrollTo(0, 0);
     }
   }, [pathname]);
 
