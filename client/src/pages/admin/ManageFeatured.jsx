@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
-import { getPackages, togglePackageFeatured } from '../../lib/packages';
+import { getPackages, togglePackageFeatured, updatePackagesOrder } from '../../lib/packages';
 import styles from './ManageFeatured.module.css';
 
 export default function ManageFeatured() {
@@ -10,6 +10,9 @@ export default function ManageFeatured() {
   const [loading, setLoading] = useState(true);
   const [saving, setSaving] = useState(null); // id del paquete que se está guardando
   const [message, setMessage] = useState({ type: '', text: '' });
+  const [reorderMode, setReorderMode] = useState(false);
+  const [reorderedFeatured, setReorderedFeatured] = useState([]);
+  const [savingOrder, setSavingOrder] = useState(false);
 
   useEffect(() => {
     loadPackages();
@@ -64,6 +67,43 @@ export default function ManageFeatured() {
 
   const featuredCount = packages.filter(p => p.is_featured).length;
 
+  function startReorderMode() {
+    setReorderedFeatured(packages.filter(p => p.is_featured));
+    setReorderMode(true);
+  }
+
+  function cancelReorderMode() {
+    setReorderMode(false);
+    setReorderedFeatured([]);
+  }
+
+  function moveFeatured(index, direction) {
+    setReorderedFeatured(prev => {
+      const arr = [...prev];
+      const swapIndex = index + direction;
+      if (swapIndex < 0 || swapIndex >= arr.length) return arr;
+      [arr[index], arr[swapIndex]] = [arr[swapIndex], arr[index]];
+      return arr;
+    });
+  }
+
+  async function saveOrder() {
+    setSavingOrder(true);
+    try {
+      const orderedDbIds = reorderedFeatured.map(p => p._db_id).filter(Boolean);
+      if (orderedDbIds.length === 0) throw new Error('No hay IDs de BD disponibles. Sincroniza los paquetes con la BD primero.');
+      await updatePackagesOrder(orderedDbIds);
+      setReorderMode(false);
+      setReorderedFeatured([]);
+      setMessage({ type: 'success', text: '✅ Orden de promociones guardado.' });
+      await loadPackages();
+    } catch (err) {
+      setMessage({ type: 'error', text: '❌ ' + (err.message || 'Error al guardar el orden') });
+    } finally {
+      setSavingOrder(false);
+    }
+  }
+
   return (
     <div className={styles.managePackages}>
       <header className={styles.header}>
@@ -71,6 +111,15 @@ export default function ManageFeatured() {
           ← Volver al Dashboard
         </Link>
         <h1 className={styles.pageTitle}>Gestionar Promociones</h1>
+        {!loading && featuredCount > 0 && (
+          <button
+            className={styles.reorderBtn}
+            onClick={reorderMode ? cancelReorderMode : startReorderMode}
+            disabled={savingOrder}
+          >
+            {reorderMode ? '✕ Cancelar' : '🔀 Reordenar'}
+          </button>
+        )}
       </header>
 
       <main className={styles.content}>
@@ -99,6 +148,41 @@ export default function ManageFeatured() {
             <Link to="/admin/packages" className={styles.editBtn} style={{ display: 'inline-block', marginTop: '1rem' }}>
               Ir a Gestionar Paquetes
             </Link>
+          </div>
+        ) : reorderMode ? (
+          <div className={styles.reorderContainer}>
+            <div className={styles.reorderHeader}>
+              <p className={styles.reorderHint}>Usa ↑↓ para cambiar el orden en que aparecen las promociones en la página principal.</p>
+              <button className={styles.saveOrderBtn} onClick={saveOrder} disabled={savingOrder}>
+                {savingOrder ? '⏳ Guardando...' : '💾 Guardar Orden'}
+              </button>
+            </div>
+            <div className={styles.reorderList}>
+              {reorderedFeatured.map((pkg, index) => (
+                <div key={pkg.id} className={styles.reorderItem}>
+                  <span className={styles.reorderIndex}>{index + 1}</span>
+                  <img src={pkg.image} alt={pkg.title} className={styles.reorderThumb} />
+                  <div className={styles.reorderInfo}>
+                    <span className={styles.reorderTitle}>{pkg.title}</span>
+                    <span className={styles.reorderMeta}>{pkg.destination}</span>
+                  </div>
+                  <div className={styles.reorderBtns}>
+                    <button
+                      className={styles.reorderMoveBtn}
+                      onClick={() => moveFeatured(index, -1)}
+                      disabled={index === 0}
+                      title="Subir"
+                    >↑</button>
+                    <button
+                      className={styles.reorderMoveBtn}
+                      onClick={() => moveFeatured(index, 1)}
+                      disabled={index === reorderedFeatured.length - 1}
+                      title="Bajar"
+                    >↓</button>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         ) : (
           <div className={styles.packagesGrid}>

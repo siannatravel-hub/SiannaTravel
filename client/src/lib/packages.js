@@ -270,6 +270,19 @@ export async function togglePackageFeatured(id, isFeatured) {
   return updatePackage(id, { is_featured: isFeatured });
 }
 
+// Actualiza el order_index de múltiples paquetes en un solo batch.
+// orderedDbIds: array de _db_id (numérico) en el orden deseado (índice 0 = primero).
+export async function updatePackagesOrder(orderedDbIds) {
+  if (!isSupabaseConfigured()) throw new Error('Supabase no configurado');
+  const results = await Promise.all(
+    orderedDbIds.map((dbId, index) =>
+      supabase.from('packages').update({ order_index: index }).eq('id', dbId)
+    )
+  );
+  const failed = results.find(r => r.error);
+  if (failed) throw failed.error;
+}
+
 // ==========================================
 // Historial de Cambios (máximo 3 por paquete)
 // ==========================================

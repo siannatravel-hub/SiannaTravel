@@ -9,7 +9,8 @@ import {
   togglePackageStatus,
   fieldLabels,
   initializePackages,
-  syncDefaultsToDatabase
+  syncDefaultsToDatabase,
+  updatePackagesOrder,
 } from '../../lib/packages';
 import ImageUpload from '../../components/admin/ImageUpload';
 import styles from './ManagePackages.module.css';
@@ -35,6 +36,9 @@ export default function ManagePackages() {
   const [loadingHistory, setLoadingHistory] = useState(false);
   const [syncing, setSyncing] = useState(false);
   const [syncMessage, setSyncMessage] = useState('');
+  const [reorderMode, setReorderMode] = useState(false);
+  const [reorderedPackages, setReorderedPackages] = useState([]);
+  const [savingOrder, setSavingOrder] = useState(false);
 
   useEffect(() => {
     loadPackages();
@@ -67,6 +71,43 @@ export default function ManagePackages() {
       setSyncMessage('❌ ' + (error.message || 'Error al sincronizar'));
     } finally {
       setSyncing(false);
+    }
+  }
+
+  function startReorderMode() {
+    setReorderedPackages([...packages]);
+    setReorderMode(true);
+  }
+
+  function cancelReorderMode() {
+    setReorderMode(false);
+    setReorderedPackages([]);
+  }
+
+  function movePackage(index, direction) {
+    setReorderedPackages(prev => {
+      const arr = [...prev];
+      const swapIndex = index + direction;
+      if (swapIndex < 0 || swapIndex >= arr.length) return arr;
+      [arr[index], arr[swapIndex]] = [arr[swapIndex], arr[index]];
+      return arr;
+    });
+  }
+
+  async function saveOrder() {
+    setSavingOrder(true);
+    try {
+      const orderedDbIds = reorderedPackages.map(p => p._db_id).filter(Boolean);
+      if (orderedDbIds.length === 0) throw new Error('No hay IDs de BD disponibles. Sincroniza los paquetes con la BD primero.');
+      await updatePackagesOrder(orderedDbIds);
+      setPackages(reorderedPackages);
+      setReorderMode(false);
+      setReorderedPackages([]);
+      setSyncMessage('✅ Orden guardado correctamente.');
+    } catch (error) {
+      setSyncMessage('❌ ' + (error.message || 'Error al guardar el orden'));
+    } finally {
+      setSavingOrder(false);
     }
   }
 
@@ -347,6 +388,13 @@ export default function ManagePackages() {
           >
             {syncing ? '⏳ Sincronizando...' : '🔄 Sincronizar con BD'}
           </button>
+          <button
+            className={styles.reorderBtn}
+            onClick={reorderMode ? cancelReorderMode : startReorderMode}
+            disabled={savingOrder}
+          >
+            {reorderMode ? '✕ Cancelar' : '🔀 Reordenar'}
+          </button>
           <Link to="/admin" className={styles.backBtn}>
             ← Volver al Dashboard
           </Link>
@@ -367,6 +415,42 @@ export default function ManagePackages() {
           <button className={styles.addBtn} onClick={loadPackages}>
             Cargar paquetes de ejemplo
           </button>
+        </div>
+      ) : reorderMode ? (
+        <div className={styles.reorderContainer}>
+          <div className={styles.reorderHeader}>
+            <p className={styles.reorderHint}>Usa los botones ↑↓ para cambiar el orden de visualización en la web. Presiona <strong>Guardar Orden</strong> para aplicar los cambios.</p>
+            <button className={styles.saveOrderBtn} onClick={saveOrder} disabled={savingOrder}>
+              {savingOrder ? '⏳ Guardando...' : '💾 Guardar Orden'}
+            </button>
+          </div>
+          <div className={styles.reorderList}>
+            {reorderedPackages.map((pkg, index) => (
+              <div key={pkg.id} className={styles.reorderItem}>
+                <span className={styles.reorderIndex}>{index + 1}</span>
+                <img src={pkg.image} alt={pkg.title} className={styles.reorderThumb} />
+                <div className={styles.reorderInfo}>
+                  <span className={styles.reorderTitle}>{pkg.title}</span>
+                  <span className={styles.reorderMeta}>{pkg.destination} · {pkg.duration}</span>
+                </div>
+                {pkg.is_featured && <span className={styles.reorderFeaturedBadge}>⭐</span>}
+                <div className={styles.reorderBtns}>
+                  <button
+                    className={styles.reorderMoveBtn}
+                    onClick={() => movePackage(index, -1)}
+                    disabled={index === 0}
+                    title="Subir"
+                  >↑</button>
+                  <button
+                    className={styles.reorderMoveBtn}
+                    onClick={() => movePackage(index, 1)}
+                    disabled={index === reorderedPackages.length - 1}
+                    title="Bajar"
+                  >↓</button>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       ) : (
         <div className={styles.packagesGrid}>
