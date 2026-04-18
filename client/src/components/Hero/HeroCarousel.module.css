@@ -265,30 +265,38 @@
   top: 50%;
   transform: translateY(-50%);
   z-index: 4;
-  background: rgba(255, 255, 255, 0.12);
-  border: 1px solid rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(8px);
-  color: #fff;
-  font-size: 2.2rem;
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  backdrop-filter: blur(6px);
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 1.8rem;
   line-height: 1;
-  width: 52px;
-  height: 52px;
+  width: 40px;
+  height: 40px;
   border-radius: 50%;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.2s, transform 0.2s;
+  transition: background 0.25s, color 0.25s, transform 0.25s, opacity 0.25s;
   padding: 0;
+  opacity: 0.6;
+}
+
+.hero:hover .arrow {
+  opacity: 1;
 }
 
 .arrow:hover {
-  background: rgba(29, 184, 209, 0.35);
-  transform: translateY(-50%) scale(1.08);
+  background: rgba(29, 184, 209, 0.22);
+  color: #fff;
+  border-color: rgba(29, 184, 209, 0.45);
+  transform: translateY(-50%) scale(1.1);
+  opacity: 1;
 }
 
-.arrowLeft  { left: 2rem; }
-.arrowRight { right: 2rem; }
+.arrowLeft  { left: 1.25rem; }
+.arrowRight { right: 1.25rem; }
 
 /* ── Navegación: Dots ── */
 .dots {
@@ -350,13 +358,13 @@
     height: 60px;
   }
 
-  .arrowLeft  { left: 0.75rem; }
-  .arrowRight { right: 0.75rem; }
+  .arrowLeft  { left: 0.5rem; }
+  .arrowRight { right: 0.5rem; }
 
   .arrow {
-    width: 42px;
-    height: 42px;
-    font-size: 1.8rem;
+    width: 34px;
+    height: 34px;
+    font-size: 1.5rem;
   }
 }
 

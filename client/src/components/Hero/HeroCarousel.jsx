@@ -78,6 +78,7 @@ export default function HeroCarousel() {
   const animatingRef = useRef(false);
   const currentRef = useRef(0);
   const timerRef = useRef(null);
+  const touchStartX = useRef(null);
 
   const goTo = useCallback((index) => {
     if (animatingRef.current) return;
@@ -109,8 +110,21 @@ export default function HeroCarousel() {
 
   const slide = SLIDES[current];
 
+  function handleTouchStart(e) {
+    touchStartX.current = e.touches[0].clientX;
+  }
+
+  function handleTouchEnd(e) {
+    if (touchStartX.current === null) return;
+    const delta = e.changedTouches[0].clientX - touchStartX.current;
+    touchStartX.current = null;
+    if (Math.abs(delta) < 40) return;
+    if (delta < 0) next();
+    else prev();
+  }
+
   return (
-    <section className={styles.hero}>
+    <section className={styles.hero} onTouchStart={handleTouchStart} onTouchEnd={handleTouchEnd}>
       {/* Backgrounds — pre-renderizamos todos para evitar parpadeo */}
       {SLIDES.map((s, i) => (
         <div
