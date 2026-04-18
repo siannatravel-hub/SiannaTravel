@@ -70,8 +70,8 @@ export default function FeaturedPackages() {
 
               {pkg.tag && <span className={styles.cardTag}>{pkg.tag}</span>}
 
-              {pkg.original_price > pkg.price && (
-                <span className={styles.cardDiscount}>-{Math.round((1 - pkg.price / pkg.original_price) * 100)}%</span>
+              {(pkg.discount > 0 || pkg.original_price > pkg.price) && (
+                <span className={styles.cardDiscount}>-{pkg.discount > 0 ? pkg.discount : Math.round((1 - pkg.price / pkg.original_price) * 100)}%</span>
               )}
 
               <div className={styles.cardContent}>

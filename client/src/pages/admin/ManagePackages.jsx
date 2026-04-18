@@ -141,16 +141,29 @@ export default function ManagePackages() {
   function handleInputChange(field, value) {
     setEditForm(prev => {
       const updated = { ...prev, [field]: value };
-      // Auto-calcular descuento cuando cambia precio o precio original
+
+      const toNum = v => parseFloat(v) || 0;
+
       if (field === 'price' || field === 'original_price') {
-        const price = parseFloat(field === 'price' ? value : prev.price);
-        const original = parseFloat(field === 'original_price' ? value : prev.original_price);
+        // precio o precio original cambió → recalcular descuento
+        const price    = toNum(field === 'price' ? value : prev.price);
+        const original = toNum(field === 'original_price' ? value : prev.original_price);
         if (original > 0 && price > 0 && original > price) {
           updated.discount = Math.round((1 - price / original) * 100);
         } else {
           updated.discount = 0;
         }
+      } else if (field === 'discount') {
+        // descuento cambió → recalcular precio original
+        const price    = toNum(prev.price);
+        const pct      = toNum(value);
+        if (price > 0 && pct > 0 && pct < 100) {
+          updated.original_price = Math.round(price / (1 - pct / 100));
+        } else {
+          updated.original_price = '';
+        }
       }
+
       return updated;
     });
   }
@@ -595,12 +608,12 @@ export default function ManagePackages() {
                     <input type="number" value={editForm.price || ''} onChange={e => handleInputChange('price', e.target.value)} placeholder="ej: 1899" />
                   </div>
                   <div className={styles.formGroup}>
-                    <label>Precio Original ($)</label>
+                    <label>Precio Original ($) — se calcula si pones descuento</label>
                     <input type="number" value={editForm.original_price || ''} onChange={e => handleInputChange('original_price', e.target.value)} placeholder="ej: 2299" />
                   </div>
                   <div className={styles.formGroup}>
-                    <label>Descuento (%) — calculado automáticamente</label>
-                    <input type="number" value={editForm.discount || 0} readOnly tabIndex={-1} style={{ opacity: 0.6, cursor: 'not-allowed', background: 'rgba(255,255,255,0.04)' }} />
+                    <label>Descuento (%) — se calcula si pones precio original</label>
+                    <input type="number" value={editForm.discount ?? ''} onChange={e => handleInputChange('discount', e.target.value)} placeholder="ej: 17" min="0" max="99" />
                   </div>
                   <div className={styles.formGroup}>
                     <label>Duración</label>

@@ -163,9 +163,12 @@ export default function PackageDetailNew() {
   const packageTitle = pkg?.title || pkg?.name || '';
   const packageImage = pkg?.image || pkg?.image_url || '';
   const gallery = pkg?.gallery || DEFAULT_GALLERY;
-  const discount = (pkg?.original_price && pkg?.price && pkg?.original_price > pkg?.price)
-    ? Math.round((1 - pkg.price / pkg.original_price) * 100)
-    : 0;
+  // Usar el descuento guardado en BD; si no existe, calcularlo como fallback
+  const discount = pkg?.discount > 0
+    ? pkg.discount
+    : (pkg?.original_price && pkg?.price && pkg?.original_price > pkg?.price
+        ? Math.round((1 - pkg.price / pkg.original_price) * 100)
+        : 0);
 
   // useSEO debe llamarse siempre en el mismo orden — nunca después de un return condicional
   useSEO({
