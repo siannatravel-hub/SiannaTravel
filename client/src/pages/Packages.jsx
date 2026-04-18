@@ -111,8 +111,8 @@ export default function Packages() {
                   />
                   <div className={styles.cardOverlay}></div>
                   
-                  {pkg.discount > 0 && (
-                    <span className={styles.cardDiscount}>-{pkg.discount}%</span>
+                  {pkg.original_price > pkg.price && (
+                    <span className={styles.cardDiscount}>-{Math.round((1 - pkg.price / pkg.original_price) * 100)}%</span>
                   )}
                   
                   <span className={styles.cardType}>
