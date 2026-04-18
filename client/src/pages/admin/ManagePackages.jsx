@@ -154,13 +154,13 @@ export default function ManagePackages() {
           updated.discount = 0;
         }
       } else if (field === 'discount') {
-        // descuento cambió → recalcular precio original
-        const price    = toNum(prev.price);
+        // descuento cambió → recalcular precio (precio = original × (1 - descuento/100))
+        const original = toNum(prev.original_price);
         const pct      = toNum(value);
-        if (price > 0 && pct > 0 && pct < 100) {
-          updated.original_price = Math.round(price / (1 - pct / 100));
+        if (original > 0 && pct > 0 && pct < 100) {
+          updated.price = Math.round(original * (1 - pct / 100));
         } else {
-          updated.original_price = '';
+          updated.price = toNum(prev.price);
         }
       }
 
@@ -608,11 +608,11 @@ export default function ManagePackages() {
                     <input type="number" value={editForm.price || ''} onChange={e => handleInputChange('price', e.target.value)} placeholder="ej: 1899" />
                   </div>
                   <div className={styles.formGroup}>
-                    <label>Precio Original ($) — se calcula si pones descuento</label>
+                    <label>Precio Original ($) — llena este + descuento para calcular precio</label>
                     <input type="number" value={editForm.original_price || ''} onChange={e => handleInputChange('original_price', e.target.value)} placeholder="ej: 2299" />
                   </div>
                   <div className={styles.formGroup}>
-                    <label>Descuento (%) — se calcula si pones precio original</label>
+                    <label>Descuento (%) — se calcula de precio / precio original</label>
                     <input type="number" value={editForm.discount ?? ''} onChange={e => handleInputChange('discount', e.target.value)} placeholder="ej: 17" min="0" max="99" />
                   </div>
                   <div className={styles.formGroup}>
