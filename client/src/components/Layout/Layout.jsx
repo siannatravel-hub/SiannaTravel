@@ -20,6 +20,8 @@ export default function Layout({ children }) {
 
   useLayoutEffect(() => {
     // Save previous page scroll
+    const key = 'scroll:' + prevPathname.current;
+    sessionStorage.setItem(key, String(window.scrollY));
     scrollPositions.current[prevPathname.current] = window.scrollY;
     prevPathname.current = pathname;
 
@@ -27,10 +29,19 @@ export default function Layout({ children }) {
     document.documentElement.style.scrollBehavior = 'auto';
 
     if (isPopRef.current) {
-      // Back/forward: restore saved position
-      const saved = scrollPositions.current[pathname];
-      window.scrollTo(0, saved != null ? saved : 0);
       isPopRef.current = false;
+      // Intentar desde sessionStorage primero, luego desde ref en memoria
+      const fromStorage = sessionStorage.getItem('scroll:' + pathname);
+      const saved = fromStorage != null
+        ? parseFloat(fromStorage)
+        : scrollPositions.current[pathname];
+
+      // doble rAF: espera a que React pinte el contenido antes de scrollear
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+          window.scrollTo(0, saved != null ? saved : 0);
+        });
+      });
     } else {
       // New navigation: scroll to top immediately
       window.scrollTo(0, 0);
