@@ -144,23 +144,33 @@ export default function ManagePackages() {
 
       const toNum = v => parseFloat(v) || 0;
 
-      if (field === 'price' || field === 'original_price') {
-        // precio o precio original cambió → recalcular descuento
-        const price    = toNum(field === 'price' ? value : prev.price);
-        const original = toNum(field === 'original_price' ? value : prev.original_price);
-        if (original > 0 && price > 0 && original > price) {
-          updated.discount = Math.round((1 - price / original) * 100);
-        } else {
-          updated.discount = 0;
-        }
-      } else if (field === 'discount') {
-        // descuento cambió → recalcular precio (precio = original × (1 - descuento/100))
+      if (field === 'discount') {
+        // descuento cambió → precio = original × (1 - pct/100)
         const original = toNum(prev.original_price);
         const pct      = toNum(value);
         if (original > 0 && pct > 0 && pct < 100) {
           updated.price = Math.round(original * (1 - pct / 100));
+        } else if (original > 0) {
+          // sin descuento → precio igual al original
+          updated.price = original;
+        }
+      } else if (field === 'original_price') {
+        // precio original cambió → recalcular precio con el descuento actual
+        const original = toNum(value);
+        const pct      = toNum(prev.discount);
+        if (original > 0 && pct > 0 && pct < 100) {
+          updated.price = Math.round(original * (1 - pct / 100));
+        } else if (original > 0) {
+          updated.price = original;
+        }
+      } else if (field === 'price') {
+        // precio editado manualmente → recalcular descuento
+        const price    = toNum(value);
+        const original = toNum(prev.original_price);
+        if (original > 0 && price > 0 && original > price) {
+          updated.discount = Math.round((1 - price / original) * 100);
         } else {
-          updated.price = toNum(prev.price);
+          updated.discount = 0;
         }
       }
 
