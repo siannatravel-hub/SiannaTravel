@@ -89,13 +89,10 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Ofertas — botón destacado */}
+      {/* Ofertas — enlace secundario */}
       <div style={{ textAlign: 'center', padding: '0 1rem 3rem' }}>
-        <Link
-          to="/ofertas"
-          className={styles.offersBtn}
-        >
-          🔥 Ver ofertas de viaje
+        <Link to="/ofertas" className={styles.offersBtn}>
+          Ver más paquetes internacionales →
         </Link>
       </div>
 

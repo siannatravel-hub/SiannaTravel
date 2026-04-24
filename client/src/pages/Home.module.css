@@ -195,26 +195,23 @@
   transform: translateX(4px);
 }
 
-/* Botón ofertas */
+/* Botón ofertas — discreto, alineado al tono del sitio */
 .offersBtn {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 0.9rem 2.25rem;
-  background: linear-gradient(135deg, #6B21A8 0%, #1a8a9e 100%);
-  color: #fff;
+  display: inline-block;
+  padding: 0.7rem 2rem;
+  border: 1.5px solid #1db8d1;
   border-radius: 50px;
-  font-weight: 700;
-  font-size: 1rem;
+  color: #1db8d1;
+  font-size: 0.95rem;
+  font-weight: 600;
   text-decoration: none;
-  box-shadow: 0 4px 18px rgba(107, 33, 168, 0.35);
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: background 0.2s ease, color 0.2s ease;
   letter-spacing: 0.01em;
 }
 
 .offersBtn:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 28px rgba(107, 33, 168, 0.45);
+  background: #1db8d1;
+  color: #fff;
 }
 
 /* CTA Section */
