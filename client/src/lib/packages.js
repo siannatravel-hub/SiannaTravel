@@ -175,6 +175,69 @@ export async function createPackage(packageData) {
   return data;
 }
 
+export async function createPackage(data) {
+  if (!isSupabaseConfigured()) throw new Error('Supabase no configurado');
+
+  const slug = (data.title || 'paquete')
+    .toLowerCase()
+    .normalize('NFD').replace(/[̀-ͯ]/g, '')
+    .replace(/[^a-z0-9\s-]/g, '')
+    .trim()
+    .replace(/\s+/g, '-')
+    + '-' + Date.now();
+
+  const payload = {
+    slug,
+    title: data.title || '',
+    destination: data.destination || '',
+    country: data.country || '',
+    region: data.region || '',
+    description: data.description || '',
+    price: parseInt(data.price) || 0,
+    original_price: parseInt(data.original_price) || 0,
+    discount: parseInt(data.discount) || 0,
+    duration: data.duration || '',
+    nights: parseInt(data.nights) || 0,
+    image: data.image || '',
+    category: data.category || 'aventura',
+    rating: parseFloat(data.rating) || 4.5,
+    reviews_count: parseInt(data.reviews_count) || 0,
+    is_featured: data.is_featured ?? false,
+    is_active: data.is_active ?? true,
+    order_index: parseInt(data.order_index) || 0,
+    flight_type: data.flight_type || 'internacional',
+    service_type: data.service_type || 'paquete',
+    persons: parseInt(data.persons) || 2,
+    currency: data.currency || 'MXN',
+    hotel_name: data.hotel_name || '',
+    hotel_stars: parseInt(data.hotel_stars) || null,
+    room_type: data.room_type || '',
+    accommodation_type: data.accommodation_type || '',
+    itinerary_pdf: data.itinerary_pdf || '',
+    dates: data.dates || '',
+    contact_whatsapp: data.contact_whatsapp || '',
+    cancellation_policy: data.cancellation_policy || '',
+    includes: data.includes || [],
+    highlights: data.highlights || [],
+    gallery: data.gallery || [],
+    flight_includes: data.flight_includes || [],
+    transfers_included: data.transfers_included || [],
+    itinerary: data.itinerary || [],
+    important_info: data.important_info || [],
+    terms_conditions: data.terms_conditions || [],
+    payment_options: data.payment_options || [],
+  };
+
+  const { data: created, error } = await supabase
+    .from('packages')
+    .insert(payload)
+    .select()
+    .single();
+
+  if (error) throw error;
+  return created ? { ...created, id: created.slug || String(created.id) } : null;
+}
+
 export async function updatePackage(id, updates, userEmail = 'admin') {
   if (!isSupabaseConfigured()) {
     throw new Error('Supabase no configurado');

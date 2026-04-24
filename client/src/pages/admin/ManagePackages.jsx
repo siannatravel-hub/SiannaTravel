@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import {
   getPackages,
+  createPackage,
   updatePackage,
   deletePackage,
   getPackageHistory,
@@ -34,6 +35,7 @@ export default function ManagePackages() {
   const [showHistory, setShowHistory] = useState(null);
   const [history, setHistory] = useState([]);
   const [loadingHistory, setLoadingHistory] = useState(false);
+  const [isNewPackage, setIsNewPackage] = useState(false);
   const [syncing, setSyncing] = useState(false);
   const [syncMessage, setSyncMessage] = useState('');
   const [reorderMode, setReorderMode] = useState(false);
@@ -133,7 +135,26 @@ export default function ManagePackages() {
     setEditTab('general');
   }
 
+  function openNewPackageModal() {
+    setIsNewPackage(true);
+    setSelectedPackage({ id: '__new__' });
+    setEditForm({
+      title: '', destination: '', country: '', region: '', description: '',
+      price: 0, original_price: 0, discount: 0, duration: '', nights: 0,
+      image: '', category: 'aventura', rating: 4.5, reviews_count: 0,
+      is_featured: false, is_active: true, order_index: packages.length,
+      flight_type: 'internacional', service_type: 'paquete', persons: 2,
+      currency: 'MXN', hotel_name: '', hotel_stars: '', room_type: '',
+      accommodation_type: '', itinerary_pdf: '', dates: '', contact_whatsapp: '',
+      cancellation_policy: '', includes: [], highlights: [], gallery: [],
+      flight_includes: [], transfers_included: [], itinerary: [],
+      important_info: [], terms_conditions: [], payment_options: [],
+    });
+    setEditTab('general');
+  }
+
   function closeEditModal() {
+    setIsNewPackage(false);
     setSelectedPackage(null);
     setEditForm({});
   }
@@ -282,9 +303,21 @@ export default function ManagePackages() {
 
   async function handleSave() {
     if (!selectedPackage) return;
-    
+
     setSaving(true);
     try {
+      if (isNewPackage) {
+        if (!editForm.title?.trim()) {
+          alert('El título del paquete es obligatorio.');
+          setSaving(false);
+          return;
+        }
+        await createPackage(editForm);
+        await loadPackages();
+        closeEditModal();
+        return;
+      }
+
       const updates = {};
       const scalarFields = [
         'title', 'destination', 'country', 'region', 'description',
@@ -294,11 +327,9 @@ export default function ManagePackages() {
         'hotel_name', 'hotel_stars', 'room_type', 'accommodation_type',
         'itinerary_pdf', 'dates', 'contact_whatsapp', 'cancellation_policy'
       ];
-      
+
       for (const field of scalarFields) {
-        // Si la columna no existe aún en la BD, el objeto del paquete no tendrá esa clave → omitir
         if (!(field in selectedPackage) && editForm[field] !== undefined && editForm[field] !== '') {
-          // La columna no existe en la BD todavía, saltar
           continue;
         }
         if (editForm[field] !== selectedPackage[field]) {
@@ -313,7 +344,6 @@ export default function ManagePackages() {
         }
       }
 
-      // Array fields — only include if the column exists in the DB record
       const arrayFields = [
         'includes', 'gallery', 'flight_includes', 'transfers_included',
         'itinerary', 'important_info', 'terms_conditions', 'payment_options'
@@ -328,7 +358,7 @@ export default function ManagePackages() {
         await updatePackage(selectedPackage.id, updates, user?.email || 'admin');
         await loadPackages();
       }
-      
+
       closeEditModal();
     } catch (error) {
       console.error('Error saving package:', error);
@@ -416,6 +446,12 @@ export default function ManagePackages() {
           Gestión de Paquetes
         </h1>
         <div className={styles.headerActions}>
+          <button
+            className={styles.newPackageBtn}
+            onClick={openNewPackageModal}
+          >
+            + Nuevo Paquete
+          </button>
           <button
             className={styles.syncBtn}
             onClick={handleSyncToDatabase}
