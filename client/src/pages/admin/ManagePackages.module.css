@@ -433,6 +433,17 @@
   transition: all 0.3s ease;
 }
 
+.formGroup select option {
+  background: #1e2535;
+  color: #fff;
+}
+
+.formGroup select option:hover,
+.formGroup select option:checked {
+  background: #d4af37;
+  color: #000;
+}
+
 .formGroup input:focus,
 .formGroup textarea:focus,
 .formGroup select:focus {
@@ -927,6 +938,11 @@
   display: flex;
   gap: 0.35rem;
   align-items: center;
+}
+
+.mealItem select option {
+  background: #1e2535;
+  color: #fff;
 }
 
 .mealItem select {
