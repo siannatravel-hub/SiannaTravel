@@ -89,6 +89,20 @@ export default function Home() {
         </div>
       </section>
 
+      {/* Ofertas de viaje MegaTravel */}
+      <section style={{ width: '100%', display: 'flex', justifyContent: 'center', padding: '2rem 1rem', background: '#f8f8f8' }}>
+        <iframe
+          src="https://www.megatravel.com.mx/tools/ofertas-viaje.php?Dest=&txtColor=1D1D1D&lblTPaq=9900FF&lblTRange=570090&lblNumRange=9900FF&itemBack=D5D5D5&ItemHov=360058&txtColorHov=ffffff&ff=1"
+          width="800"
+          height="1200"
+          frameBorder="0"
+          allowTransparency="true"
+          align="center"
+          style={{ maxWidth: '100%', border: 'none' }}
+          title="Ofertas de viaje"
+        />
+      </section>
+
       {/* Servicios de Vuelos y Hoteles */}
       <FlightHotelServices />
 
