@@ -8,31 +8,24 @@ export default function Ofertas() {
       {/* Header de la sección */}
       <div className={styles.header}>
         <p className={styles.breadcrumb}>
-          <Link to="/">Inicio</Link> / Más ofertas
+          <Link to="/">Inicio</Link> / Ofertas
         </p>
-        <h1 className={styles.title}>Más opciones de viaje</h1>
+        <h1 className={styles.title}>Ofertas de Viaje</h1>
         <p className={styles.subtitle}>
-          Explora una selección adicional de paquetes disponibles a través de nuestros aliados.
-          Para una atención personalizada, te recomendamos nuestros{' '}
-          <Link to="/paquetes" className={styles.linkAccent}>paquetes propios →</Link>
+          Descubre destinos increíbles con las mejores promociones disponibles para ti.
         </p>
-        <div className={styles.disclaimer}>
-          <span className={styles.disclaimerIcon}>ℹ</span>
-          Estas ofertas son proporcionadas por un proveedor externo. Precios y disponibilidad
-          sujetos a cambio. Contáctanos para confirmar antes de reservar.
-        </div>
       </div>
 
-      {/* Contenedor del iframe con tratamiento visual secundario */}
+      {/* iframe con colores Sianna */}
       <div className={styles.iframeWrapper}>
         <iframe
-          src="https://www.megatravel.com.mx/tools/ofertas-viaje.php?Dest=&txtColor=1D1D1D&lblTPaq=9900FF&lblTRange=570090&lblNumRange=9900FF&itemBack=D5D5D5&ItemHov=360058&txtColorHov=ffffff&ff=1"
+          src="https://www.megatravel.com.mx/tools/ofertas-viaje.php?Dest=&txtColor=1D1D1D&aColor=6B21A8&ahColor=9333EA&thBG=4C1D95&thTxColor=FFFFFF&lblTPaq=7C3AED&lblTRange=4C1D95&lblNumRange=7C3AED&itemBack=F3E8FF&ItemHov=6B21A8&txtColorHov=ffffff&ff=1"
           width="800"
           height="1200"
           frameBorder="0"
           allowTransparency="true"
           style={{ maxWidth: '100%', border: 'none' }}
-          title="Más ofertas de viaje"
+          title="Ofertas de viaje"
         />
       </div>
 

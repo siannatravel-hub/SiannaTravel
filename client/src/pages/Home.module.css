@@ -195,6 +195,28 @@
   transform: translateX(4px);
 }
 
+/* Botón ofertas */
+.offersBtn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.9rem 2.25rem;
+  background: linear-gradient(135deg, #6B21A8 0%, #1a8a9e 100%);
+  color: #fff;
+  border-radius: 50px;
+  font-weight: 700;
+  font-size: 1rem;
+  text-decoration: none;
+  box-shadow: 0 4px 18px rgba(107, 33, 168, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  letter-spacing: 0.01em;
+}
+
+.offersBtn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 28px rgba(107, 33, 168, 0.45);
+}
+
 /* CTA Section */
 .cta {
   background: linear-gradient(135deg, #0f172a, #1e3a5f);

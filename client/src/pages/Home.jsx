@@ -89,24 +89,13 @@ export default function Home() {
         </div>
       </section>
 
-      {/* Más ofertas disponibles — enlace secundario */}
-      <div style={{ textAlign: 'center', padding: '0.5rem 1rem 2.5rem' }}>
+      {/* Ofertas — botón destacado */}
+      <div style={{ textAlign: 'center', padding: '0 1rem 3rem' }}>
         <Link
           to="/ofertas"
-          style={{
-            display: 'inline-block',
-            padding: '0.6rem 1.5rem',
-            border: '1px solid #bbb',
-            borderRadius: '50px',
-            color: '#777',
-            textDecoration: 'none',
-            fontSize: '0.85rem',
-            transition: 'all 0.2s ease',
-          }}
-          onMouseEnter={e => { e.target.style.borderColor = '#888'; e.target.style.color = '#444'; }}
-          onMouseLeave={e => { e.target.style.borderColor = '#bbb'; e.target.style.color = '#777'; }}
+          className={styles.offersBtn}
         >
-          Ver más opciones de viaje disponibles →
+          🔥 Ver ofertas de viaje
         </Link>
       </div>
 

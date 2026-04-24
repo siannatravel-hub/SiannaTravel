@@ -79,9 +79,6 @@
   display: flex;
   justify-content: center;
   padding: 0 1rem;
-  /* Filtro sutil que baja la saturación del iframe para diferenciarlo visualmente */
-  filter: saturate(0.85) brightness(0.97);
-  opacity: 0.93;
 }
 
 /* CTA de vuelta a Sianna */
