@@ -352,7 +352,7 @@
   width: 100%;
   max-width: 900px;
   max-height: 92vh;
-  overflow-y: auto;
+  overflow: hidden;
   display: flex;
   flex-direction: column;
 }
@@ -396,6 +396,8 @@
 
 .modalBody {
   padding: 1.5rem;
+  overflow-y: auto;
+  flex: 1;
 }
 
 .formGrid {
