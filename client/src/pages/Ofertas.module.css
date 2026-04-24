@@ -1,0 +1,146 @@
+.page {
+  background: #f4f4f6;
+  min-height: 100vh;
+  padding-bottom: 4rem;
+}
+
+/* Header */
+.header {
+  max-width: 860px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem 2rem;
+  text-align: center;
+}
+
+.breadcrumb {
+  font-size: 0.85rem;
+  color: #888;
+  margin-bottom: 1rem;
+}
+
+.breadcrumb a {
+  color: #888;
+  text-decoration: none;
+}
+
+.breadcrumb a:hover {
+  color: #555;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #2d2d2d;
+  margin-bottom: 0.75rem;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: #666;
+  line-height: 1.6;
+  margin-bottom: 1.25rem;
+}
+
+.linkAccent {
+  color: #7c3aed;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.linkAccent:hover {
+  text-decoration: underline;
+}
+
+/* Disclaimer */
+.disclaimer {
+  display: inline-flex;
+  align-items: flex-start;
+  gap: 0.5rem;
+  background: #fff3cd;
+  border: 1px solid #ffd866;
+  border-radius: 8px;
+  padding: 0.75rem 1.25rem;
+  font-size: 0.82rem;
+  color: #7a5c00;
+  text-align: left;
+  max-width: 640px;
+}
+
+.disclaimerIcon {
+  font-style: normal;
+  font-weight: 700;
+  font-size: 0.9rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+/* iframe container — visualmente neutral, no branded */
+.iframeWrapper {
+  display: flex;
+  justify-content: center;
+  padding: 0 1rem;
+  /* Filtro sutil que baja la saturación del iframe para diferenciarlo visualmente */
+  filter: saturate(0.85) brightness(0.97);
+  opacity: 0.93;
+}
+
+/* CTA de vuelta a Sianna */
+.cta {
+  text-align: center;
+  padding: 3rem 1.5rem 1rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+}
+
+.ctaText {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: #2d2d2d;
+  margin: 0;
+}
+
+.ctaBtn {
+  display: inline-block;
+  padding: 0.85rem 2rem;
+  background: linear-gradient(135deg, #1a8a9e, #0d6b7e);
+  color: #fff;
+  text-decoration: none;
+  border-radius: 50px;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.ctaBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(26, 138, 158, 0.35);
+}
+
+.ctaBtnSecondary {
+  display: inline-block;
+  padding: 0.75rem 1.75rem;
+  background: transparent;
+  color: #555;
+  text-decoration: none;
+  border: 1px solid #ccc;
+  border-radius: 50px;
+  font-size: 0.9rem;
+  transition: border-color 0.2s ease, color 0.2s ease;
+}
+
+.ctaBtnSecondary:hover {
+  border-color: #888;
+  color: #222;
+}
+
+@media (max-width: 600px) {
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .disclaimer {
+    font-size: 0.78rem;
+  }
+}

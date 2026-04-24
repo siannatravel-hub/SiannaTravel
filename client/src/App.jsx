@@ -19,6 +19,7 @@ const CulturalTravel = lazy(() => import('./pages/CulturalTravel'));
 const AdventureTravel = lazy(() => import('./pages/AdventureTravel'));
 const Blog = lazy(() => import('./pages/Blog'));
 const BlogPost = lazy(() => import('./pages/BlogPost'));
+const Ofertas = lazy(() => import('./pages/Ofertas'));
 const NotFound = lazy(() => import('./pages/NotFound'));
 
 // Admin pages
@@ -48,6 +49,7 @@ export default function App() {
               <Route path="/viajes-aventura" element={<AdventureTravel />} />
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/:slug" element={<BlogPost />} />
+              <Route path="/ofertas" element={<Ofertas />} />
             </Route>
 
             {/* Admin routes without main layout */}
