@@ -164,17 +164,6 @@ export async function getPackageById(id) {
   }
 }
 
-export async function createPackage(packageData) {
-  const { data, error } = await supabase
-    .from('packages')
-    .insert([packageData])
-    .select()
-    .single();
-  
-  if (error) throw error;
-  return data;
-}
-
 export async function createPackage(data) {
   if (!isSupabaseConfigured()) throw new Error('Supabase no configurado');
 
