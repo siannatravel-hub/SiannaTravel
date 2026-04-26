@@ -2,24 +2,24 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
         xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
 
-  <!-- ═══ INICIO ═══ -->
+  <!-- INICIO -->
   <url>
-    <loc>https://siannatravel.com/</loc>
-    <lastmod>2026-04-08</lastmod>
+    <loc>https://www.siannatravelagencia.com/</loc>
+    <lastmod>2026-04-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
 
-  <!-- ═══ PAQUETES ═══ -->
+  <!-- PAQUETES -->
   <url>
-    <loc>https://siannatravel.com/paquetes</loc>
-    <lastmod>2026-04-08</lastmod>
+    <loc>https://www.siannatravelagencia.com/paquetes</loc>
+    <lastmod>2026-04-24</lastmod>
     <changefreq>daily</changefreq>
     <priority>0.95</priority>
   </url>
   <url>
-    <loc>https://siannatravel.com/paquetes/barrancas-del-cobre</loc>
-    <lastmod>2026-04-08</lastmod>
+    <loc>https://www.siannatravelagencia.com/paquetes/barrancas-del-cobre</loc>
+    <lastmod>2026-04-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
@@ -28,214 +28,112 @@
     </image:image>
   </url>
   <url>
-    <loc>https://siannatravel.com/paquetes/tren-paraiso-maya</loc>
-    <lastmod>2026-04-08</lastmod>
+    <loc>https://www.siannatravelagencia.com/paquetes/tren-paraiso-maya</loc>
+    <lastmod>2026-04-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
     <image:image>
-      <image:loc>https://images.unsplash.com/photo-1552074284-5e88ef1aef18?w=1200</image:loc>
+      <image:loc>https://www.siannatravelagencia.com/images/packages/trenmaya.jpg</image:loc>
       <image:title>Tren y Paraíso Maya – Riviera Maya y Tulum</image:title>
     </image:image>
   </url>
   <url>
-    <loc>https://siannatravel.com/paquetes/vamos-a-colombia</loc>
-    <lastmod>2026-04-08</lastmod>
+    <loc>https://www.siannatravelagencia.com/paquetes/vamos-a-colombia</loc>
+    <lastmod>2026-04-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://images.unsplash.com/photo-1562803500-bc4dd1af4920?w=1200</image:loc>
-      <image:title>Vamos a Colombia – Bogotá y Cartagena</image:title>
-    </image:image>
   </url>
   <url>
-    <loc>https://siannatravel.com/paquetes/orlando-verano-magico</loc>
-    <lastmod>2026-04-08</lastmod>
+    <loc>https://www.siannatravelagencia.com/paquetes/orlando-verano-magico</loc>
+    <lastmod>2026-04-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.9</priority>
-    <image:image>
-      <image:loc>https://images.unsplash.com/photo-1524850011238-e3d235c7d4c9?w=1200</image:loc>
-      <image:title>Orlando Verano Mágico – Disney y Universal Studios</image:title>
-    </image:image>
-  </url>
-  <url>
-    <loc>https://siannatravel.com/paquetes/tokyo-moderno</loc>
-    <lastmod>2026-04-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://siannatravel.com/paquetes/bariloche-nieve</loc>
-    <lastmod>2026-04-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
   </url>
 
-  <!-- ═══ CATEGORÍAS ═══ -->
+  <!-- CATEGORÍAS -->
   <url>
-    <loc>https://siannatravel.com/viajes-playa</loc>
-    <lastmod>2026-04-08</lastmod>
+    <loc>https://www.siannatravelagencia.com/viajes-playa</loc>
+    <lastmod>2026-04-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://siannatravel.com/viajes-culturales</loc>
-    <lastmod>2026-04-08</lastmod>
+    <loc>https://www.siannatravelagencia.com/viajes-culturales</loc>
+    <lastmod>2026-04-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
   <url>
-    <loc>https://siannatravel.com/viajes-aventura</loc>
-    <lastmod>2026-04-08</lastmod>
+    <loc>https://www.siannatravelagencia.com/viajes-aventura</loc>
+    <lastmod>2026-04-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.85</priority>
   </url>
 
-  <!-- ═══ BLOG ═══ -->
+  <!-- OFERTAS -->
   <url>
-    <loc>https://siannatravel.com/blog</loc>
-    <lastmod>2026-04-08</lastmod>
+    <loc>https://www.siannatravelagencia.com/ofertas</loc>
+    <lastmod>2026-04-24</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- BLOG -->
+  <url>
+    <loc>https://www.siannatravelagencia.com/blog</loc>
+    <lastmod>2026-04-24</lastmod>
     <changefreq>weekly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://siannatravel.com/blog/catedral-tulancingo-vs-catedrales-del-mundo</loc>
+    <loc>https://www.siannatravelagencia.com/blog/catedral-tulancingo-vs-catedrales-del-mundo</loc>
     <lastmod>2026-04-08</lastmod>
     <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-    <image:image>
-      <image:loc>https://siannatravel.com/Saint_Peter%27s_Basilica_facade%2C_Rome%2C_Italy.jpg</image:loc>
-      <image:title>Catedral de Tulancingo vs catedrales del mundo</image:title>
-    </image:image>
+    <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://siannatravel.com/blog/mejores-destinos-playa-mexico-2026</loc>
+    <loc>https://www.siannatravelagencia.com/blog/mejores-destinos-playa-mexico-2026</loc>
     <lastmod>2026-03-15</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://siannatravel.com/blog/guia-viajeros-primerizos</loc>
+    <loc>https://www.siannatravelagencia.com/blog/guia-viajeros-primerizos</loc>
     <lastmod>2026-03-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://siannatravel.com/blog/escapadas-romanticas-mexico</loc>
+    <loc>https://www.siannatravelagencia.com/blog/escapadas-romanticas-mexico</loc>
     <lastmod>2026-03-05</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
 
-  <!-- ═══ PÁGINAS ESTÁTICAS ═══ -->
+  <!-- PÁGINAS ESTÁTICAS -->
   <url>
-    <loc>https://siannatravel.com/contacto</loc>
-    <lastmod>2026-04-08</lastmod>
+    <loc>https://www.siannatravelagencia.com/contacto</loc>
+    <lastmod>2026-04-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.75</priority>
   </url>
   <url>
-    <loc>https://siannatravel.com/nosotros</loc>
-    <lastmod>2026-04-08</lastmod>
+    <loc>https://www.siannatravelagencia.com/nosotros</loc>
+    <lastmod>2026-04-24</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.65</priority>
   </url>
   <url>
-    <loc>https://siannatravel.com/terminos</loc>
-    <lastmod>2026-04-08</lastmod>
+    <loc>https://www.siannatravelagencia.com/terminos</loc>
+    <lastmod>2026-04-24</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
   <url>
-    <loc>https://siannatravel.com/privacidad</loc>
-    <lastmod>2026-04-08</lastmod>
+    <loc>https://www.siannatravelagencia.com/privacidad</loc>
+    <lastmod>2026-04-24</lastmod>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
   </url>
 
-</urlset>
-
-  <url>
-    <loc>https://siannatravel.com/</loc>
-    <lastmod>2026-03-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>1.0</priority>
-  </url>
-  <url>
-    <loc>https://siannatravel.com/paquetes</loc>
-    <lastmod>2026-03-30</lastmod>
-    <changefreq>daily</changefreq>
-    <priority>0.9</priority>
-  </url>
-  <url>
-    <loc>https://siannatravel.com/viajes-playa</loc>
-    <lastmod>2026-03-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://siannatravel.com/viajes-culturales</loc>
-    <lastmod>2026-03-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://siannatravel.com/viajes-aventura</loc>
-    <lastmod>2026-03-30</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://siannatravel.com/contacto</loc>
-    <lastmod>2026-03-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://siannatravel.com/nosotros</loc>
-    <lastmod>2026-03-30</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.6</priority>
-  </url>
-  <url>
-    <loc>https://siannatravel.com/blog</loc>
-    <lastmod>2026-04-08</lastmod>
-    <changefreq>weekly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://siannatravel.com/blog/catedral-tulancingo-vs-catedrales-del-mundo</loc>
-    <lastmod>2026-04-08</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.8</priority>
-  </url>
-  <url>
-    <loc>https://siannatravel.com/blog/mejores-destinos-playa-mexico-2026</loc>
-    <lastmod>2026-03-15</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://siannatravel.com/blog/guia-viajeros-primerizos</loc>
-    <lastmod>2026-03-10</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://siannatravel.com/blog/escapadas-romanticas-mexico</loc>
-    <lastmod>2026-03-05</lastmod>
-    <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
-  </url>
-  <url>
-    <loc>https://siannatravel.com/terminos</loc>
-    <lastmod>2026-03-30</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://siannatravel.com/privacidad</loc>
-    <lastmod>2026-03-30</lastmod>
-    <changefreq>yearly</changefreq>
-    <priority>0.3</priority>
-  </url>
 </urlset>
