@@ -1,6 +1,7 @@
 import express from 'express';
 import cors from 'cors';
 import compression from 'compression';
+import { createClient } from '@supabase/supabase-js';
 
 const app = express();
 app.use(cors());
@@ -8,10 +9,23 @@ app.use(compression());
 app.use(express.json({ limit: '10kb' }));
 
 // ==========================================
-// Paquetes reales de Sianna Travel
+// Supabase client (lee vars del entorno Vercel)
+// Las mismas que usa el admin: VITE_SUPABASE_URL / VITE_SUPABASE_ANON_KEY
 // ==========================================
 
-const packages = [
+const SUPABASE_URL  = process.env.VITE_SUPABASE_URL  || process.env.SUPABASE_URL;
+const SUPABASE_KEY  = process.env.VITE_SUPABASE_ANON_KEY || process.env.SUPABASE_ANON_KEY;
+
+const supabase = (SUPABASE_URL && SUPABASE_KEY)
+  ? createClient(SUPABASE_URL, SUPABASE_KEY)
+  : null;
+
+// ==========================================
+// Fallback: paquetes hardcodeados
+// Solo se usan si Supabase no está disponible
+// ==========================================
+
+const DEFAULT_PACKAGES = [
   {
     id: 'barrancas-del-cobre',
     title: 'Barrancas del Cobre',
@@ -115,26 +129,64 @@ const packages = [
 ];
 
 // ==========================================
-// Utilidades
+// Función central: obtiene paquetes desde Supabase
+// Si falla o no está configurado, usa DEFAULT_PACKAGES
 // ==========================================
 
-function filterPackages(query) {
-  let result = [...packages];
+async function getPackages() {
+  if (!supabase) return DEFAULT_PACKAGES;
+
+  try {
+    const { data, error } = await supabase
+      .from('packages')
+      .select(`
+        id, title, destination, country, region, category, flight_type,
+        description, price, original_price, discount, currency,
+        duration, nights, includes, highlights,
+        is_featured, is_active, rating, reviews_count,
+        image, itinerary_pdf, order_index,
+        slug
+      `)
+      .eq('is_active', true)
+      .order('order_index', { ascending: true });
+
+    if (error || !data || data.length === 0) {
+      console.warn('[API] Supabase error o sin datos, usando fallback:', error?.message);
+      return DEFAULT_PACKAGES;
+    }
+
+    // Normaliza: usa slug como id si existe, sino usa el id numérico como string
+    return data.map((p) => ({
+      ...p,
+      id: p.slug || String(p.id),
+    }));
+  } catch (err) {
+    console.error('[API] Error consultando Supabase:', err.message);
+    return DEFAULT_PACKAGES;
+  }
+}
+
+// ==========================================
+// Utilidades de filtrado
+// ==========================================
+
+function filterPackages(list, query) {
+  let result = [...list];
   if (query.type || query.category) {
     const cat = (query.type || query.category).toLowerCase();
     result = result.filter((p) => p.category === cat);
   }
-  if (query.region) result = result.filter((p) => p.region === query.region);
+  if (query.region)      result = result.filter((p) => p.region === query.region);
   if (query.destination) {
     const d = query.destination.toLowerCase();
     result = result.filter((p) => p.destination.toLowerCase().includes(d));
   }
-  if (query.minPrice) result = result.filter((p) => p.price >= Number(query.minPrice));
-  if (query.maxPrice) result = result.filter((p) => p.price <= Number(query.maxPrice));
+  if (query.minPrice)    result = result.filter((p) => p.price >= Number(query.minPrice));
+  if (query.maxPrice)    result = result.filter((p) => p.price <= Number(query.maxPrice));
   if (query.featured === 'true') result = result.filter((p) => p.is_featured);
   if (query.sort === 'price_asc')  result.sort((a, b) => a.price - b.price);
   else if (query.sort === 'price_desc') result.sort((a, b) => b.price - a.price);
-  else if (query.sort === 'rating') result.sort((a, b) => b.rating - a.rating);
+  else if (query.sort === 'rating')     result.sort((a, b) => b.rating - a.rating);
   return result;
 }
 
@@ -152,24 +204,31 @@ async function sendN8nWebhook(path, data) {
 }
 
 // ==========================================
-// Rutas existentes
+// Rutas
 // ==========================================
 
 app.get('/api/health', (_req, res) => {
-  res.json({ status: 'ok', timestamp: new Date().toISOString() });
+  res.json({
+    status: 'ok',
+    timestamp: new Date().toISOString(),
+    supabase: !!supabase,
+  });
 });
 
-app.get('/api/packages', (req, res) => {
-  const result = filterPackages(req.query);
+app.get('/api/packages', async (req, res) => {
+  const packages = await getPackages();
+  const result = filterPackages(packages, req.query);
   res.json({ data: result, count: result.length });
 });
 
-app.get('/api/packages/featured', (_req, res) => {
+app.get('/api/packages/featured', async (_req, res) => {
+  const packages = await getPackages();
   const result = packages.filter((p) => p.is_featured && p.is_active);
   res.json({ data: result, count: result.length });
 });
 
-app.get('/api/packages/filters', (_req, res) => {
+app.get('/api/packages/filters', async (_req, res) => {
+  const packages = await getPackages();
   const categories = [...new Set(packages.map((p) => p.category))];
   const regions    = [...new Set(packages.map((p) => p.region))];
   const priceRange = {
@@ -179,7 +238,8 @@ app.get('/api/packages/filters', (_req, res) => {
   res.json({ data: { categories, regions, priceRange } });
 });
 
-app.get('/api/packages/:id', (req, res) => {
+app.get('/api/packages/:id', async (req, res) => {
+  const packages = await getPackages();
   const pkg = packages.find((p) => p.id === req.params.id);
   if (!pkg) return res.status(404).json({ error: 'Package not found' });
   res.json({ data: pkg });
@@ -208,12 +268,12 @@ app.post('/api/contact/booking', (req, res) => {
 
 app.get('/api/airlines', (_req, res) => {
   res.json({ data: [
-    { id: 'aeromexico',            name: 'Aeroméxico',            code: 'AM' },
-    { id: 'air-france',           name: 'Air France',            code: 'AF' },
-    { id: 'latam',                name: 'LATAM Airlines',        code: 'LA' },
-    { id: 'copa',                 name: 'Copa Airlines',         code: 'CM' },
-    { id: 'ana',                  name: 'ANA',                   code: 'NH' },
-    { id: 'aerolineas-argentinas',name: 'Aerolíneas Argentinas', code: 'AR' },
+    { id: 'aeromexico',             name: 'Aeroméxico',            code: 'AM' },
+    { id: 'air-france',            name: 'Air France',            code: 'AF' },
+    { id: 'latam',                 name: 'LATAM Airlines',        code: 'LA' },
+    { id: 'copa',                  name: 'Copa Airlines',         code: 'CM' },
+    { id: 'ana',                   name: 'ANA',                   code: 'NH' },
+    { id: 'aerolineas-argentinas', name: 'Aerolíneas Argentinas', code: 'AR' },
   ]});
 });
 
@@ -222,13 +282,15 @@ app.get('/api/airlines', (_req, res) => {
 // GET /api/bot/paquetes
 // GET /api/bot/paquetes?q=colombia
 // ==========================================
-app.get('/api/bot/paquetes', (req, res) => {
+
+app.get('/api/bot/paquetes', async (req, res) => {
   const { q } = req.query;
 
   const normalize = (str) =>
     (str || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
 
-  let resultado = packages.filter((p) => p.is_active);
+  const packages = await getPackages();
+  let resultado = packages.filter((p) => p.is_active !== false);
 
   if (q && q.trim() !== '') {
     const query = normalize(q.trim());
@@ -240,7 +302,7 @@ app.get('/api/bot/paquetes', (req, res) => {
         pkg.region,
         pkg.category,
         pkg.description,
-        ...(pkg.includes  || []),
+        ...(pkg.includes   || []),
         ...(pkg.highlights || []),
       ];
       return campos.some((c) => normalize(c).includes(query));
@@ -259,7 +321,7 @@ app.get('/api/bot/paquetes', (req, res) => {
     descuento:      `${pkg.discount}% de descuento`,
     duracion:       pkg.duration,
     descripcion:    pkg.description,
-    que_incluye:    Array.isArray(pkg.includes) ? pkg.includes.join(' | ') : '',
+    que_incluye:    Array.isArray(pkg.includes)   ? pkg.includes.join(' | ')   : '',
     destacados:     Array.isArray(pkg.highlights) ? pkg.highlights.join(', ') : '',
     calificacion:   `${pkg.rating} ⭐ (${pkg.reviews_count} reseñas)`,
     link:           `https://www.siannatravelagencia.com/paquetes/${pkg.id}`,
@@ -270,6 +332,7 @@ app.get('/api/bot/paquetes', (req, res) => {
     ok:       true,
     total:    paquetes.length,
     consulta: q || 'todos',
+    fuente:   supabase ? 'supabase' : 'fallback',
     paquetes,
   });
 });
