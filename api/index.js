@@ -236,4 +236,64 @@ app.get('/api/airlines', (_req, res) => {
   ]});
 });
 
+// ============================================
+// ENDPOINT PARA SIANNABOT (WhatsApp / n8n)
+// GET /api/bot/paquetes?q=cancun
+// ============================================
+app.get('/api/bot/paquetes', (req, res) => {
+  const { q } = req.query;
+
+  // Normaliza texto: quita tildes y pasa a minúsculas
+  const normalize = (str) =>
+    (str || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
+
+  let resultado = [...packages];
+
+  if (q && q.trim() !== '') {
+    const query = normalize(q.trim());
+    resultado = packages.filter((pkg) => {
+      const campos = [
+        pkg.title,
+        pkg.destination,
+        pkg.country,
+        pkg.region,
+        pkg.type,
+        pkg.description,
+        ...(pkg.benefits || []),
+      ];
+      return campos.some((c) => normalize(c).includes(query));
+    });
+  }
+
+  const paquetes = resultado.map((pkg) => ({
+    nombre:        pkg.title,
+    destino:       pkg.destination,
+    pais:          pkg.country,
+    region:        pkg.region,
+    tipo:          pkg.type,
+    precio:        `desde $${Number(pkg.price).toLocaleString('es-MX')} ${pkg.currency || 'MXN'}`,
+    duracion:      pkg.duration,
+    fechas:        pkg.dates
+                     ? `${pkg.dates.start} al ${pkg.dates.end}`
+                     : 'Consultar disponibilidad',
+    descripcion:   pkg.description,
+    que_incluye:   Array.isArray(pkg.benefits) ? pkg.benefits.join(' | ') : '',
+    aerolinea:     pkg.airline   || '',
+    hotel:         pkg.hotel     || '',
+    estrellas:     pkg.hotelStars || '',
+    destacado:     pkg.featured  || false,
+    calificacion:  pkg.rating    || '',
+    link:          `https://www.siannatravelagencia.com/paquetes/${pkg.id}`,
+    pdf_itinerario: pkg.itinerary_pdf || '',
+  }));
+
+  res.json({
+    ok:       true,
+    total:    paquetes.length,
+    consulta: q || 'todos',
+    paquetes,
+  });
+});
+
 export default app;
+
