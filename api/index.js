@@ -2,152 +2,128 @@ import express from 'express';
 import cors from 'cors';
 import compression from 'compression';
 
-// Create mini express app for serverless
 const app = express();
 app.use(cors());
 app.use(compression());
 app.use(express.json({ limit: '10kb' }));
 
-// ---- Inline services (for serverless deployment) ----
+// ==========================================
+// Paquetes reales de Sianna Travel
+// ==========================================
 
 const packages = [
   {
-    id: 'cancun-all-inclusive',
-    title: 'Cancún All Inclusive',
-    destination: 'Cancún, México',
+    id: 'barrancas-del-cobre',
+    title: 'Barrancas del Cobre',
+    destination: 'Chihuahua, México',
+    country: 'México',
+    region: 'Norte de México',
+    category: 'aventura',
+    flight_type: 'nacional',
+    description: 'Descubre el Mar de Barrancas en la Sierra Tarahumara. A bordo del legendario Tren El Chepe, recorre uno de los cañones más profundos de México rodeado de naturaleza única.',
+    price: 1450,
+    original_price: 1799,
+    discount: 19,
+    currency: 'USD',
+    duration: '5 noches / 6 días',
+    nights: 5,
+    includes: ['Vuelo redondo', 'Tren El Chepe', 'Hotel en Creel', 'Guía especializado', 'Visita a cascadas'],
+    highlights: ['Barranca del Cobre', 'Creel', 'Tren El Chepe', 'Sierra Tarahumara'],
+    is_featured: true,
+    is_active: true,
+    rating: 4.8,
+    reviews_count: 127,
+    image: '/images/packages/barranchadelcobre.png',
+    itinerary_pdf: 'https://drive.google.com/file/d/10THWoFOvm9GDeB-EB-XNr8IpyoNmCbYa/view',
+    order_index: 0,
+  },
+  {
+    id: 'tren-paraiso-maya',
+    title: 'Tren y Paraíso Maya',
+    destination: 'Riviera Maya, México',
     country: 'México',
     region: 'Caribe',
-    type: 'playa',
+    category: 'playa',
+    flight_type: 'nacional',
+    description: 'Recorre la Riviera Maya a bordo del moderno Tren Maya. Desde Cancún hasta Tulum, disfruta de cenotes turquesas, zonas arqueológicas y las playas más bellas del Caribe mexicano.',
     price: 1299,
-    currency: 'USD',
-    duration: '5 noches / 6 días',
-    dates: { start: '2026-06-15', end: '2026-06-20' },
-    airline: 'Aeroméxico',
-    hotel: 'Grand Oasis Cancún',
-    hotelStars: 5,
-    image: '/images/cancun.webp',
-    gallery: [],
-    description: 'Disfruta de las playas cristalinas de Cancún con todo incluido. Hospedaje de lujo, vuelos directos y actividades acuáticas.',
-    benefits: ['Vuelo redondo incluido', 'Hotel 5 estrellas all-inclusive', 'Traslados aeropuerto-hotel', 'Snorkel y deportes acuáticos', 'Seguro de viaje'],
-    featured: true,
-    rating: 4.8,
-    reviewCount: 234,
-  },
-  {
-    id: 'paris-romantico',
-    title: 'París Romántico',
-    destination: 'París, Francia',
-    country: 'Francia',
-    region: 'Europa',
-    type: 'cultural',
-    price: 2499,
+    original_price: 1599,
+    discount: 19,
     currency: 'USD',
     duration: '7 noches / 8 días',
-    dates: { start: '2026-07-01', end: '2026-07-08' },
-    airline: 'Air France',
-    hotel: 'Hôtel Le Marais',
-    hotelStars: 4,
-    image: '/images/paris.webp',
-    gallery: [],
-    description: 'Vive la magia de París con tours guiados, cenas gourmet y vistas inolvidables desde la Torre Eiffel.',
-    benefits: ['Vuelo redondo incluido', 'Hotel boutique 4 estrellas', 'Tour por el Louvre y Versalles', 'Crucero por el Sena', 'Cena en restaurante gourmet', 'Seguro de viaje internacional'],
-    featured: true,
+    nights: 7,
+    includes: ['Vuelo redondo', 'Pase Tren Maya', 'Hotel 5 estrellas All-Inclusive', 'Chichén Itzá', 'Tour cenotes'],
+    highlights: ['Cancún', 'Tulum', 'Chichén Itzá', 'Cenotes'],
+    is_featured: true,
+    is_active: true,
     rating: 4.9,
-    reviewCount: 189,
+    reviews_count: 213,
+    image: '/images/packages/trenmaya.jpg',
+    itinerary_pdf: 'https://drive.google.com/file/d/1xcJNxnJMxfwbsbc2jwKPaNA3RHafNSVG/view',
+    order_index: 1,
   },
   {
-    id: 'machu-picchu-aventura',
-    title: 'Aventura en Machu Picchu',
-    destination: 'Cusco, Perú',
-    country: 'Perú',
+    id: 'vamos-a-colombia',
+    title: 'Vamos a Colombia',
+    destination: 'Bogotá y Cartagena, Colombia',
+    country: 'Colombia',
     region: 'Sudamérica',
-    type: 'aventura',
-    price: 1799,
+    category: 'cultural',
+    flight_type: 'internacional',
+    description: 'De Bogotá a Cartagena, Colombia te enamora con su gente cálida, gastronomía colorida, café de altura, arquitectura colonial y el ritmo del Caribe.',
+    price: 1599,
+    original_price: 1999,
+    discount: 20,
+    currency: 'USD',
+    duration: '7 noches / 8 días',
+    nights: 7,
+    includes: ['Vuelo redondo', 'Hotel boutique Cartagena', 'City tours', 'Tour del café', 'Islas del Rosario'],
+    highlights: ['Cartagena', 'Bogotá', 'Café colombiano', 'Islas del Rosario'],
+    is_featured: true,
+    is_active: true,
+    rating: 4.8,
+    reviews_count: 98,
+    image: '/images/packages/bogota.jpg',
+    itinerary_pdf: 'https://drive.google.com/file/d/1AyUr-OcfJKiVEtBvNEngTOzuDQoXNde3/view',
+    order_index: 2,
+  },
+  {
+    id: 'orlando-verano-magico',
+    title: 'Orlando Verano Mágico',
+    destination: 'Orlando, Florida, EUA',
+    country: 'Estados Unidos',
+    region: 'Norteamérica',
+    category: 'familia',
+    flight_type: 'internacional',
+    description: 'El verano más mágico de tu familia en los mejores parques del mundo. Disney World, Universal Studios, SeaWorld y más en una sola escapada inolvidable.',
+    price: 1899,
+    original_price: 2299,
+    discount: 17,
     currency: 'USD',
     duration: '6 noches / 7 días',
-    dates: { start: '2026-08-10', end: '2026-08-16' },
-    airline: 'LATAM Airlines',
-    hotel: 'Belmond Sanctuary Lodge',
-    hotelStars: 5,
-    image: '/images/machupicchu.webp',
-    gallery: [],
-    description: 'Explora la ciudadela inca de Machu Picchu con guías expertos, trekking por el Valle Sagrado y gastronomía peruana.',
-    benefits: ['Vuelo redondo incluido', 'Hotel 5 estrellas en Cusco', 'Tren panorámico a Machu Picchu', 'Guía profesional bilingüe', 'Tour Valle Sagrado', 'Seguro de viaje'],
-    featured: true,
+    nights: 6,
+    includes: ['Vuelo redondo', 'Hotel temático', 'Multi-park pass 4 parques', 'Traslados', 'Seguro familiar'],
+    highlights: ['Disney World', 'Universal Studios', 'SeaWorld', 'LEGOLAND'],
+    is_featured: true,
+    is_active: true,
     rating: 4.9,
-    reviewCount: 312,
-  },
-  {
-    id: 'punta-cana-familiar',
-    title: 'Punta Cana Familiar',
-    destination: 'Punta Cana, República Dominicana',
-    country: 'República Dominicana',
-    region: 'Caribe',
-    type: 'playa',
-    price: 1499,
-    currency: 'USD',
-    duration: '5 noches / 6 días',
-    dates: { start: '2026-07-20', end: '2026-07-25' },
-    airline: 'Copa Airlines',
-    hotel: 'Barceló Bávaro Palace',
-    hotelStars: 5,
-    image: '/images/puntacana.webp',
-    gallery: [],
-    description: 'El destino perfecto para familias con playas paradisíacas, parques acuáticos y entretenimiento para todas las edades.',
-    benefits: ['Vuelo redondo incluido', 'Resort all-inclusive familiar', 'Kids club y actividades infantiles', 'Parque acuático', 'Excursión a Isla Saona', 'Seguro de viaje familiar'],
-    featured: false,
-    rating: 4.7,
-    reviewCount: 456,
-  },
-  {
-    id: 'tokyo-moderno',
-    title: 'Tokio Moderno',
-    destination: 'Tokio, Japón',
-    country: 'Japón',
-    region: 'Asia',
-    type: 'cultural',
-    price: 3199,
-    currency: 'USD',
-    duration: '8 noches / 9 días',
-    dates: { start: '2026-09-05', end: '2026-09-13' },
-    airline: 'ANA',
-    hotel: 'Park Hyatt Tokyo',
-    hotelStars: 5,
-    image: '/images/tokyo.webp',
-    gallery: [],
-    description: 'Sumérgete en la cultura japonesa: templos milenarios, tecnología de vanguardia, gastronomía y tradición.',
-    benefits: ['Vuelo redondo incluido', 'Hotel 5 estrellas en Shinjuku', 'Japan Rail Pass 7 días', 'Tour guiado Tokio-Kioto', 'Experiencia gastronómica tradicional', 'Seguro de viaje internacional'],
-    featured: true,
-    rating: 4.8,
-    reviewCount: 167,
-  },
-  {
-    id: 'bariloche-nieve',
-    title: 'Bariloche Nieve & Chocolate',
-    destination: 'Bariloche, Argentina',
-    country: 'Argentina',
-    region: 'Sudamérica',
-    type: 'aventura',
-    price: 1599,
-    currency: 'USD',
-    duration: '5 noches / 6 días',
-    dates: { start: '2026-07-15', end: '2026-07-20' },
-    airline: 'Aerolíneas Argentinas',
-    hotel: 'Llao Llao Resort',
-    hotelStars: 5,
-    image: '/images/bariloche.webp',
-    gallery: [],
-    description: 'Esquí, chocolate artesanal y paisajes de ensueño en la Patagonia argentina. Perfecto para parejas y familias.',
-    benefits: ['Vuelo redondo incluido', 'Hotel 5 estrellas frente al lago', 'Pase de esquí 3 días', 'Tour de chocolaterías', 'Circuito Chico', 'Seguro de viaje'],
-    featured: false,
-    rating: 4.6,
-    reviewCount: 198,
+    reviews_count: 342,
+    image: '/images/packages/Disney_Orlando_castle_at_night.jpg',
+    itinerary_pdf: 'https://drive.google.com/file/d/1EyUMnItwTFynJ0DBCNf17Xk_BGacm8RS/view',
+    order_index: 3,
   },
 ];
 
+// ==========================================
+// Utilidades
+// ==========================================
+
 function filterPackages(query) {
   let result = [...packages];
-  if (query.type) result = result.filter((p) => p.type === query.type);
+  if (query.type || query.category) {
+    const cat = (query.type || query.category).toLowerCase();
+    result = result.filter((p) => p.category === cat);
+  }
   if (query.region) result = result.filter((p) => p.region === query.region);
   if (query.destination) {
     const d = query.destination.toLowerCase();
@@ -155,8 +131,8 @@ function filterPackages(query) {
   }
   if (query.minPrice) result = result.filter((p) => p.price >= Number(query.minPrice));
   if (query.maxPrice) result = result.filter((p) => p.price <= Number(query.maxPrice));
-  if (query.featured === 'true') result = result.filter((p) => p.featured);
-  if (query.sort === 'price_asc') result.sort((a, b) => a.price - b.price);
+  if (query.featured === 'true') result = result.filter((p) => p.is_featured);
+  if (query.sort === 'price_asc')  result.sort((a, b) => a.price - b.price);
   else if (query.sort === 'price_desc') result.sort((a, b) => b.price - a.price);
   else if (query.sort === 'rating') result.sort((a, b) => b.rating - a.rating);
   return result;
@@ -175,7 +151,9 @@ async function sendN8nWebhook(path, data) {
   } catch { /* non-blocking */ }
 }
 
-// ---- Routes ----
+// ==========================================
+// Rutas existentes
+// ==========================================
 
 app.get('/api/health', (_req, res) => {
   res.json({ status: 'ok', timestamp: new Date().toISOString() });
@@ -187,15 +165,18 @@ app.get('/api/packages', (req, res) => {
 });
 
 app.get('/api/packages/featured', (_req, res) => {
-  const result = packages.filter((p) => p.featured);
+  const result = packages.filter((p) => p.is_featured && p.is_active);
   res.json({ data: result, count: result.length });
 });
 
 app.get('/api/packages/filters', (_req, res) => {
-  const types = [...new Set(packages.map((p) => p.type))];
-  const regions = [...new Set(packages.map((p) => p.region))];
-  const priceRange = { min: Math.min(...packages.map((p) => p.price)), max: Math.max(...packages.map((p) => p.price)) };
-  res.json({ data: { types, regions, priceRange } });
+  const categories = [...new Set(packages.map((p) => p.category))];
+  const regions    = [...new Set(packages.map((p) => p.region))];
+  const priceRange = {
+    min: Math.min(...packages.map((p) => p.price)),
+    max: Math.max(...packages.map((p) => p.price)),
+  };
+  res.json({ data: { categories, regions, priceRange } });
 });
 
 app.get('/api/packages/:id', (req, res) => {
@@ -227,63 +208,61 @@ app.post('/api/contact/booking', (req, res) => {
 
 app.get('/api/airlines', (_req, res) => {
   res.json({ data: [
-    { id: 'aeromexico', name: 'Aeroméxico', code: 'AM' },
-    { id: 'air-france', name: 'Air France', code: 'AF' },
-    { id: 'latam', name: 'LATAM Airlines', code: 'LA' },
-    { id: 'copa', name: 'Copa Airlines', code: 'CM' },
-    { id: 'ana', name: 'ANA', code: 'NH' },
-    { id: 'aerolineas-argentinas', name: 'Aerolíneas Argentinas', code: 'AR' },
+    { id: 'aeromexico',            name: 'Aeroméxico',            code: 'AM' },
+    { id: 'air-france',           name: 'Air France',            code: 'AF' },
+    { id: 'latam',                name: 'LATAM Airlines',        code: 'LA' },
+    { id: 'copa',                 name: 'Copa Airlines',         code: 'CM' },
+    { id: 'ana',                  name: 'ANA',                   code: 'NH' },
+    { id: 'aerolineas-argentinas',name: 'Aerolíneas Argentinas', code: 'AR' },
   ]});
 });
 
-// ============================================
+// ==========================================
 // ENDPOINT PARA SIANNABOT (WhatsApp / n8n)
-// GET /api/bot/paquetes?q=cancun
-// ============================================
+// GET /api/bot/paquetes
+// GET /api/bot/paquetes?q=colombia
+// ==========================================
 app.get('/api/bot/paquetes', (req, res) => {
   const { q } = req.query;
 
-  // Normaliza texto: quita tildes y pasa a minúsculas
   const normalize = (str) =>
     (str || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
 
-  let resultado = [...packages];
+  let resultado = packages.filter((p) => p.is_active);
 
   if (q && q.trim() !== '') {
     const query = normalize(q.trim());
-    resultado = packages.filter((pkg) => {
+    resultado = resultado.filter((pkg) => {
       const campos = [
         pkg.title,
         pkg.destination,
         pkg.country,
         pkg.region,
-        pkg.type,
+        pkg.category,
         pkg.description,
-        ...(pkg.benefits || []),
+        ...(pkg.includes  || []),
+        ...(pkg.highlights || []),
       ];
       return campos.some((c) => normalize(c).includes(query));
     });
   }
 
   const paquetes = resultado.map((pkg) => ({
-    nombre:        pkg.title,
-    destino:       pkg.destination,
-    pais:          pkg.country,
-    region:        pkg.region,
-    tipo:          pkg.type,
-    precio:        `desde $${Number(pkg.price).toLocaleString('es-MX')} ${pkg.currency || 'MXN'}`,
-    duracion:      pkg.duration,
-    fechas:        pkg.dates
-                     ? `${pkg.dates.start} al ${pkg.dates.end}`
-                     : 'Consultar disponibilidad',
-    descripcion:   pkg.description,
-    que_incluye:   Array.isArray(pkg.benefits) ? pkg.benefits.join(' | ') : '',
-    aerolinea:     pkg.airline   || '',
-    hotel:         pkg.hotel     || '',
-    estrellas:     pkg.hotelStars || '',
-    destacado:     pkg.featured  || false,
-    calificacion:  pkg.rating    || '',
-    link:          `https://www.siannatravelagencia.com/paquetes/${pkg.id}`,
+    nombre:         pkg.title,
+    destino:        pkg.destination,
+    pais:           pkg.country,
+    region:         pkg.region,
+    categoria:      pkg.category,
+    vuelo:          pkg.flight_type === 'nacional' ? 'Nacional' : 'Internacional',
+    precio:         `$${Number(pkg.price).toLocaleString('es-MX')} USD`,
+    precio_antes:   `$${Number(pkg.original_price).toLocaleString('es-MX')} USD`,
+    descuento:      `${pkg.discount}% de descuento`,
+    duracion:       pkg.duration,
+    descripcion:    pkg.description,
+    que_incluye:    Array.isArray(pkg.includes) ? pkg.includes.join(' | ') : '',
+    destacados:     Array.isArray(pkg.highlights) ? pkg.highlights.join(', ') : '',
+    calificacion:   `${pkg.rating} ⭐ (${pkg.reviews_count} reseñas)`,
+    link:           `https://www.siannatravelagencia.com/paquetes/${pkg.id}`,
     pdf_itinerario: pkg.itinerary_pdf || '',
   }));
 
@@ -296,4 +275,3 @@ app.get('/api/bot/paquetes', (req, res) => {
 });
 
 export default app;
-
