@@ -6,7 +6,17 @@ Allow: /
 Disallow: /admin/
 Disallow: /admin/*
 
+# Facebook / Meta crawlers (verificación de dominio y vista previa)
 User-agent: facebookexternalhit
+Allow: /
+
+User-agent: facebookexternalhit/1.1
+Allow: /
+
+User-agent: facebookcatalog
+Allow: /
+
+User-agent: Facebot
 Allow: /
 
 User-agent: Googlebot-Image
