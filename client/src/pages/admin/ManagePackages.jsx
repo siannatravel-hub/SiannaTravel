@@ -993,7 +993,7 @@ export default function ManagePackages() {
                       type="text"
                       value={editForm.contact_whatsapp || ''}
                       onChange={e => handleInputChange('contact_whatsapp', e.target.value)}
-                      placeholder="ej: 527753718942"
+                      placeholder="ej: 527752658413"
                     />
                   </div>
                 </div>

@@ -48,8 +48,8 @@ export default function Contact() {
                 </div>
                 <div>
                   <div className={styles.contactLabel}>WhatsApp</div>
-                  <a href="https://wa.me/527753718942" target="_blank" rel="noopener noreferrer" className={styles.contactValueLink}>
-                    +52 775 371 8942
+                  <a href="https://wa.me/527752658413" target="_blank" rel="noopener noreferrer" className={styles.contactValueLink}>
+                    +52 775 265 8413
                   </a>
                 </div>
               </div>
@@ -162,7 +162,7 @@ export default function Contact() {
           <h2 className={styles.bannerTitle}>Tu aventura comienza aquí</h2>
           <p className={styles.bannerSub}>Desde el corazón de Hidalgo hacia cualquier rincón del mundo</p>
           <a
-            href="https://wa.me/527753718942?text=Hola%2C%20quiero%20info%20sobre%20sus%20paquetes"
+            href="https://wa.me/527752658413?text=Hola%2C%20quiero%20info%20sobre%20sus%20paquetes"
             target="_blank"
             rel="noopener noreferrer"
             className={styles.bannerBtn}

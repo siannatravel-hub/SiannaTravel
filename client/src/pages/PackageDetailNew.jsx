@@ -490,7 +490,7 @@ export default function PackageDetailNew() {
             </button>
             
             <a 
-              href={`https://wa.me/527753718942?text=${whatsappMessage}`}
+              href={`https://wa.me/527752658413?text=${whatsappMessage}`}
               target="_blank"
               rel="noopener noreferrer"
               className={styles.btnWhatsapp}

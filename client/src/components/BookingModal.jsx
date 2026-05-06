@@ -24,7 +24,7 @@ export default function BookingModal({ packageData, onClose }) {
       `\n` +
       `¡Quedo al pendiente de su respuesta!`
     );
-    window.open(`https://wa.me/527753718942?text=${message}`, '_blank', 'noopener,noreferrer');
+    window.open(`https://wa.me/527752658413?text=${message}`, '_blank', 'noopener,noreferrer');
     onClose();
   };
 

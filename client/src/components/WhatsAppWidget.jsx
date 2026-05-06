@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import styles from './WhatsAppWidget.module.css';
 
-const WHATSAPP_NUMBER = '527753718942';
+const WHATSAPP_NUMBER = '527752658413';
 
 const QUICK_MESSAGES = [
   'Hola, me interesa conocer sus paquetes de viaje',
