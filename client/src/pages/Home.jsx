@@ -115,7 +115,7 @@ export default function Home() {
             </p>
           </div>
           <a
-            href="https://wa.me/527752658413?text=Hola%2C%20me%20interesa%20conocer%20sus%20paquetes%20de%20viaje"
+            href="https://wa.me/527752658413?text=Hola%2C%20los%20contacto%20desde%20su%20sitio%20web.%20Me%20interesa%20conocer%20sus%20paquetes%20de%20viaje"
             target="_blank"
             rel="noopener noreferrer"
             className={styles.whatsappCtaBtn}
@@ -139,7 +139,7 @@ export default function Home() {
             Explorar Paquetes
           </Link>
           <a
-            href="https://wa.me/527752658413?text=Hola%2C%20quiero%20cotizar%20un%20viaje%20personalizado"
+            href="https://wa.me/527752658413?text=Hola%2C%20los%20contacto%20desde%20su%20sitio%20web.%20Quiero%20cotizar%20un%20viaje%20personalizado"
             target="_blank"
             rel="noopener noreferrer"
             className="btn btn-outline btn-lg"

@@ -162,7 +162,7 @@ export default function Contact() {
           <h2 className={styles.bannerTitle}>Tu aventura comienza aquí</h2>
           <p className={styles.bannerSub}>Desde el corazón de Hidalgo hacia cualquier rincón del mundo</p>
           <a
-            href="https://wa.me/527752658413?text=Hola%2C%20quiero%20info%20sobre%20sus%20paquetes"
+            href="https://wa.me/527752658413?text=Hola%2C%20los%20contacto%20desde%20su%20sitio%20web.%20Quiero%20informaci%C3%B3n%20sobre%20sus%20paquetes"
             target="_blank"
             rel="noopener noreferrer"
             className={styles.bannerBtn}

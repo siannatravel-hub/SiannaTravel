@@ -11,7 +11,7 @@ export default function BookingModal({ packageData, onClose }) {
     e.preventDefault();
     const price = pkg.price ? `$${Number(pkg.price).toLocaleString('es-MX')} MXN` : 'Por confirmar';
     const message = encodeURIComponent(
-      `¡Hola! Me interesa reservar:\n` +
+      `¡Hola! Los contacto desde el sitio web de Sianna Travel. Me interesa reservar:\n` +
       `\n` +
       `📦 *Paquete:* ${pkg.name || pkg.title || 'Sin nombre'}\n` +
       `📍 *Destino:* ${pkg.destination || pkg.location || 'Por confirmar'}\n` +

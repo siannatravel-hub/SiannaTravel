@@ -4,10 +4,10 @@ import styles from './WhatsAppWidget.module.css';
 const WHATSAPP_NUMBER = '527752658413';
 
 const QUICK_MESSAGES = [
-  'Hola, me interesa conocer sus paquetes de viaje',
-  'Quiero cotizar un viaje personalizado',
-  'Necesito información sobre disponibilidad',
-  'Me gustaría hablar con un asesor',
+  'Hola, los contacto desde su sitio web. Me interesa conocer sus paquetes de viaje',
+  'Hola, los contacto desde su sitio web. Quiero cotizar un viaje personalizado',
+  'Hola, los contacto desde su sitio web. Necesito información sobre disponibilidad',
+  'Hola, los contacto desde su sitio web. Me gustaría hablar con un asesor',
 ];
 
 export default function WhatsAppWidget() {

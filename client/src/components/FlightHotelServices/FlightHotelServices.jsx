@@ -41,7 +41,7 @@ export default function FlightHotelServices() {
                 <li>Asesoría personalizada en cada reserva</li>
               </ul>
               <a
-                href="https://wa.me/527752658413?text=Hola%2C%20me%20interesa%20cotizar%20un%20vuelo"
+                href="https://wa.me/527752658413?text=Hola%2C%20los%20contacto%20desde%20su%20sitio%20web.%20Me%20interesa%20cotizar%20un%20vuelo"
                 target="_blank"
                 rel="noopener noreferrer"
                 className={styles.cardBtn}
@@ -97,7 +97,7 @@ export default function FlightHotelServices() {
             </p>
           </div>
           <a
-            href="https://wa.me/527752658413?text=Hola%2C%20me%20interesa%20cotizar%20un%20vuelo%20%2F%20hotel"
+            href="https://wa.me/527752658413?text=Hola%2C%20los%20contacto%20desde%20su%20sitio%20web.%20Me%20interesa%20cotizar%20un%20vuelo%20%2F%20hotel"
             target="_blank"
             rel="noopener noreferrer"
             className={styles.ctaBtn}

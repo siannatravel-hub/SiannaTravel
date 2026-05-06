@@ -233,7 +233,7 @@ export default function PackageDetailNew() {
   }
 
   const whatsappMessage = encodeURIComponent(
-    `Hola! Me interesa el paquete "${packageTitle}" a ${pkg.destination}. ¿Podrían darme más información?`
+    `Hola, los contacto desde el sitio web. Me interesa el paquete "${packageTitle}" a ${pkg.destination}. ¿Podrían darme más información?`
   );
 
   const renderStars = (count) => {

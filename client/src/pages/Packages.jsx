@@ -182,7 +182,7 @@ export default function Packages() {
             ¿No encuentras lo que buscas? Cuéntanos tu viaje ideal
           </p>
           <a
-            href="https://wa.me/527752658413?text=Hola%2C%20quiero%20cotizar%20un%20viaje%20personalizado"
+            href="https://wa.me/527752658413?text=Hola%2C%20los%20contacto%20desde%20su%20sitio%20web.%20Quiero%20cotizar%20un%20viaje%20personalizado"
             target="_blank"
             rel="noopener noreferrer"
             className={styles.packagesWhatsappBtn}
