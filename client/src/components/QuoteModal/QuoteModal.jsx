@@ -36,7 +36,7 @@ export default function QuoteModal({ pkg, onClose }) {
             <div>
               <div className={styles.packageInfoTitle}>{pkg.title}</div>
               <div className={styles.packageInfoPrice}>
-                Desde ${pkg.price.toLocaleString()} USD · {pkg.duration}
+                Desde ${pkg.price.toLocaleString()} {pkg.currency || 'MXN'} · {pkg.duration}
               </div>
             </div>
           </div>
