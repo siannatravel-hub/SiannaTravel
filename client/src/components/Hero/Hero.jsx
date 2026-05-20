@@ -49,10 +49,6 @@ export default function Hero() {
             </Link>
           </div>
 
-          <div className={styles.heroPhones}>
-            <a href="tel:7752658413" className={styles.heroPhone}>775-265-8413</a>
-            <a href="tel:7757525171" className={styles.heroPhone}>775 752 5171</a>
-          </div>
         </div>
       </div>
     </section>
