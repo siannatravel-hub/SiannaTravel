@@ -24,7 +24,7 @@ const SLIDES = [
     ),
     subtitle: '¿Te ayudamos?',
     cta: { label: 'Escríbenos', to: '/contacto', variant: 'glass' },
-    phones: ['775 265 8513', '775 752 5171'],
+    phones: ['775 265 8413', '775 752 5171'],
   },
   {
     id: 'vuelos',
