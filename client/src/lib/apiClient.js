@@ -1,0 +1,33 @@
+// Cliente HTTP hacia el backend Express (Easypanel).
+// Misma convención que services/api.js: base = VITE_API_URL || '/api'.
+// credentials:'include' para enviar la cookie de sesión del admin.
+const BASE = import.meta.env.VITE_API_URL || '/api';
+
+async function req(endpoint, options = {}) {
+  const res = await fetch(`${BASE}${endpoint}`, {
+    credentials: 'include',
+    headers: { 'Content-Type': 'application/json', ...(options.headers || {}) },
+    ...options,
+  });
+  const isJson = (res.headers.get('content-type') || '').includes('application/json');
+  const data = isJson ? await res.json() : null;
+  if (!res.ok) throw new Error((data && data.error) || `Error ${res.status}`);
+  return data;
+}
+
+export const apiGet = (endpoint) => req(endpoint);
+export const apiPost = (endpoint, body) => req(endpoint, { method: 'POST', body: JSON.stringify(body) });
+export const apiPut = (endpoint, body) => req(endpoint, { method: 'PUT', body: JSON.stringify(body) });
+export const apiDelete = (endpoint) => req(endpoint, { method: 'DELETE' });
+
+// Subida de archivos (multipart). No fijar Content-Type (lo pone el navegador).
+export async function apiUpload(endpoint, formData) {
+  const res = await fetch(`${BASE}${endpoint}`, {
+    method: 'POST',
+    credentials: 'include',
+    body: formData,
+  });
+  const data = await res.json().catch(() => null);
+  if (!res.ok) throw new Error((data && data.error) || `Error ${res.status}`);
+  return data;
+}

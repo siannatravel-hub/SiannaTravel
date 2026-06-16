@@ -28,6 +28,9 @@ const AdminDashboard = lazy(() => import('./pages/admin/AdminDashboard'));
 const ManageFeatured = lazy(() => import('./pages/admin/ManageFeatured'));
 const ManagePackages = lazy(() => import('./pages/admin/ManagePackages'));
 const ManageBlog = lazy(() => import('./pages/admin/ManageBlog'));
+const ManageFaq = lazy(() => import('./pages/admin/ManageFaq'));
+const ManageLinks = lazy(() => import('./pages/admin/ManageLinks'));
+const ManageSolicitudes = lazy(() => import('./pages/admin/ManageSolicitudes'));
 
 export default function App() {
   return (
@@ -83,6 +86,30 @@ export default function App() {
               element={
                 <ProtectedRoute>
                   <Suspense fallback={<Spinner />}><ManageBlog /></Suspense>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/faq"
+              element={
+                <ProtectedRoute>
+                  <Suspense fallback={<Spinner />}><ManageFaq /></Suspense>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/links"
+              element={
+                <ProtectedRoute>
+                  <Suspense fallback={<Spinner />}><ManageLinks /></Suspense>
+                </ProtectedRoute>
+              }
+            />
+            <Route
+              path="/admin/solicitudes"
+              element={
+                <ProtectedRoute>
+                  <Suspense fallback={<Spinner />}><ManageSolicitudes /></Suspense>
                 </ProtectedRoute>
               }
             />

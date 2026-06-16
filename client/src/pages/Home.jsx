@@ -18,7 +18,7 @@ export default function Home() {
       '@type': 'TravelAgency',
       name: 'Sianna Travel',
       url: 'https://siannatravel.com',
-      telephone: '+52-775-265-8513',
+      telephone: '+52-775-265-8413',
       address: {
         '@type': 'PostalAddress',
         addressLocality: 'Tulancingo de Bravo',

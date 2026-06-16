@@ -1,6 +1,5 @@
 import { useState, useRef } from 'react';
-import { uploadImage, replaceImage } from '../../lib/storage';
-import { isSupabaseConfigured } from '../../lib/supabase';
+import { replaceImage } from '../../lib/storage';
 import styles from './ImageUpload.module.css';
 
 export default function ImageUpload({ 
@@ -45,11 +44,6 @@ export default function ImageUpload({
   };
 
   const handleUpload = async (file) => {
-    if (!isSupabaseConfigured()) {
-      setError('Sube la imagen a un host (ej: Imgur, Cloudinary) y pega la URL abajo.');
-      setShowUrlInput(true);
-      return;
-    }
     setError(null);
     setUploading(true);
     setProgress(0);

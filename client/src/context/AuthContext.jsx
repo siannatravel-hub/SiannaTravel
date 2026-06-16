@@ -1,5 +1,5 @@
 import { createContext, useContext, useEffect, useState } from 'react';
-import { supabase, isSupabaseConfigured } from '../lib/supabase';
+import { apiGet, apiPost } from '../lib/apiClient';
 
 const AuthContext = createContext({});
 
@@ -16,91 +16,40 @@ export function AuthProvider({ children }) {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  // Restaurar sesión al cargar (cookie httpOnly → /api/admin/me)
   useEffect(() => {
-    if (!isSupabaseConfigured()) {
-      setLoading(false);
-      return;
-    }
-
-    // Obtener sesión actual
-    supabase.auth.getSession()
-      .then(({ data: { session } }) => {
-        setUser(session?.user ?? null);
-      })
-      .catch(() => {
-        // Supabase no disponible (proyecto pausado, sin red, CORS)
-        // Simplemente no autenticar al usuario
-      })
-      .finally(() => {
-        setLoading(false);
-      });
-
-    // Escuchar cambios de autenticación
-    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
-      setUser(session?.user ?? null);
-    });
-
-    return () => subscription.unsubscribe();
+    apiGet('/admin/me')
+      .then((res) => setUser(res.user ?? null))
+      .catch(() => setUser(null))
+      .finally(() => setLoading(false));
   }, []);
 
   const signIn = async (email, password) => {
     setError(null);
     try {
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email,
-        password,
-      });
-      
-      if (error) throw error;
-      return data;
+      const res = await apiPost('/admin/login', { email, password });
+      setUser(res.user ?? null);
+      return res;
     } catch (err) {
       const msg = err.message === 'Failed to fetch'
-        ? 'No se pudo conectar con Supabase. Verifica que el proyecto esté activo en supabase.com y que las credenciales en .env sean correctas.'
-        : err.message;
+        ? 'No se pudo conectar con el servidor. Verifica que el backend esté activo.'
+        : (err.message || 'Credenciales inválidas');
       setError(msg);
       throw new Error(msg);
-    }
-  };
-
-  const signUp = async (email, password) => {
-    setError(null);
-    try {
-      const { data, error } = await supabase.auth.signUp({
-        email,
-        password,
-      });
-      
-      if (error) throw error;
-      return data;
-    } catch (err) {
-      setError(err.message);
-      throw err;
     }
   };
 
   const signOut = async () => {
     setError(null);
     try {
-      const { error } = await supabase.auth.signOut();
-      if (error) throw error;
-    } catch (err) {
-      setError(err.message);
-      throw err;
-    }
+      await apiPost('/admin/logout', {});
+    } catch { /* ignore */ }
+    setUser(null);
   };
 
-  const resetPassword = async (email) => {
-    setError(null);
-    try {
-      const { error } = await supabase.auth.resetPasswordForEmail(email, {
-        redirectTo: `${window.location.origin}/admin/reset-password`,
-      });
-      if (error) throw error;
-    } catch (err) {
-      setError(err.message);
-      throw err;
-    }
-  };
+  // No usados con el nuevo backend (el admin se gestiona en la BD).
+  const signUp = async () => { throw new Error('Registro deshabilitado. El admin se gestiona en la base de datos.'); };
+  const resetPassword = async () => { throw new Error('Función no disponible.'); };
 
   const value = {
     user,
@@ -111,7 +60,7 @@ export function AuthProvider({ children }) {
     signOut,
     resetPassword,
     isAuthenticated: !!user,
-    isConfigured: isSupabaseConfigured(),
+    isConfigured: true,
   };
 
   return (

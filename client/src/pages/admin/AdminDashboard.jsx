@@ -95,6 +95,41 @@ export default function AdminDashboard() {
           </div>
         </div>
 
+        {/* ---- Sección diferenciada: Bot / Automatización ---- */}
+        <div
+          style={{
+            marginTop: 40,
+            padding: '24px',
+            borderRadius: 16,
+            background: 'linear-gradient(135deg, rgba(56,189,248,0.10), rgba(14,165,233,0.04))',
+            border: '1px solid rgba(56,189,248,0.35)',
+          }}
+        >
+          <h2 className={styles.sectionTitle} style={{ marginTop: 0 }}>
+            🤖 Bot / Automatización
+          </h2>
+          <p style={{ color: '#94a3b8', marginTop: -8, marginBottom: 20, fontSize: '0.92rem' }}>
+            Contenido que usa el asistente de WhatsApp (en Postgres).
+          </p>
+          <div className={styles.actionsGrid}>
+            <Link to="/admin/faq" className={styles.actionCard}>
+              <div className={styles.actionIcon}>💡</div>
+              <h3 className={styles.actionTitle}>FAQ del Bot</h3>
+              <p className={styles.actionDesc}>Preguntas y respuestas que responde el asistente.</p>
+            </Link>
+            <Link to="/admin/solicitudes" className={styles.actionCard}>
+              <div className={styles.actionIcon}>📨</div>
+              <h3 className={styles.actionTitle}>Solicitudes / Leads</h3>
+              <p className={styles.actionDesc}>Mensajes capturados; estado, prioridad y pausa del bot.</p>
+            </Link>
+            <Link to="/admin/links" className={styles.actionCard}>
+              <div className={styles.actionIcon}>🔗</div>
+              <h3 className={styles.actionTitle}>Enlaces</h3>
+              <p className={styles.actionDesc}>Links que el bot comparte (catálogo, web, redes, PDFs).</p>
+            </Link>
+          </div>
+        </div>
+
         <Link to="/" className={styles.backLink}>
           ← Ver sitio público
         </Link>
