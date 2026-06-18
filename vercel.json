@@ -3,17 +3,15 @@
   "buildCommand": "cd client && npm install && npm run build",
   "outputDirectory": "client/dist",
   "rewrites": [
-    { "source": "/api/:path*", "destination": "/api/index.js" },
-    { "source": "/(.*)",       "destination": "/index.html" }
+    { "source": "/api/:path*",    "destination": "https://sianna-siannacrm.78h02z.easypanel.host/api/:path*" },
+    { "source": "/images/:path*", "destination": "https://sianna-siannacrm.78h02z.easypanel.host/images/:path*" },
+    { "source": "/(.*)",          "destination": "/index.html" }
   ],
   "headers": [
     {
       "source": "/api/(.*)",
       "headers": [
-        { "key": "Access-Control-Allow-Origin",  "value": "*" },
-        { "key": "Access-Control-Allow-Methods", "value": "GET, POST, OPTIONS" },
-        { "key": "Access-Control-Allow-Headers", "value": "Content-Type, Authorization" },
-        { "key": "Cache-Control",                "value": "no-store" }
+        { "key": "Cache-Control", "value": "no-store" }
       ]
     },
     {
