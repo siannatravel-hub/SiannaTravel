@@ -59,3 +59,25 @@ botRouter.get('/links', async (_req, res) => {
     res.json({ ok: true, total: rows.length, links: rows });
   } catch (e) { res.status(500).json({ ok: false, error: e.message }); }
 });
+
+// Upsert de solicitud/lead capturado por el agente IA (sin auth — solo el bot llama esto)
+botRouter.post('/ticket', async (req, res) => {
+  try {
+    const { numero_whatsapp, nombre_cliente, estado, intencion_compra, descripcion, ultimo_mensaje } = req.body;
+    if (!numero_whatsapp) return res.status(400).json({ ok: false, error: 'numero_whatsapp requerido' });
+    const { rows } = await query(
+      `INSERT INTO solicitudes (numero_whatsapp, nombre_cliente, estado, intencion_compra, descripcion, ultimo_mensaje, updated_at)
+       VALUES ($1, $2, $3, $4, $5, $6, NOW())
+       ON CONFLICT (numero_whatsapp) DO UPDATE SET
+         nombre_cliente    = COALESCE(NULLIF($2, ''), solicitudes.nombre_cliente),
+         estado            = COALESCE(NULLIF($3, ''), solicitudes.estado),
+         intencion_compra  = CASE WHEN $4 IS NOT NULL THEN $4 ELSE solicitudes.intencion_compra END,
+         descripcion       = COALESCE(NULLIF($5, ''), solicitudes.descripcion),
+         ultimo_mensaje    = COALESCE(NULLIF($6, ''), solicitudes.ultimo_mensaje),
+         updated_at        = NOW()
+       RETURNING id`,
+      [numero_whatsapp, nombre_cliente || '', estado || 'Nuevo', intencion_compra ?? null, descripcion || '', ultimo_mensaje || '']
+    );
+    res.json({ ok: true, id: rows[0]?.id });
+  } catch (e) { res.status(500).json({ ok: false, error: e.message }); }
+});
