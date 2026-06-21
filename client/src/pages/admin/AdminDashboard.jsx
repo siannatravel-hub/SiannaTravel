@@ -1,10 +1,15 @@
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import { getUnreadCount } from '../../lib/solicitudes';
 import styles from './AdminDashboard.module.css';
 
 export default function AdminDashboard() {
   const { user, signOut } = useAuth();
   const navigate = useNavigate();
+  const [unread, setUnread] = useState(0);
+
+  useEffect(() => { getUnreadCount().then(setUnread); }, []);
 
   const handleLogout = async () => {
     await signOut();
@@ -117,7 +122,8 @@ export default function AdminDashboard() {
               <h3 className={styles.actionTitle}>FAQ del Bot</h3>
               <p className={styles.actionDesc}>Preguntas y respuestas que responde el asistente.</p>
             </Link>
-            <Link to="/admin/solicitudes" className={styles.actionCard}>
+            <Link to="/admin/solicitudes" className={styles.actionCard} style={{ position: 'relative' }}>
+              {unread > 0 && <span className={styles.unreadBadge}>{unread}</span>}
               <div className={styles.actionIcon}>📨</div>
               <h3 className={styles.actionTitle}>Solicitudes / Leads</h3>
               <p className={styles.actionDesc}>Mensajes capturados; estado, prioridad y pausa del bot.</p>

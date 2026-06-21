@@ -19,3 +19,18 @@ export async function deleteSolicitud(id) {
   await apiDelete(`/admin/solicitudes/${id}`);
   return true;
 }
+
+export async function getUnreadCount() {
+  try {
+    const res = await apiGet('/admin/solicitudes/unread-count');
+    return res.count ?? 0;
+  } catch {
+    return 0;
+  }
+}
+
+export async function markSolicitudesRead() {
+  try {
+    await apiPut('/admin/solicitudes/mark-read', {});
+  } catch { /* silent */ }
+}

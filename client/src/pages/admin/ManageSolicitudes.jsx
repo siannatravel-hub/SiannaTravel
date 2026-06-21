@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
-import { getSolicitudes, updateSolicitud, deleteSolicitud } from '../../lib/solicitudes';
+import { getSolicitudes, updateSolicitud, deleteSolicitud, markSolicitudesRead } from '../../lib/solicitudes';
 import styles from './BotAdmin.module.css';
 
 const ESTADOS = ['Nuevo', 'Escalado', 'Atendido', 'Cerrado'];
@@ -16,7 +16,7 @@ export default function ManageSolicitudes() {
     setItems(await getSolicitudes());
     setLoading(false);
   };
-  useEffect(() => { load(); }, []);
+  useEffect(() => { load().then(() => markSolicitudesRead()); }, []);
 
   const setField = (id, field, val) =>
     setItems((prev) => prev.map((it) => (it.id === id ? { ...it, [field]: val } : it)));
