@@ -10,6 +10,7 @@ export default function BookingModal({ packageData, onClose }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const price = pkg.price ? `$${Number(pkg.price).toLocaleString('es-MX')} MXN` : 'Por confirmar';
+    const priceUnitLabel = pkg.price_unit === 'habitacion' ? 'por habitación' : 'por persona';
     const message = encodeURIComponent(
       `¡Hola! Los contacto desde el sitio web de Sianna Travel. Me interesa reservar:\n` +
       `\n` +
@@ -17,7 +18,7 @@ export default function BookingModal({ packageData, onClose }) {
       `📍 *Destino:* ${pkg.destination || pkg.location || 'Por confirmar'}\n` +
       `📅 *Duración:* ${pkg.duration || 'Por confirmar'}\n` +
       `🗓️ *Fechas:* ${pkg.dates || 'Por confirmar'}\n` +
-      `💰 *Precio por persona:* ${price}\n` +
+      `💰 *Precio ${priceUnitLabel}:* ${price}\n` +
       `\n` +
       `👤 *Nombre:* ${name}\n` +
       `👥 *Viajeros:* ${travelers}\n` +

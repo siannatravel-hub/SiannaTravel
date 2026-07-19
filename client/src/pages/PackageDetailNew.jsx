@@ -462,7 +462,7 @@ export default function PackageDetailNew() {
                 <span className={styles.priceAmount}>${(pkg.price || 0).toLocaleString()}</span>
                 <span className={styles.priceCurrency}>{pkg.currency || 'MXN'}</span>
               </div>
-              <span className={styles.priceNote}>por persona</span>
+              <span className={styles.priceNote}>{pkg.price_unit === 'habitacion' ? 'por habitación' : 'por persona'}</span>
               {discount > 0 && (
                 <span className={styles.discountBadge}>{discount}% OFF</span>
               )}

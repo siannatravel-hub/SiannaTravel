@@ -140,7 +140,7 @@ export default function ManagePackages() {
     setSelectedPackage({ id: '__new__' });
     setEditForm({
       title: '', destination: '', country: '', region: '', description: '',
-      price: 0, original_price: 0, discount: 0, duration: '', nights: 0,
+      price: 0, original_price: 0, discount: 0, price_unit: 'persona', duration: '', nights: 0,
       image: '', category: 'aventura', rating: 4.5, reviews_count: 0,
       is_featured: false, is_active: true, order_index: packages.length,
       flight_type: 'internacional', service_type: 'paquete', persons: 2,
@@ -321,7 +321,7 @@ export default function ManagePackages() {
       const updates = {};
       const scalarFields = [
         'title', 'destination', 'country', 'region', 'description',
-        'price', 'original_price', 'discount', 'duration', 'nights',
+        'price', 'original_price', 'discount', 'price_unit', 'duration', 'nights',
         'image', 'category', 'rating', 'reviews_count', 'is_featured',
         'airline', 'flight_type', 'service_type', 'persons', 'currency',
         'hotel_name', 'hotel_stars', 'room_type', 'accommodation_type',
@@ -660,6 +660,13 @@ export default function ManagePackages() {
                   <div className={styles.formGroup}>
                     <label>Descuento (%) — se calcula de precio / precio original</label>
                     <input type="number" value={editForm.discount ?? ''} onChange={e => handleInputChange('discount', e.target.value)} placeholder="ej: 17" min="0" max="99" />
+                  </div>
+                  <div className={styles.formGroup}>
+                    <label>El precio es por</label>
+                    <select value={editForm.price_unit || 'persona'} onChange={e => handleInputChange('price_unit', e.target.value)}>
+                      <option value="persona">Persona</option>
+                      <option value="habitacion">Habitación (costo total del paquete)</option>
+                    </select>
                   </div>
                   <div className={styles.formGroup}>
                     <label>Duración</label>

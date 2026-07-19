@@ -4,7 +4,7 @@ import { pickAllowed, buildInsert, buildUpdate } from '../crud.js';
 
 const ALLOWED = [
   'slug', 'title', 'destination', 'country', 'region', 'description', 'price',
-  'original_price', 'discount', 'currency', 'duration', 'nights', 'image', 'gallery',
+  'original_price', 'discount', 'price_unit', 'currency', 'duration', 'nights', 'image', 'gallery',
   'category', 'rating', 'reviews_count', 'includes', 'highlights', 'is_active',
   'is_featured', 'order_index', 'airline', 'flight_type', 'service_type', 'persons',
   'hotel_name', 'hotel_stars', 'room_type', 'accommodation_type', 'itinerary_pdf',

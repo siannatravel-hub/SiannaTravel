@@ -107,7 +107,7 @@ export async function syncDefaultsToDatabase() { return []; }
 export const fieldLabels = {
   title: 'Título', destination: 'Destino', country: 'País', region: 'Región',
   description: 'Descripción', price: 'Precio', original_price: 'Precio Original',
-  discount: 'Descuento', duration: 'Duración', nights: 'Noches', image: 'Imagen',
+  discount: 'Descuento', price_unit: 'Precio Por', duration: 'Duración', nights: 'Noches', image: 'Imagen',
   category: 'Categoría', rating: 'Calificación', reviews_count: 'N° Reseñas',
   is_active: 'Estado', is_featured: 'Destacado', airline: 'Aerolínea',
   flight_type: 'Tipo de Vuelo', service_type: 'Tipo de Servicio', persons: 'Personas',
