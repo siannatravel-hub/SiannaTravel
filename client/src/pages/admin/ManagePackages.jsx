@@ -143,7 +143,7 @@ export default function ManagePackages() {
       price: 0, original_price: 0, discount: 0, price_unit: 'persona', duration: '', nights: 0,
       image: '', category: 'aventura', rating: 4.5, reviews_count: 0,
       is_featured: false, is_active: true, order_index: packages.length,
-      flight_type: 'internacional', service_type: 'paquete', persons: 2,
+      flight_type: 'internacional', service_type: 'paquete', persons: 2, children: 0,
       currency: 'MXN', hotel_name: '', hotel_stars: '', room_type: '',
       accommodation_type: '', itinerary_pdf: '', dates: '', contact_whatsapp: '',
       cancellation_policy: '', includes: [], highlights: [], gallery: [],
@@ -323,7 +323,7 @@ export default function ManagePackages() {
         'title', 'destination', 'country', 'region', 'description',
         'price', 'original_price', 'discount', 'price_unit', 'duration', 'nights',
         'image', 'category', 'rating', 'reviews_count', 'is_featured',
-        'airline', 'flight_type', 'service_type', 'persons', 'currency',
+        'airline', 'flight_type', 'service_type', 'persons', 'children', 'currency',
         'hotel_name', 'hotel_stars', 'room_type', 'accommodation_type',
         'itinerary_pdf', 'dates', 'contact_whatsapp', 'cancellation_policy'
       ];
@@ -334,7 +334,7 @@ export default function ManagePackages() {
         }
         if (editForm[field] !== selectedPackage[field]) {
           let value = editForm[field];
-          if (['price', 'original_price', 'discount', 'nights', 'hotel_stars', 'persons', 'reviews_count'].includes(field)) {
+          if (['price', 'original_price', 'discount', 'nights', 'hotel_stars', 'persons', 'children', 'reviews_count'].includes(field)) {
             value = parseInt(value) || 0;
           }
           if (field === 'rating') {
@@ -740,8 +740,12 @@ export default function ManagePackages() {
                     </select>
                   </div>
                   <div className={styles.formGroup}>
-                    <label>Personas</label>
+                    <label>Personas (adultos)</label>
                     <input type="number" value={editForm.persons || ''} onChange={e => handleInputChange('persons', e.target.value)} placeholder="ej: 2" min="1" />
+                  </div>
+                  <div className={styles.formGroup}>
+                    <label>Niños</label>
+                    <input type="number" value={editForm.children ?? ''} onChange={e => handleInputChange('children', e.target.value)} placeholder="ej: 0" min="0" />
                   </div>
                   <div className={styles.formGroup}>
                     <label>Moneda</label>

@@ -6,7 +6,7 @@ const ALLOWED = [
   'slug', 'title', 'destination', 'country', 'region', 'description', 'price',
   'original_price', 'discount', 'price_unit', 'currency', 'duration', 'nights', 'image', 'gallery',
   'category', 'rating', 'reviews_count', 'includes', 'highlights', 'is_active',
-  'is_featured', 'order_index', 'airline', 'flight_type', 'service_type', 'persons',
+  'is_featured', 'order_index', 'airline', 'flight_type', 'service_type', 'persons', 'children',
   'hotel_name', 'hotel_stars', 'room_type', 'accommodation_type', 'itinerary_pdf',
   'dates', 'contact_whatsapp', 'cancellation_policy', 'flight_includes',
   'transfers_included', 'itinerary', 'important_info', 'terms_conditions', 'payment_options',

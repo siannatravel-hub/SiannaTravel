@@ -1,6 +1,16 @@
 import { useState } from 'react';
 import styles from './BookingModal.module.css';
 
+// Describe la ocupación de la habitación (adultos + niños)
+function formatOcupacion(pkg) {
+  const adultos = pkg.persons || 2;
+  const ninos = pkg.children || 0;
+  if (ninos > 0) {
+    return `${adultos} adulto${adultos === 1 ? '' : 's'} + ${ninos} niño${ninos === 1 ? '' : 's'}`;
+  }
+  return `${adultos} persona${adultos === 1 ? '' : 's'}`;
+}
+
 export default function BookingModal({ packageData, onClose }) {
   const [name, setName] = useState('');
   const [travelers, setTravelers] = useState(1);
@@ -10,7 +20,9 @@ export default function BookingModal({ packageData, onClose }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     const price = pkg.price ? `$${Number(pkg.price).toLocaleString('es-MX')} MXN` : 'Por confirmar';
-    const priceUnitLabel = pkg.price_unit === 'habitacion' ? 'por habitación' : 'por persona';
+    const priceUnitLabel = pkg.price_unit === 'habitacion'
+      ? `por habitación (${formatOcupacion(pkg)})`
+      : 'por persona';
     const message = encodeURIComponent(
       `¡Hola! Los contacto desde el sitio web de Sianna Travel. Me interesa reservar:\n` +
       `\n` +

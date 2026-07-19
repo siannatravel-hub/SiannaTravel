@@ -114,6 +114,16 @@ function toEmbedUrl(url) {
   return url.replace('/view', '/preview').split('?')[0];
 }
 
+// Describe la ocupación de la habitación (adultos + niños)
+function formatOcupacion(pkg) {
+  const adultos = pkg.persons || 2;
+  const ninos = pkg.children || 0;
+  if (ninos > 0) {
+    return `${adultos} adulto${adultos === 1 ? '' : 's'} + ${ninos} niño${ninos === 1 ? '' : 's'}`;
+  }
+  return `${adultos} persona${adultos === 1 ? '' : 's'}`;
+}
+
 export default function PackageDetailNew() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -313,8 +323,8 @@ export default function PackageDetailNew() {
               </span>
             </div>
             <div className={styles.stat}>
-              <span className={styles.statLabel}>Máx. de personas</span>
-              <span className={styles.statValue}>{pkg.persons || 2}</span>
+              <span className={styles.statLabel}>Ocupación</span>
+              <span className={styles.statValue}>{formatOcupacion(pkg)}</span>
             </div>
           </div>
 
@@ -462,7 +472,7 @@ export default function PackageDetailNew() {
                 <span className={styles.priceAmount}>${(pkg.price || 0).toLocaleString()}</span>
                 <span className={styles.priceCurrency}>{pkg.currency || 'MXN'}</span>
               </div>
-              <span className={styles.priceNote}>{pkg.price_unit === 'habitacion' ? 'por habitación' : 'por persona'}</span>
+              <span className={styles.priceNote}>{pkg.price_unit === 'habitacion' ? `por habitación (${formatOcupacion(pkg)})` : 'por persona'}</span>
               {discount > 0 && (
                 <span className={styles.discountBadge}>{discount}% OFF</span>
               )}

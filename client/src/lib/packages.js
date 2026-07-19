@@ -110,7 +110,7 @@ export const fieldLabels = {
   discount: 'Descuento', price_unit: 'Precio Por', duration: 'Duración', nights: 'Noches', image: 'Imagen',
   category: 'Categoría', rating: 'Calificación', reviews_count: 'N° Reseñas',
   is_active: 'Estado', is_featured: 'Destacado', airline: 'Aerolínea',
-  flight_type: 'Tipo de Vuelo', service_type: 'Tipo de Servicio', persons: 'Personas',
+  flight_type: 'Tipo de Vuelo', service_type: 'Tipo de Servicio', persons: 'Personas (adultos)', children: 'Niños',
   hotel_name: 'Hotel', hotel_stars: 'Estrellas Hotel', room_type: 'Tipo de Habitación',
   accommodation_type: 'Régimen', itinerary_pdf: 'Itinerario PDF', dates: 'Fechas / Salidas',
   contact_whatsapp: 'WhatsApp', cancellation_policy: 'Política de Cancelación',

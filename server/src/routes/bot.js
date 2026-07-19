@@ -8,6 +8,16 @@ export const botRouter = Router();
 
 const normalize = (str) => (str || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '');
 
+// Describe la ocupación de la habitación (adultos + niños)
+function formatOcupacion(pkg) {
+  const adultos = pkg.persons || 2;
+  const ninos = pkg.children || 0;
+  if (ninos > 0) {
+    return `${adultos} adulto${adultos === 1 ? '' : 's'} + ${ninos} niño${ninos === 1 ? '' : 's'}`;
+  }
+  return `${adultos} persona${adultos === 1 ? '' : 's'}`;
+}
+
 botRouter.get('/paquetes', async (req, res) => {
   try {
     const { q } = req.query;
@@ -30,7 +40,7 @@ botRouter.get('/paquetes', async (req, res) => {
       region: pkg.region,
       categoria: pkg.category,
       vuelo: pkg.flight_type === 'nacional' ? 'Nacional' : 'Internacional',
-      precio: `$${Number(pkg.price).toLocaleString('es-MX')} ${pkg.currency || 'USD'}`,
+      precio: `$${Number(pkg.price).toLocaleString('es-MX')} ${pkg.currency || 'USD'} (${pkg.price_unit === 'habitacion' ? `precio total por habitación para ${formatOcupacion(pkg)}` : 'precio por persona'})`,
       precio_antes: `$${Number(pkg.original_price).toLocaleString('es-MX')} ${pkg.currency || 'USD'}`,
       descuento: `${pkg.discount}% de descuento`,
       duracion: pkg.duration,
