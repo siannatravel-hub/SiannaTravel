@@ -1,7 +1,7 @@
 import { useEffect } from 'react';
 
-const BASE_URL = 'https://siannatravel.com';
-const DEFAULT_IMAGE = `${BASE_URL}/images/logos/logo.png`;
+const BASE_URL = 'https://www.siannatravelagencia.com';
+const DEFAULT_IMAGE = `${BASE_URL}/images/og/og-default.png`;
 const SITE_NAME = 'Sianna Travel';
 
 /**
