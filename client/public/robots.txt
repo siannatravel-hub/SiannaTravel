@@ -25,4 +25,26 @@ Allow: /images/
 User-agent: Bingbot
 Allow: /
 
+# Rastreadores de IA (ChatGPT, Perplexity, Claude, etc.)
+User-agent: GPTBot
+Allow: /
+
+User-agent: ChatGPT-User
+Allow: /
+
+User-agent: OAI-SearchBot
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Claude-Web
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
 Sitemap: https://www.siannatravelagencia.com/sitemap.xml

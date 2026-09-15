@@ -197,18 +197,18 @@ export default function PackageDetailNew() {
       name: packageTitle,
       description: pkg.description || '',
       image: packageImage || '',
-      url: `https://siannatravel.com/paquetes/${pkg.id}`,
+      url: `https://www.siannatravelagencia.com/paquetes/${pkg.id}`,
       touristType: pkg.category || 'leisure',
       offers: {
         '@type': 'Offer',
         price: pkg.price,
         priceCurrency: pkg.currency || 'MXN',
         availability: 'https://schema.org/InStock',
-        url: `https://siannatravel.com/paquetes/${pkg.id}`,
+        url: `https://www.siannatravelagencia.com/paquetes/${pkg.id}`,
         seller: {
           '@type': 'TravelAgency',
           name: 'Sianna Travel',
-          url: 'https://siannatravel.com',
+          url: 'https://www.siannatravelagencia.com',
         },
       },
       itinerary: {
