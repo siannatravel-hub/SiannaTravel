@@ -16,11 +16,11 @@ export default function Blog() {
       '@context': 'https://schema.org',
       '@type': 'Blog',
       name: 'Blog Sianna Travel',
-      url: 'https://siannatravel.com/blog',
+      url: 'https://www.siannatravelagencia.com/blog',
       publisher: {
         '@type': 'Organization',
         name: 'Sianna Travel',
-        url: 'https://siannatravel.com',
+        url: 'https://www.siannatravelagencia.com',
       },
     },
   });

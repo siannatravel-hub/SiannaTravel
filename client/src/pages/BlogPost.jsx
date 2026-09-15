@@ -18,7 +18,7 @@ export default function BlogPost() {
           image: post.cover_image
             ? post.cover_image.startsWith('http')
               ? post.cover_image
-              : `https://siannatravel.com${post.cover_image}`
+              : `https://www.siannatravelagencia.com${post.cover_image}`
             : undefined,
           type: 'article',
           schema: {
@@ -29,23 +29,23 @@ export default function BlogPost() {
             image: post.cover_image || '',
             datePublished: post.published_at || post.created_at || '',
             dateModified: post.updated_at || post.published_at || '',
-            url: `https://siannatravel.com/blog/${post.slug}`,
+            url: `https://www.siannatravelagencia.com/blog/${post.slug}`,
             author: {
               '@type': 'Organization',
               name: 'Sianna Travel',
-              url: 'https://siannatravel.com',
+              url: 'https://www.siannatravelagencia.com',
             },
             publisher: {
               '@type': 'Organization',
               name: 'Sianna Travel',
               logo: {
                 '@type': 'ImageObject',
-                url: 'https://siannatravel.com/images/logos/logo.png',
+                url: 'https://www.siannatravelagencia.com/images/logos/logosianna.png',
               },
             },
             mainEntityOfPage: {
               '@type': 'WebPage',
-              '@id': `https://siannatravel.com/blog/${post.slug}`,
+              '@id': `https://www.siannatravelagencia.com/blog/${post.slug}`,
             },
           },
         }

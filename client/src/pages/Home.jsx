@@ -17,7 +17,7 @@ export default function Home() {
       '@context': 'https://schema.org',
       '@type': 'TravelAgency',
       name: 'Sianna Travel',
-      url: 'https://siannatravel.com',
+      url: 'https://www.siannatravelagencia.com',
       telephone: '+52-775-265-8413',
       address: {
         '@type': 'PostalAddress',
@@ -27,7 +27,10 @@ export default function Home() {
       },
       priceRange: '$$',
       openingHours: 'Mo-Fr 09:00-18:00',
-      sameAs: [],
+      sameAs: [
+        'https://www.facebook.com/SiannaTravel',
+        'https://www.instagram.com/agenciadeviajes_sianna/',
+      ],
     },
   });
 
