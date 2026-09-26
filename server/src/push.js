@@ -14,6 +14,16 @@ function asegurarConfig() {
   configurado = true;
 }
 
+const normalizar = (s) =>
+  String(s || '').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^a-z0-9]/g, '');
+
+// Los usuarios sin "asesora" (admin, supervisión) reciben todas las alertas;
+// los que la tienen asignada reciben solo las suyas.
+export function filtrarDestinatarios(filas, asesora) {
+  const objetivo = normalizar(asesora);
+  return filas.filter((f) => !f.asesora || normalizar(f.asesora) === objetivo);
+}
+
 // Envía a UNA suscripción. Devuelve true si el push service la aceptó.
 export async function enviarASuscripcion(sub, payload) {
   asegurarConfig();
@@ -33,10 +43,16 @@ export async function enviarASuscripcion(sub, payload) {
   }
 }
 
-// Envía a todos los dispositivos suscritos del admin.
-export async function enviarATodos(payload) {
+// Avisa de un lead a la asesora asignada (y a los usuarios sin asesora).
+export async function enviarALead(asesora, payload) {
   asegurarConfig();
-  const { rows } = await query('SELECT endpoint, p256dh, auth FROM push_subscriptions');
-  const resultados = await Promise.all(rows.map((s) => enviarASuscripcion(s, payload)));
-  return { enviados: resultados.filter(Boolean).length, total: rows.length };
+  const { rows } = await query(
+    `SELECT s.endpoint, s.p256dh, s.auth, u.asesora
+       FROM push_subscriptions s
+       JOIN admin_users u ON u.id = s.usuario_id
+      WHERE u.activo = true`
+  );
+  const destinos = filtrarDestinatarios(rows, asesora);
+  const resultados = await Promise.all(destinos.map((s) => enviarASuscripcion(s, payload)));
+  return { enviados: resultados.filter(Boolean).length, destinatarios: destinos.length, total: rows.length };
 }

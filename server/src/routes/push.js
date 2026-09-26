@@ -2,7 +2,7 @@ import { Router } from 'express';
 import { timingSafeEqual } from 'crypto';
 import { query } from '../db.js';
 import config from '../config.js';
-import { enviarATodos, enviarASuscripcion } from '../push.js';
+import { enviarALead, enviarASuscripcion } from '../push.js';
 
 const recortar = (v, max) => String(v ?? '').replace(/\s+/g, ' ').trim().slice(0, max);
 
@@ -78,7 +78,7 @@ botNotifyRouter.post('/', async (req, res) => {
   const vip = req.body?.vip === true || req.body?.vip === 'true';
 
   try {
-    const resultado = await enviarATodos({
+    const resultado = await enviarALead(asesora, {
       title: `${vip ? '⭐ Lead VIP' : 'Nuevo lead'} · ${asesora}`,
       body: [nombre + (telefono ? ` · ${telefono}` : ''), motivo].filter(Boolean).join(' — '),
       url: '/admin/solicitudes',
