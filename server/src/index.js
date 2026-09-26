@@ -17,6 +17,7 @@ import { adminLinksRouter, publicLinksRouter } from './routes/links.js';
 import { adminSolicitudesRouter } from './routes/solicitudes.js';
 import { uploadRouter } from './routes/upload.js';
 import { botRouter } from './routes/bot.js';
+import { adminPushRouter, botNotifyRouter } from './routes/push.js';
 
 const app = express();
 
@@ -39,6 +40,7 @@ app.use('/api/packages', publicPackagesRouter);
 app.use('/api/featured', publicFeaturedRouter);
 app.use('/api/blog', publicBlogRouter);
 app.use('/api/links', publicLinksRouter);
+app.use('/api/bot/notificar', botNotifyRouter);
 app.use('/api/bot', botRouter);
 
 // ---------- Admin (protegido) ----------
@@ -49,6 +51,7 @@ app.use('/api/admin/faq', requireAuth, adminFaqRouter);
 app.use('/api/admin/links', requireAuth, adminLinksRouter);
 app.use('/api/admin/solicitudes', requireAuth, adminSolicitudesRouter);
 app.use('/api/admin/upload', requireAuth, uploadRouter);
+app.use('/api/admin/push', requireAuth, adminPushRouter);
 
 // ---------- Imágenes subidas ----------
 app.use('/images/uploads', express.static(resolve(config.uploadDir)));

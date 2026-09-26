@@ -28,6 +28,17 @@ const config = {
 
   // Carpeta del build del cliente (React/Vite) para servir el sitio + admin.
   clientDist: process.env.CLIENT_DIST || '../client/dist',
+
+  // Notificaciones push del admin (PWA). Genera las llaves con:
+  //   npx web-push generate-vapid-keys
+  vapid: {
+    publicKey: process.env.VAPID_PUBLIC_KEY || '',
+    privateKey: process.env.VAPID_PRIVATE_KEY || '',
+    subject: process.env.VAPID_SUBJECT || 'mailto:soporte@siannatravelagencia.com',
+  },
+
+  // Clave que n8n manda en el header x-bot-key a /api/bot/notificar.
+  botApiKey: process.env.BOT_API_KEY || '',
 };
 
 if (!config.databaseUrl) {

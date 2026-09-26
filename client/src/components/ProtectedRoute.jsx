@@ -1,9 +1,12 @@
 import { Navigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
+import useAdminManifest from '../hooks/useAdminManifest';
+import PushSetup from './admin/PushSetup';
 
 export default function ProtectedRoute({ children }) {
   const { isAuthenticated, loading, isConfigured } = useAuth();
   const location = useLocation();
+  useAdminManifest();
 
   if (loading) {
     return (
@@ -27,5 +30,10 @@ export default function ProtectedRoute({ children }) {
     return <Navigate to="/admin/login" state={{ from: location }} replace />;
   }
 
-  return children;
+  return (
+    <>
+      {children}
+      <PushSetup />
+    </>
+  );
 }

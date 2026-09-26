@@ -1,9 +1,11 @@
 import { useState } from 'react';
 import { Link, useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
+import useAdminManifest from '../../hooks/useAdminManifest';
 import styles from './AdminLogin.module.css';
 
 export default function AdminLogin() {
+  useAdminManifest();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isLoading, setIsLoading] = useState(false);
