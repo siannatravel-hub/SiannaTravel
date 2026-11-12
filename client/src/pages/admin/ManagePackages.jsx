@@ -312,7 +312,13 @@ export default function ManagePackages() {
           setSaving(false);
           return;
         }
-        await createPackage(editForm);
+        const payload = { ...editForm };
+        for (const f of ['price', 'original_price', 'discount', 'nights', 'persons', 'children', 'reviews_count', 'order_index']) {
+          payload[f] = parseInt(payload[f]) || 0;
+        }
+        payload.hotel_stars = parseInt(payload.hotel_stars) || null;
+        payload.rating = parseFloat(payload.rating) || 0;
+        await createPackage(payload);
         await loadPackages();
         closeEditModal();
         return;

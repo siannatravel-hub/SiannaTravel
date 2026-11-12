@@ -14,6 +14,22 @@ const ALLOWED = [
 const JSON_COLS = ['gallery', 'includes', 'highlights', 'flight_includes',
   'transfers_included', 'itinerary', 'important_info', 'terms_conditions', 'payment_options'];
 
+const INT_COLS = ['price', 'original_price', 'discount', 'nights', 'reviews_count',
+  'order_index', 'persons', 'children'];
+
+// Postgres rechaza '' en columnas numéricas: el formulario manda '' cuando un campo queda vacío.
+export function normalizePackageNumbers(data) {
+  for (const k of INT_COLS) {
+    if (k in data) data[k] = parseInt(data[k], 10) || 0;
+  }
+  if ('hotel_stars' in data) {
+    const n = parseInt(data.hotel_stars, 10);
+    data.hotel_stars = Number.isNaN(n) ? null : n;
+  }
+  if ('rating' in data) data.rating = parseFloat(data.rating) || 0;
+  return data;
+}
+
 function slugify(title) {
   return (title || 'paquete')
     .toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g, '')
@@ -122,7 +138,7 @@ adminPackagesRouter.get('/:id/history', async (req, res) => {
 
 adminPackagesRouter.post('/', async (req, res) => {
   try {
-    const data = pickAllowed(req.body, ALLOWED);
+    const data = normalizePackageNumbers(pickAllowed(req.body, ALLOWED));
     if (!data.slug) data.slug = slugify(data.title) + '-' + Date.now();
     const { text, params } = buildInsert('packages', data, JSON_COLS);
     const { rows } = await query(text, params);
@@ -134,7 +150,7 @@ adminPackagesRouter.put('/:id', async (req, res) => {
   try {
     const current = await findPackage(req.params.id);
     if (!current) return res.status(404).json({ error: 'No encontrado' });
-    const data = pickAllowed(req.body, ALLOWED);
+    const data = normalizePackageNumbers(pickAllowed(req.body, ALLOWED));
     if (Object.keys(data).length === 0) return res.json({ data: current });
 
     // Historial: registrar cambios de campos escalares.
