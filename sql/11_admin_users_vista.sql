@@ -16,8 +16,8 @@ ALTER TABLE admin_users
   CHECK (vista_inicio IN ('duena', 'asesora'));
 
 -- ---------- Asignación (editar los correos reales y ejecutar a mano) ----------
--- Ana Laura conserva asesora = 'Ana Laura' para seguir recibiendo sus avisos de leads VIP.
--- UPDATE admin_users SET vista_inicio = 'duena',   asesora = 'Ana Laura' WHERE lower(email) = lower('CORREO_DE_ANA_LAURA');
+-- Ana Laura observa: asesora = NULL => recibe TODAS las alertas de leads (las suyas VIP y las de Bianka/Wendy).
+-- UPDATE admin_users SET vista_inicio = 'duena',   asesora = NULL        WHERE lower(email) = lower('CORREO_DE_ANA_LAURA');
 -- Bianka y Wendy: el valor de "asesora" debe coincidir con el nombre que manda n8n.
 -- UPDATE admin_users SET vista_inicio = 'asesora', asesora = 'Bianka'    WHERE lower(email) = lower('CORREO_DE_BIANKA');
 -- UPDATE admin_users SET vista_inicio = 'asesora', asesora = 'Wendy'     WHERE lower(email) = lower('CORREO_DE_WENDY');
