@@ -1,15 +1,21 @@
 import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getSolicitudes, updateSolicitud, deleteSolicitud, markSolicitudesRead } from '../../lib/solicitudes';
+import { useAuth } from '../../context/AuthContext';
+import { estaPendiente, linkWhatsApp, opcionesEstado } from '../../lib/adminStats';
 import styles from './BotAdmin.module.css';
+import movil from './SolicitudesMovil.module.css';
 
 const ESTADOS = ['Nuevo', 'Escalado', 'Atendido', 'Cerrado'];
 const PRIORIDADES = ['BAJA', 'MEDIA', 'ALTA'];
 
 export default function ManageSolicitudes() {
+  const { isOwner } = useAuth();
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [savedId, setSavedId] = useState(null);
+  // Las asesoras abren directo "Por atender"; la dueña ve todo.
+  const [filtro, setFiltro] = useState(isOwner ? 'todos' : 'pendientes');
 
   const load = async () => {
     setLoading(true);
@@ -38,23 +44,36 @@ export default function ManageSolicitudes() {
 
   const fecha = (f) => (f ? new Date(f).toLocaleString('es-MX', { dateStyle: 'short', timeStyle: 'short' }) : '—');
 
+  const porAtender = items.filter((it) => estaPendiente(it.estado));
+  const visibles = filtro === 'pendientes' ? porAtender : items;
+
   return (
     <div className={styles.page}>
       <div className={styles.header}>
-        <h1 className={styles.title}>Solicitudes / <span>Leads</span></h1>
+        <h1 className={styles.title}>{isOwner ? <>Solicitudes / <span>Leads</span></> : <>Mis <span>leads</span></>}</h1>
         <Link to="/admin" className={styles.back}>← Volver al panel</Link>
       </div>
-      <p className={styles.subtitle}>Mensajes y leads capturados por el bot. Cambia estado, prioridad, asesor o pausa el bot por contacto.</p>
+      <p className={styles.subtitle}>
+        {isOwner
+          ? 'Mensajes y leads capturados por el bot. Cambia estado, prioridad, asesor o pausa el bot por contacto.'
+          : 'Tus leads. Cambia el estado cuando los atiendas o pausa el bot si vas a escribirle tú.'}
+      </p>
 
       <div className={styles.toolbar}>
+        <button className={filtro === 'pendientes' ? styles.btn : styles.btnGhost} onClick={() => setFiltro('pendientes')}>
+          Por atender ({porAtender.length})
+        </button>
+        <button className={filtro === 'todos' ? styles.btn : styles.btnGhost} onClick={() => setFiltro('todos')}>
+          Todos ({items.length})
+        </button>
         <button className={styles.btnGhost} onClick={load}>↻ Actualizar</button>
       </div>
 
       {loading ? <p className={styles.empty}>Cargando...</p>
-        : items.length === 0 ? <p className={styles.empty}>Aún no hay solicitudes.</p>
+        : visibles.length === 0 ? <p className={styles.empty}>{filtro === 'pendientes' && items.length > 0 ? '✓ Estás al día: no hay leads por atender.' : 'Aún no hay solicitudes.'}</p>
           : (
             <div className={styles.card} style={{ overflowX: 'auto' }}>
-              <table className={styles.table}>
+              <table className={`${styles.table} ${movil.tarjetas}`}>
                 <thead>
                   <tr>
                     <th>Cliente</th><th>WhatsApp</th><th>Último mensaje</th>
@@ -62,39 +81,44 @@ export default function ManageSolicitudes() {
                   </tr>
                 </thead>
                 <tbody>
-                  {items.map((it) => (
+                  {visibles.map((it) => (
                     <tr key={it.id}>
-                      <td>{it.nombre_cliente || '—'}</td>
-                      <td>{it.numero_whatsapp || '—'}</td>
-                      <td style={{ maxWidth: 220 }}>{it.ultimo_mensaje || '—'}</td>
-                      <td>
+                      <td data-label="Cliente">{it.nombre_cliente || '—'}</td>
+                      <td data-label="WhatsApp">
+                        {linkWhatsApp(it.numero_whatsapp)
+                          ? <a href={linkWhatsApp(it.numero_whatsapp)} target="_blank" rel="noopener noreferrer">{it.numero_whatsapp}</a>
+                          : (it.numero_whatsapp || '—')}
+                      </td>
+                      <td data-label="Último mensaje" style={{ maxWidth: 220 }}>{it.ultimo_mensaje || '—'}</td>
+                      <td data-label="Estado">
                         <select className={styles.select} value={it.estado || 'Nuevo'}
                           onChange={(e) => setField(it.id, 'estado', e.target.value)}>
-                          {ESTADOS.map((s) => <option key={s} value={s}>{s}</option>)}
+                          {opcionesEstado(ESTADOS, it.estado || 'Nuevo').map((s) => <option key={s} value={s}>{s}</option>)}
                         </select>
                       </td>
-                      <td>
+                      <td data-label="Prioridad">
                         <select className={styles.select} value={it.prioridad || 'MEDIA'}
                           onChange={(e) => setField(it.id, 'prioridad', e.target.value)}>
                           {PRIORIDADES.map((s) => <option key={s} value={s}>{s}</option>)}
                         </select>
                       </td>
-                      <td>
+                      <td data-label="Asesor">
                         <input className={styles.input} style={{ minWidth: 90 }} value={it.asesor || ''}
+                          readOnly={!isOwner} title={isOwner ? undefined : 'Solo la dueña puede reasignar leads'}
                           onChange={(e) => setField(it.id, 'asesor', e.target.value)} />
                       </td>
-                      <td>
+                      <td data-label="Bot">
                         <label className={styles.checkbox}>
                           <input type="checkbox" checked={!!it.bot_pausado}
                             onChange={(e) => setField(it.id, 'bot_pausado', e.target.checked)} /> Pausado
                         </label>
                       </td>
-                      <td>{fecha(it.fecha_hora)}</td>
-                      <td>
+                      <td data-label="Fecha">{fecha(it.fecha_hora)}</td>
+                      <td data-label="">
                         <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
                           {savedId === it.id && <span className={styles.saved}>✓</span>}
                           <button className={styles.btn} onClick={() => save(it)}>Guardar</button>
-                          <button className={styles.btnDanger} onClick={() => remove(it.id)}>✕</button>
+                          {isOwner && <button className={styles.btnDanger} onClick={() => remove(it.id)}>✕</button>}
                         </div>
                       </td>
                     </tr>

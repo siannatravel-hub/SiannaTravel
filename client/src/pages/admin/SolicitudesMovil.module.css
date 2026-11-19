@@ -1,0 +1,53 @@
+/* En celular la tabla de leads pasa a tarjetas: una por contacto, con cada dato rotulado. */
+@media (max-width: 760px) {
+  table.tarjetas,
+  table.tarjetas tbody,
+  table.tarjetas tr,
+  table.tarjetas td { display: block; width: 100%; }
+
+  table.tarjetas thead { display: none; }
+
+  table.tarjetas tr {
+    margin-bottom: 14px;
+    padding: 12px;
+    background: rgba(15, 23, 42, 0.55);
+    border: 1px solid #334155;
+    border-radius: 12px;
+  }
+
+  table.tarjetas td {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 12px;
+    padding: 7px 0;
+    border-bottom: 1px solid rgba(51, 65, 85, 0.5);
+    text-align: right;
+  }
+  table.tarjetas td:last-child { border-bottom: none; padding-top: 12px; }
+
+  table.tarjetas td::before {
+    content: attr(data-label);
+    flex: none;
+    color: #94a3b8;
+    font-size: 0.78rem;
+    font-weight: 600;
+    text-align: left;
+  }
+
+  /* El nombre abre la tarjeta: sin rótulo y más grande. */
+  table.tarjetas td[data-label="Cliente"] { justify-content: flex-start; font-size: 1.05rem; font-weight: 600; }
+  table.tarjetas td[data-label="Cliente"]::before { display: none; }
+
+  table.tarjetas td[data-label="Último mensaje"] { align-items: flex-start; max-width: none !important; }
+
+  table.tarjetas td select,
+  table.tarjetas td input[type="text"],
+  table.tarjetas td input:not([type]) { max-width: 60%; min-width: 0 !important; }
+
+  table.tarjetas td[data-label=""] > div { width: 100%; justify-content: flex-end; }
+}
+
+/* En cualquier ancho: el número de WhatsApp se ve como enlace y el campo bloqueado se ve bloqueado. */
+table.tarjetas a { color: #4ade80; text-decoration: underline; }
+table.tarjetas input[readonly] { opacity: 0.6; cursor: not-allowed; }

@@ -60,6 +60,8 @@ export function AuthProvider({ children }) {
     signOut,
     resetPassword,
     isAuthenticated: !!user,
+    // Sin "rol" (sesión anterior o BD sin migrar) se trata como dueña: nadie pierde acceso por error.
+    isOwner: !!user && user.rol !== 'asesora',
     isConfigured: true,
   };
 

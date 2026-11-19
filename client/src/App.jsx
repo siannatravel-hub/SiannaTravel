@@ -68,7 +68,7 @@ export default function App() {
             <Route
               path="/admin/featured"
               element={
-                <ProtectedRoute>
+                <ProtectedRoute ownerOnly>
                   <Suspense fallback={<Spinner />}><ManageFeatured /></Suspense>
                 </ProtectedRoute>
               }
@@ -76,7 +76,7 @@ export default function App() {
             <Route
               path="/admin/packages"
               element={
-                <ProtectedRoute>
+                <ProtectedRoute ownerOnly>
                   <Suspense fallback={<Spinner />}><ManagePackages /></Suspense>
                 </ProtectedRoute>
               }
@@ -84,7 +84,7 @@ export default function App() {
             <Route
               path="/admin/blog"
               element={
-                <ProtectedRoute>
+                <ProtectedRoute ownerOnly>
                   <Suspense fallback={<Spinner />}><ManageBlog /></Suspense>
                 </ProtectedRoute>
               }
@@ -92,7 +92,7 @@ export default function App() {
             <Route
               path="/admin/faq"
               element={
-                <ProtectedRoute>
+                <ProtectedRoute ownerOnly>
                   <Suspense fallback={<Spinner />}><ManageFaq /></Suspense>
                 </ProtectedRoute>
               }
@@ -100,7 +100,7 @@ export default function App() {
             <Route
               path="/admin/links"
               element={
-                <ProtectedRoute>
+                <ProtectedRoute ownerOnly>
                   <Suspense fallback={<Spinner />}><ManageLinks /></Suspense>
                 </ProtectedRoute>
               }

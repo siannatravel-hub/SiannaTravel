@@ -32,7 +32,7 @@ authRouter.post('/login', async (req, res) => {
     if (!email || !password) return res.status(400).json({ error: 'Faltan credenciales' });
 
     const { rows } = await query(
-      'SELECT id, email, nombre, password_hash, activo FROM admin_users WHERE lower(email) = lower($1)',
+      'SELECT id, email, nombre, rol, asesora, password_hash, activo FROM admin_users WHERE lower(email) = lower($1)',
       [email]
     );
     const user = rows[0];
@@ -41,7 +41,7 @@ authRouter.post('/login', async (req, res) => {
     const ok = await bcrypt.compare(password, user.password_hash);
     if (!ok) return res.status(401).json({ error: 'Credenciales inválidas' });
 
-    const payload = { id: user.id, email: user.email, nombre: user.nombre };
+    const payload = { id: user.id, email: user.email, nombre: user.nombre, rol: user.rol, asesora: user.asesora };
     const token = jwt.sign(payload, config.jwtSecret, { expiresIn: '7d' });
     res.cookie(config.cookieName, token, cookieOpts);
     res.json({ user: payload });
@@ -52,7 +52,8 @@ authRouter.post('/login', async (req, res) => {
 
 // GET /api/admin/me  → sesión actual
 authRouter.get('/me', requireAuth, (req, res) => {
-  res.json({ user: { id: req.admin.id, email: req.admin.email, nombre: req.admin.nombre } });
+  const { id, email, nombre, rol, asesora } = req.admin;
+  res.json({ user: { id, email, nombre, rol, asesora } });
 });
 
 // POST /api/admin/logout

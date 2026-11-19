@@ -3,8 +3,8 @@ import { useAuth } from '../context/AuthContext';
 import useAdminManifest from '../hooks/useAdminManifest';
 import PushSetup from './admin/PushSetup';
 
-export default function ProtectedRoute({ children }) {
-  const { isAuthenticated, loading, isConfigured } = useAuth();
+export default function ProtectedRoute({ children, ownerOnly = false }) {
+  const { isAuthenticated, isOwner, loading, isConfigured } = useAuth();
   const location = useLocation();
   useAdminManifest();
 
@@ -28,6 +28,11 @@ export default function ProtectedRoute({ children }) {
 
   if (!isAuthenticated) {
     return <Navigate to="/admin/login" state={{ from: location }} replace />;
+  }
+
+  // Las asesoras solo ven sus leads: el catálogo, el blog y el bot son de la dueña.
+  if (ownerOnly && !isOwner) {
+    return <Navigate to="/admin" replace />;
   }
 
   return (
