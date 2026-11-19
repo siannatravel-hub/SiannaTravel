@@ -18,9 +18,10 @@ ALTER TABLE admin_users
 -- ---------- Asignación (editar los correos reales y ejecutar a mano) ----------
 -- Ana Laura observa: asesora = NULL => recibe TODAS las alertas de leads (las suyas VIP y las de Bianka/Wendy).
 -- UPDATE admin_users SET vista_inicio = 'duena',   asesora = NULL        WHERE lower(email) = lower('CORREO_DE_ANA_LAURA');
--- Bianka y Wendy: el valor de "asesora" debe coincidir con el nombre que manda n8n.
+-- Bianka y Wendy: "asesora" debe coincidir con el nombre que usa n8n (flujo vivo: BIANKA y WEN; se compara sin acentos ni mayúsculas).
+-- OJO: a Wendy el flujo la llama 'Wen'. Si aquí se pone 'Wendy', NO le llegarán sus alertas ni verá 'mis leads'.
 -- UPDATE admin_users SET vista_inicio = 'asesora', asesora = 'Bianka'    WHERE lower(email) = lower('CORREO_DE_BIANKA');
--- UPDATE admin_users SET vista_inicio = 'asesora', asesora = 'Wendy'     WHERE lower(email) = lower('CORREO_DE_WENDY');
+-- UPDATE admin_users SET vista_inicio = 'asesora', asesora = 'Wen'       WHERE lower(email) = lower('CORREO_DE_WENDY');
 
 -- Comprobar:
 -- SELECT id, email, nombre, vista_inicio, asesora, activo FROM admin_users ORDER BY id;

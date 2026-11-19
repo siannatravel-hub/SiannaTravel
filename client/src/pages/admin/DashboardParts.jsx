@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { hace, linkWhatsApp, normalizar } from '../../lib/adminStats';
+import { hace, linkWhatsApp, nombreAsesora, normalizar } from '../../lib/adminStats';
 import styles from './DashboardViews.module.css';
 
 export function Kpi({ label, value, hint, to, alerta = false, cargando = false }) {
@@ -42,7 +42,7 @@ export function LeadRow({ lead, mostrarAsesora = false, conWhatsApp = false }) {
         <p className={styles.leadMsg}>{lead.ultimo_mensaje || 'Sin mensajes todavía'}</p>
         <div className={styles.leadMeta}>
           <span>{hace(lead.fecha_hora)}</span>
-          {mostrarAsesora && <span>· {lead.asesor?.trim() || 'Sin asignar'}</span>}
+          {mostrarAsesora && <span>· {nombreAsesora(lead.asesor)}</span>}
         </div>
       </div>
       <div className={styles.leadSide}>

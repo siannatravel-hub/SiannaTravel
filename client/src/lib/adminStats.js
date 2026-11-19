@@ -38,7 +38,7 @@ export function porAsesora(items) {
   for (const it of items) {
     const clave = normalizar(it.asesor) || '_sin';
     if (!grupos.has(clave)) {
-      grupos.set(clave, { clave, nombre: String(it.asesor || '').trim() || 'Sin asignar', total: 0, pendientes: 0 });
+      grupos.set(clave, { clave, nombre: nombreAsesora(it.asesor), total: 0, pendientes: 0 });
     }
     const g = grupos.get(clave);
     g.total += 1;
@@ -102,3 +102,7 @@ export function leadsPorDia(items, dias = 7, ahora = new Date()) {
 // Leads de una asesora (sin importar acentos ni mayúsculas). Sin asesora definida devuelve todos.
 export const misLeads = (items, asesora) =>
   asesora ? items.filter((l) => normalizar(l.asesor) === normalizar(asesora)) : items;
+
+// n8n guarda las asesoras en mayúsculas ('BIANKA', 'WEN', 'ANA LAURA'): se muestran como nombre propio.
+export const nombreAsesora = (s) =>
+  String(s || '').trim().toLowerCase().replace(/(^|\s)\S/g, (c) => c.toUpperCase()) || 'Sin asignar';
