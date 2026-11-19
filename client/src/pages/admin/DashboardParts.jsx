@@ -44,7 +44,9 @@ export function LeadRow({ lead, mostrarAsesora = false, conWhatsApp = false }) {
           {lead.intencion_compra && <span className={styles.estrella} title="Quiere comprar">★ Quiere comprar</span>}
         </div>
         <p className={styles.leadMsg}>{lead.ultimo_mensaje || 'Sin mensajes todavía'}</p>
-        {botDijo && <p className={styles.leadBot}>Bot: {botDijo}</p>}
+        {lead.resumen
+          ? <p className={styles.leadResumen}>{lead.resumen}</p>
+          : botDijo && <p className={styles.leadBot}>Bot: {botDijo}</p>}
         <div className={styles.leadMeta}>
           <span>{hace(lead.fecha_hora)}</span>
           {mostrarAsesora && <span>· {nombreAsesora(lead.asesor)}</span>}

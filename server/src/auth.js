@@ -32,7 +32,8 @@ authRouter.post('/login', async (req, res) => {
     if (!email || !password) return res.status(400).json({ error: 'Faltan credenciales' });
 
     const { rows } = await query(
-      'SELECT id, email, nombre, vista_inicio, asesora, password_hash, activo FROM admin_users WHERE lower(email) = lower($1)',
+      // SELECT *: si la base aún no tiene vista_inicio (SQL 11 sin correr) el login sigue funcionando.
+      'SELECT * FROM admin_users WHERE lower(email) = lower($1)',
       [email]
     );
     const user = rows[0];

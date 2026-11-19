@@ -23,4 +23,9 @@
 .vacio { color: #94a3b8; font-size: 0.9rem; margin: 0; }
 .cita { display: block; margin-top: 8px; padding: 8px 12px; background: #1e293b; border-radius: 10px; color: #e2e8f0; }
 .pie { position: fixed; bottom: 0; right: 0; width: min(480px, 100%); padding: 12px 18px; background: #0f172a; border-top: 1px solid #334155; box-sizing: border-box; }
+.resumen { padding: 12px 14px; background: rgba(56, 189, 248, 0.08); border: 1px solid rgba(56, 189, 248, 0.3); border-radius: 12px; }
+.resumen .texto { white-space: pre-line; }
+.pie { display: flex; gap: 10px; }
+.pie a { flex: 1; }
+.cw { display: block; text-align: center; padding: 11px; border-radius: 10px; border: 1px solid #475569; color: #e2e8f0; font-weight: 600; text-decoration: none; }
 .wa { display: block; text-align: center; padding: 11px; border-radius: 10px; background: #16a34a; color: #fff; font-weight: 600; text-decoration: none; }

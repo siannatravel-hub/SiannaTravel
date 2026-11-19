@@ -130,3 +130,12 @@ export function ultimaRespuestaBot(texto) {
   const m = parseHistorial(texto).filter((x) => x.rol === 'bot');
   return m.length ? m[m.length - 1].texto : '';
 }
+
+// Enlace a la conversación real en Chatwoot (n8n guarda los ids). Sin ids no hay enlace.
+const CHATWOOT_URL = String(import.meta.env?.VITE_CHATWOOT_URL || 'https://sianna-chatwoot.78h02z.easypanel.host').replace(/\/+$/, '');
+export function linkChatwoot(lead, base = CHATWOOT_URL) {
+  const cuenta = String(lead?.chatwoot_account_id ?? '').trim();
+  const conv = String(lead?.chatwoot_conversation_id ?? '').trim();
+  if (!/^\d+$/.test(cuenta) || !/^\d+$/.test(conv)) return null;
+  return `${base}/app/accounts/${cuenta}/conversations/${conv}`;
+}

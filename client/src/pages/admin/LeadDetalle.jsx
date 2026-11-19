@@ -1,5 +1,5 @@
 import { useEffect } from 'react';
-import { hace, linkWhatsApp, nombreAsesora, parseHistorial } from '../../lib/adminStats';
+import { hace, linkChatwoot, linkWhatsApp, nombreAsesora, parseHistorial } from '../../lib/adminStats';
 import styles from './LeadDetalle.module.css';
 
 // Panel con todo lo que sabe el CRM de un lead: datos, lo que pide y la conversación con el bot.
@@ -15,6 +15,7 @@ export default function LeadDetalle({ lead, onClose }) {
   const nombre = lead.nombre_cliente?.trim() || `Cliente de ${canal}`;
   const mensajes = parseHistorial(lead.historial);
   const wa = canal === 'WhatsApp' ? linkWhatsApp(lead.numero_whatsapp) : null;
+  const chatwoot = linkChatwoot(lead);
 
   const datos = [
     ['Canal', canal],
@@ -44,6 +45,13 @@ export default function LeadDetalle({ lead, onClose }) {
           {datos.map(([k, v]) => (<div key={k}><dt>{k}</dt><dd>{v}</dd></div>))}
         </dl>
 
+        {lead.resumen && (
+          <section className={styles.resumen}>
+            <h3 className={styles.titulo}>Resumen para ti</h3>
+            <p className={styles.texto}>{lead.resumen}</p>
+          </section>
+        )}
+
         {lead.descripcion && (
           <section>
             <h3 className={styles.titulo}>Lo que busca</h3>
@@ -70,9 +78,10 @@ export default function LeadDetalle({ lead, onClose }) {
           )}
         </section>
 
-        {wa && (
+        {(wa || chatwoot) && (
           <footer className={styles.pie}>
-            <a className={styles.wa} href={wa} target="_blank" rel="noopener noreferrer">Abrir WhatsApp</a>
+            {wa && <a className={styles.wa} href={wa} target="_blank" rel="noopener noreferrer">Abrir WhatsApp</a>}
+            {chatwoot && <a className={styles.cw} href={chatwoot} target="_blank" rel="noopener noreferrer">Ver chat completo</a>}
           </footer>
         )}
       </aside>
