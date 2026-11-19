@@ -52,8 +52,15 @@ authRouter.post('/login', async (req, res) => {
 });
 
 // GET /api/admin/me  → sesión actual
-authRouter.get('/me', requireAuth, (req, res) => {
-  const { id, email, nombre, vista_inicio, asesora } = req.admin;
+authRouter.get('/me', requireAuth, async (req, res) => {
+  const { id, email, nombre } = req.admin;
+  let { vista_inicio, asesora } = req.admin;
+  // Vista y asesora se leen de la base: así un cambio aplica al recargar, sin esperar a que caduque
+  // la sesión (7 días). Si la consulta falla se usa lo que traía la sesión.
+  try {
+    const { rows } = await query('SELECT * FROM admin_users WHERE id = $1', [id]);
+    if (rows[0]) { vista_inicio = rows[0].vista_inicio; asesora = rows[0].asesora; }
+  } catch { /* se queda con lo de la sesión */ }
   res.json({ user: { id, email, nombre, vista_inicio, asesora } });
 });
 

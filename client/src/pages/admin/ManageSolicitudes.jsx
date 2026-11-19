@@ -20,9 +20,21 @@ export default function ManageSolicitudes() {
   const [filtro, setFiltro] = useState(vistaDuena ? 'todos' : 'pendientes');
   const [soloMios, setSoloMios] = useState(!vistaDuena && !!user?.asesora);
 
+  // Lo que hay guardado en el servidor (estado/asesor). Los filtros usan esto y no lo que se está
+  // editando: si no, al cambiar el estado la fila desaparecería antes de poder tocar Guardar.
+  const [guardado, setGuardado] = useState({});
+  const recordar = (lista) => setGuardado((prev) => {
+    const next = { ...prev };
+    for (const it of lista) next[it.id] = { estado: it.estado, asesor: it.asesor };
+    return next;
+  });
+
   const load = async () => {
     setLoading(true);
-    setItems(await getSolicitudes());
+    const lista = await getSolicitudes();
+    setItems(lista);
+    setGuardado({});
+    recordar(lista);
     setLoading(false);
   };
   useEffect(() => { load().then(() => markSolicitudesRead()); }, []);
@@ -35,6 +47,7 @@ export default function ManageSolicitudes() {
       estado: it.estado, prioridad: it.prioridad, asesor: it.asesor,
       bot_pausado: it.bot_pausado,
     });
+    recordar([it]);
     setSavedId(it.id);
     setTimeout(() => setSavedId(null), 1500);
   };
@@ -47,8 +60,10 @@ export default function ManageSolicitudes() {
 
   const fecha = (f) => (f ? new Date(f).toLocaleString('es-MX', { dateStyle: 'short', timeStyle: 'short' }) : '—');
 
-  const base = soloMios ? misLeads(items, user?.asesora) : items;
-  const porAtender = base.filter((it) => estaPendiente(it.estado));
+  const enServidor = (it) => guardado[it.id] || it;
+  const mios = soloMios ? new Set(misLeads(items.map((it) => ({ id: it.id, asesor: enServidor(it).asesor })), user?.asesora).map((x) => x.id)) : null;
+  const base = mios ? items.filter((it) => mios.has(it.id)) : items;
+  const porAtender = base.filter((it) => estaPendiente(enServidor(it).estado));
   const visibles = filtro === 'pendientes' ? porAtender : base;
 
   return (
@@ -76,7 +91,9 @@ export default function ManageSolicitudes() {
       </div>
 
       {loading ? <p className={styles.empty}>Cargando...</p>
-        : visibles.length === 0 ? <p className={styles.empty}>{filtro === 'pendientes' && items.length > 0 ? '✓ Estás al día: no hay leads por atender.' : 'Aún no hay solicitudes.'}</p>
+        : visibles.length === 0 ? <p className={styles.empty}>{items.length === 0 ? 'Aún no hay solicitudes.'
+          : soloMios && base.length === 0 ? 'No tienes leads asignados. Quita "Solo mis leads" para ver los de todas.'
+            : '✓ Estás al día: no hay leads por atender.'}</p>
           : (
             <div className={styles.card} style={{ overflowX: 'auto' }}>
               <table className={`${styles.table} ${movil.tarjetas}`}>
