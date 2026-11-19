@@ -78,3 +78,23 @@ export function linkWhatsApp(numero) {
 // El <select> de estado debe incluir el valor actual aunque no esté en la lista fija.
 export const opcionesEstado = (base, actual) =>
   actual && !base.includes(actual) ? [...base, actual] : base;
+
+// Leads recibidos por día en los últimos N días (el último elemento es hoy).
+export function leadsPorDia(items, dias = 7, ahora = new Date()) {
+  const out = [];
+  for (let i = dias - 1; i >= 0; i -= 1) {
+    const d = new Date(ahora.getTime() - i * 86400000);
+    out.push({
+      dia: dia(d),
+      etiqueta: d.toLocaleDateString('es-MX', { weekday: 'short', timeZone: TZ }).replace('.', ''),
+      total: 0,
+    });
+  }
+  const porDia = new Map(out.map((o) => [o.dia, o]));
+  for (const it of items) {
+    if (!it.fecha_hora) continue;
+    const o = porDia.get(dia(it.fecha_hora));
+    if (o) o.total += 1;
+  }
+  return out;
+}

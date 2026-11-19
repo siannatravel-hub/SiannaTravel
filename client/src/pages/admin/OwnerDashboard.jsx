@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import useDashboardData from '../../lib/useDashboardData';
-import { porAsesora, recientes, resumenLeads, saludo } from '../../lib/adminStats';
+import { leadsPorDia, porAsesora, recientes, resumenLeads, saludo } from '../../lib/adminStats';
 import { ErrorCarga, Kpi, LeadRow, Panel } from './DashboardParts';
 import styles from './DashboardViews.module.css';
 
@@ -28,6 +28,8 @@ export default function OwnerDashboard({ user }) {
   const r = resumenLeads(leads);
   const equipo = porAsesora(leads);
   const maxTotal = Math.max(1, ...equipo.map((g) => g.total));
+  const dias = leadsPorDia(leads, 7);
+  const maxDia = Math.max(1, ...dias.map((d) => d.total));
   const activos = paquetes.filter((p) => p.is_active).length;
   const fecha = new Date().toLocaleDateString('es-MX', { weekday: 'long', day: 'numeric', month: 'long', timeZone: 'America/Mexico_City' });
 
@@ -59,25 +61,39 @@ export default function OwnerDashboard({ user }) {
             : <ul className={styles.leads}>{recientes(leads, 6).map((l) => <LeadRow key={l.id} lead={l} mostrarAsesora />)}</ul>}
         </Panel>
 
-        <Panel titulo="Equipo">
-          {!cargando && equipo.length === 0
-            ? <p className={styles.vacio}>Aún no hay leads asignados.</p>
-            : (
-              <ul className={styles.team}>
-                {equipo.map((g) => (
-                  <li key={g.clave} className={styles.teamRow}>
-                    <div className={styles.teamTop}>
-                      <span>{g.nombre}</span>
-                      <span className={`${styles.teamPend} ${g.pendientes > 0 ? styles.teamPendAlerta : ''}`}>
-                        {g.pendientes} por atender · {g.total} en total
-                      </span>
-                    </div>
-                    <div className={styles.barra}><div className={styles.barraRelleno} style={{ width: `${(g.total / maxTotal) * 100}%` }} /></div>
-                  </li>
-                ))}
-              </ul>
-            )}
-        </Panel>
+        <div className={styles.columnaDer}>
+          <Panel titulo="Equipo">
+            {!cargando && equipo.length === 0
+              ? <p className={styles.vacio}>Aún no hay leads asignados.</p>
+              : (
+                <ul className={styles.team}>
+                  {equipo.map((g) => (
+                    <li key={g.clave} className={styles.teamRow}>
+                      <div className={styles.teamTop}>
+                        <span>{g.nombre}</span>
+                        <span className={`${styles.teamPend} ${g.pendientes > 0 ? styles.teamPendAlerta : ''}`}>
+                          {g.pendientes} por atender · {g.total} en total
+                        </span>
+                      </div>
+                      <div className={styles.barra}><div className={styles.barraRelleno} style={{ width: `${(g.total / maxTotal) * 100}%` }} /></div>
+                    </li>
+                  ))}
+                </ul>
+              )}
+          </Panel>
+
+          <Panel titulo="Últimos 7 días">
+            <div className={styles.dias}>
+              {dias.map((d) => (
+                <div key={d.dia} className={styles.dia}>
+                  <span className={styles.diaNum}>{d.total}</span>
+                  <div className={styles.diaCol}><div className={styles.diaBarra} style={{ height: `${Math.max(4, (d.total / maxDia) * 100)}%` }} /></div>
+                  <span className={styles.diaEtq}>{d.etiqueta}</span>
+                </div>
+              ))}
+            </div>
+          </Panel>
+        </div>
       </div>
 
       {GRUPOS.map((g) => (
