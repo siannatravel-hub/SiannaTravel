@@ -106,3 +106,27 @@ export const misLeads = (items, asesora) =>
 // n8n guarda las asesoras en mayúsculas ('BIANKA', 'WEN', 'ANA LAURA'): se muestran como nombre propio.
 export const nombreAsesora = (s) =>
   String(s || '').trim().toLowerCase().replace(/(^|\s)\S/g, (c) => c.toUpperCase()) || 'Sin asignar';
+
+// El historial que guarda n8n es texto: "[Cliente] hola\n[Bot] respuesta\n---\n" (un par por intercambio).
+// Lo convertimos en mensajes sueltos; las líneas sin etiqueta se pegan al mensaje anterior.
+export function parseHistorial(texto) {
+  const mensajes = [];
+  for (const crudo of String(texto || '').split(/\r?\n/)) {
+    const linea = crudo.trim();
+    if (!linea || /^-{3,}$/.test(linea)) continue;
+    const m = linea.match(/^\[(cliente|bot|asesor|asesora)\]\s*(.*)$/i);
+    if (m) {
+      const rol = m[1].toLowerCase() === 'cliente' ? 'cliente' : m[1].toLowerCase() === 'bot' ? 'bot' : 'asesor';
+      mensajes.push({ rol, texto: m[2] });
+    } else if (mensajes.length) {
+      mensajes[mensajes.length - 1].texto += ` ${linea}`;
+    }
+  }
+  return mensajes.filter((x) => x.texto);
+}
+
+// Lo último que contestó el bot (para ver de un vistazo qué ya se le dijo al cliente).
+export function ultimaRespuestaBot(texto) {
+  const m = parseHistorial(texto).filter((x) => x.rol === 'bot');
+  return m.length ? m[m.length - 1].texto : '';
+}

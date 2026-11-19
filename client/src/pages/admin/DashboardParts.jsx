@@ -1,5 +1,7 @@
+import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { hace, linkWhatsApp, nombreAsesora, normalizar } from '../../lib/adminStats';
+import LeadDetalle from './LeadDetalle';
+import { hace, linkWhatsApp, nombreAsesora, normalizar, ultimaRespuestaBot } from '../../lib/adminStats';
 import styles from './DashboardViews.module.css';
 
 export function Kpi({ label, value, hint, to, alerta = false, cargando = false }) {
@@ -31,6 +33,8 @@ export function LeadRow({ lead, mostrarAsesora = false, conWhatsApp = false }) {
     : /^ig_/i.test(lead.numero_whatsapp || '') ? 'Cliente de Instagram' : null;
   const nombre = lead.nombre_cliente?.trim() || canal || lead.numero_whatsapp || 'Sin nombre';
   const wa = conWhatsApp ? linkWhatsApp(lead.numero_whatsapp) : null;
+  const [abierto, setAbierto] = useState(false);
+  const botDijo = ultimaRespuestaBot(lead.historial);
   return (
     <li className={styles.lead}>
       <span className={styles.avatar} aria-hidden="true">{nombre.charAt(0).toUpperCase()}</span>
@@ -40,6 +44,7 @@ export function LeadRow({ lead, mostrarAsesora = false, conWhatsApp = false }) {
           {lead.intencion_compra && <span className={styles.estrella} title="Quiere comprar">★ Quiere comprar</span>}
         </div>
         <p className={styles.leadMsg}>{lead.ultimo_mensaje || 'Sin mensajes todavía'}</p>
+        {botDijo && <p className={styles.leadBot}>Bot: {botDijo}</p>}
         <div className={styles.leadMeta}>
           <span>{hace(lead.fecha_hora)}</span>
           {mostrarAsesora && <span>· {nombreAsesora(lead.asesor)}</span>}
@@ -52,7 +57,9 @@ export function LeadRow({ lead, mostrarAsesora = false, conWhatsApp = false }) {
             Abrir WhatsApp
           </a>
         )}
+        <button type="button" className={styles.btnChat} onClick={() => setAbierto(true)}>Ver conversación</button>
       </div>
+      {abierto && <LeadDetalle lead={lead} onClose={() => setAbierto(false)} />}
     </li>
   );
 }

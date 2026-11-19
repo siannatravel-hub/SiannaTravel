@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom';
 import { getSolicitudes, updateSolicitud, deleteSolicitud, markSolicitudesRead } from '../../lib/solicitudes';
 import { useAuth } from '../../context/AuthContext';
 import { estaPendiente, linkWhatsApp, misLeads, opcionesEstado } from '../../lib/adminStats';
+import LeadDetalle from './LeadDetalle';
 import styles from './BotAdmin.module.css';
 import movil from './SolicitudesMovil.module.css';
 
@@ -14,6 +15,7 @@ export default function ManageSolicitudes() {
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [savedId, setSavedId] = useState(null);
+  const [detalleId, setDetalleId] = useState(null);
   // Todas ven y administran todos los leads. Las asesoras abren con sus leads por atender; la dueña con todos.
   const [filtro, setFiltro] = useState(vistaDuena ? 'todos' : 'pendientes');
   const [soloMios, setSoloMios] = useState(!vistaDuena && !!user?.asesora);
@@ -87,7 +89,11 @@ export default function ManageSolicitudes() {
                 <tbody>
                   {visibles.map((it) => (
                     <tr key={it.id}>
-                      <td data-label="Cliente">{it.nombre_cliente || '—'}</td>
+                      <td data-label="Cliente">
+                        <button type="button" className={movil.verChat} onClick={() => setDetalleId(it.id)} title="Ver conversación">
+                          {it.nombre_cliente || 'Sin nombre'}{it.historial ? ' 💬' : ''}
+                        </button>
+                      </td>
                       <td data-label="WhatsApp">
                         {linkWhatsApp(it.numero_whatsapp)
                           ? <a href={linkWhatsApp(it.numero_whatsapp)} target="_blank" rel="noopener noreferrer">{it.numero_whatsapp}</a>
@@ -130,6 +136,7 @@ export default function ManageSolicitudes() {
               </table>
             </div>
           )}
+      {detalleId && <LeadDetalle lead={items.find((x) => x.id === detalleId)} onClose={() => setDetalleId(null)} />}
     </div>
   );
 }

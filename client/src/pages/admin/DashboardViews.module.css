@@ -338,3 +338,7 @@
 .diaEtq { font-size: 0.72rem; color: rgba(255, 255, 255, 0.45); text-transform: capitalize; }
 
 .separador { height: 1px; margin: 1.5rem 0 1.4rem; background: rgba(255, 255, 255, 0.1); }
+
+.leadBot { margin: 0 0 0.1rem; color: rgba(134, 239, 172, 0.8); font-size: 0.82rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.btnChat { background: none; border: 1px solid rgba(255,255,255,0.25); color: inherit; border-radius: 8px; padding: 5px 10px; font-size: 0.8rem; cursor: pointer; }
+.btnChat:hover { border-color: rgba(255,255,255,0.5); }

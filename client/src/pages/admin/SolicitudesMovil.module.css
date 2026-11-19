@@ -51,3 +51,5 @@
 /* En cualquier ancho: el número de WhatsApp se ve como enlace y el campo bloqueado se ve bloqueado. */
 table.tarjetas a { color: #4ade80; text-decoration: underline; }
 table.tarjetas input[readonly] { opacity: 0.6; cursor: not-allowed; }
+
+.verChat { background: none; border: none; padding: 0; color: #7dd3fc; font: inherit; text-align: inherit; cursor: pointer; text-decoration: underline dotted; }
