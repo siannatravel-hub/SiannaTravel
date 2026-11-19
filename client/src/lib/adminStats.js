@@ -98,3 +98,7 @@ export function leadsPorDia(items, dias = 7, ahora = new Date()) {
   }
   return out;
 }
+
+// Leads de una asesora (sin importar acentos ni mayúsculas). Sin asesora definida devuelve todos.
+export const misLeads = (items, asesora) =>
+  asesora ? items.filter((l) => normalizar(l.asesor) === normalizar(asesora)) : items;

@@ -4,9 +4,9 @@ import OwnerDashboard from './OwnerDashboard';
 import AsesoraDashboard from './AsesoraDashboard';
 import styles from './AdminDashboard.module.css';
 
-// La dueña ve el negocio completo; las asesoras, solo sus leads.
+// Misma administración para todas; cambia el panel de inicio: negocio completo (dueña) o mis leads (asesoras).
 export default function AdminDashboard() {
-  const { user, signOut, isOwner } = useAuth();
+  const { user, signOut, vistaDuena } = useAuth();
   const navigate = useNavigate();
 
   const handleLogout = async () => {
@@ -29,7 +29,7 @@ export default function AdminDashboard() {
       </header>
 
       <main className={styles.dashboardContent}>
-        {isOwner ? <OwnerDashboard user={user} /> : <AsesoraDashboard user={user} />}
+        {vistaDuena ? <OwnerDashboard user={user} /> : <AsesoraDashboard user={user} />}
       </main>
     </div>
   );

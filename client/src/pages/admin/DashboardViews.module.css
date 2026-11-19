@@ -336,3 +336,5 @@
 .diaBarra { width: 100%; border-radius: 6px 6px 2px 2px; background: linear-gradient(180deg, #fcd34d, var(--color-secondary)); }
 .diaNum { font-size: 0.8rem; color: rgba(255, 255, 255, 0.75); font-weight: 600; }
 .diaEtq { font-size: 0.72rem; color: rgba(255, 255, 255, 0.45); text-transform: capitalize; }
+
+.separador { height: 1px; margin: 1.5rem 0 1.4rem; background: rgba(255, 255, 255, 0.1); }

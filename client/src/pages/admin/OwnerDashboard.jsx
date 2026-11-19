@@ -1,28 +1,10 @@
 import { Link } from 'react-router-dom';
 import useDashboardData from '../../lib/useDashboardData';
 import { leadsPorDia, porAsesora, recientes, resumenLeads, saludo } from '../../lib/adminStats';
-import { ErrorCarga, Kpi, LeadRow, Panel } from './DashboardParts';
+import { Accesos, ErrorCarga, Kpi, LeadRow, Panel } from './DashboardParts';
 import styles from './DashboardViews.module.css';
 
-const GRUPOS = [
-  {
-    titulo: 'Catálogo y sitio',
-    accesos: [
-      { to: '/admin/packages', icono: '📦', titulo: 'Paquetes', desc: 'Precios, fechas, fotos e itinerarios' },
-      { to: '/admin/featured', icono: '⭐', titulo: 'Promociones', desc: 'Las 3 ofertas de la página principal' },
-      { to: '/admin/blog', icono: '📝', titulo: 'Blog', desc: 'Publicaciones con texto, imágenes y video' },
-    ],
-  },
-  {
-    titulo: 'Asistente de WhatsApp',
-    accesos: [
-      { to: '/admin/solicitudes', icono: '📨', titulo: 'Leads', desc: 'Todos los contactos del bot', insignia: true },
-      { to: '/admin/faq', icono: '💡', titulo: 'Preguntas frecuentes', desc: 'Lo que responde el asistente' },
-      { to: '/admin/links', icono: '🔗', titulo: 'Enlaces', desc: 'Catálogo, redes y PDFs que comparte' },
-    ],
-  },
-];
-
+// Panel de inicio de la dueña: primero cómo va el negocio, después los accesos de siempre.
 export default function OwnerDashboard({ user }) {
   const { cargando, error, leads, paquetes, sinLeer, recargar } = useDashboardData({ conCatalogo: true });
   const r = resumenLeads(leads);
@@ -42,7 +24,7 @@ export default function OwnerDashboard({ user }) {
           </h1>
           <p className={styles.heroSub}>Así va Sianna Travel hoy, {fecha}.</p>
         </div>
-        <span className={styles.rolChip}>Dueña</span>
+        <span className={styles.rolChip}>Resumen del negocio</span>
       </div>
 
       {error && <ErrorCarga onReintentar={recargar} />}
@@ -96,20 +78,7 @@ export default function OwnerDashboard({ user }) {
         </div>
       </div>
 
-      {GRUPOS.map((g) => (
-        <section key={g.titulo} className={styles.grupo}>
-          <h2 className={styles.grupoTitulo}>{g.titulo}</h2>
-          <div className={styles.accesos}>
-            {g.accesos.map((a) => (
-              <Link key={a.to} to={a.to} className={styles.acceso}>
-                {a.insignia && sinLeer > 0 && <span className={styles.insignia}>{sinLeer}</span>}
-                <span className={styles.accesoIcono}>{a.icono}</span>
-                <span><span className={styles.accesoTitulo}>{a.titulo}</span><span className={styles.accesoDesc}>{a.desc}</span></span>
-              </Link>
-            ))}
-          </div>
-        </section>
-      ))}
+      <Accesos sinLeer={sinLeer} />
 
       <Link to="/" className={styles.volver}>← Ver sitio público</Link>
     </>

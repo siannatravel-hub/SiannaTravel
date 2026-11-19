@@ -77,3 +77,44 @@ export function ErrorCarga({ onReintentar }) {
     </div>
   );
 }
+
+// Accesos a toda la administración. Son los mismos y en el mismo orden para todas las usuarias.
+const GRUPOS_ACCESOS = [
+  {
+    titulo: 'Atención a clientes',
+    accesos: [
+      { to: '/admin/solicitudes', icono: '📨', titulo: 'Leads', desc: 'Mensajes y contactos del asistente', insignia: true },
+      { to: '/admin/faq', icono: '💡', titulo: 'Preguntas frecuentes', desc: 'Lo que responde el asistente' },
+      { to: '/admin/links', icono: '🔗', titulo: 'Enlaces', desc: 'Catálogo, redes y PDFs que comparte' },
+    ],
+  },
+  {
+    titulo: 'Sitio web',
+    accesos: [
+      { to: '/admin/packages', icono: '📦', titulo: 'Paquetes', desc: 'Precios, fechas, fotos e itinerarios' },
+      { to: '/admin/featured', icono: '⭐', titulo: 'Promociones', desc: 'Las 3 ofertas de la página principal' },
+      { to: '/admin/blog', icono: '📝', titulo: 'Blog', desc: 'Publicaciones con texto, imágenes y video' },
+    ],
+  },
+];
+
+export function Accesos({ sinLeer = 0 }) {
+  return (
+    <>
+      {GRUPOS_ACCESOS.map((g) => (
+        <section key={g.titulo} className={styles.grupo}>
+          <h2 className={styles.grupoTitulo}>{g.titulo}</h2>
+          <div className={styles.accesos}>
+            {g.accesos.map((a) => (
+              <Link key={a.to} to={a.to} className={styles.acceso}>
+                {a.insignia && sinLeer > 0 && <span className={styles.insignia}>{sinLeer}</span>}
+                <span className={styles.accesoIcono}>{a.icono}</span>
+                <span><span className={styles.accesoTitulo}>{a.titulo}</span><span className={styles.accesoDesc}>{a.desc}</span></span>
+              </Link>
+            ))}
+          </div>
+        </section>
+      ))}
+    </>
+  );
+}

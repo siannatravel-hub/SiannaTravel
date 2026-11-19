@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { getSolicitudes, updateSolicitud, deleteSolicitud, markSolicitudesRead } from '../../lib/solicitudes';
 import { useAuth } from '../../context/AuthContext';
-import { estaPendiente, linkWhatsApp, opcionesEstado } from '../../lib/adminStats';
+import { estaPendiente, linkWhatsApp, misLeads, opcionesEstado } from '../../lib/adminStats';
 import styles from './BotAdmin.module.css';
 import movil from './SolicitudesMovil.module.css';
 
@@ -10,12 +10,13 @@ const ESTADOS = ['Nuevo', 'Escalado', 'Atendido', 'Cerrado'];
 const PRIORIDADES = ['BAJA', 'MEDIA', 'ALTA'];
 
 export default function ManageSolicitudes() {
-  const { isOwner } = useAuth();
+  const { user, vistaDuena } = useAuth();
   const [items, setItems] = useState([]);
   const [loading, setLoading] = useState(true);
   const [savedId, setSavedId] = useState(null);
-  // Las asesoras abren directo "Por atender"; la dueña ve todo.
-  const [filtro, setFiltro] = useState(isOwner ? 'todos' : 'pendientes');
+  // Todas ven y administran todos los leads. Las asesoras abren con sus leads por atender; la dueña con todos.
+  const [filtro, setFiltro] = useState(vistaDuena ? 'todos' : 'pendientes');
+  const [soloMios, setSoloMios] = useState(!vistaDuena && !!user?.asesora);
 
   const load = async () => {
     setLoading(true);
@@ -44,28 +45,31 @@ export default function ManageSolicitudes() {
 
   const fecha = (f) => (f ? new Date(f).toLocaleString('es-MX', { dateStyle: 'short', timeStyle: 'short' }) : '—');
 
-  const porAtender = items.filter((it) => estaPendiente(it.estado));
-  const visibles = filtro === 'pendientes' ? porAtender : items;
+  const base = soloMios ? misLeads(items, user?.asesora) : items;
+  const porAtender = base.filter((it) => estaPendiente(it.estado));
+  const visibles = filtro === 'pendientes' ? porAtender : base;
 
   return (
     <div className={styles.page}>
       <div className={styles.header}>
-        <h1 className={styles.title}>{isOwner ? <>Solicitudes / <span>Leads</span></> : <>Mis <span>leads</span></>}</h1>
+        <h1 className={styles.title}>Solicitudes / <span>Leads</span></h1>
         <Link to="/admin" className={styles.back}>← Volver al panel</Link>
       </div>
-      <p className={styles.subtitle}>
-        {isOwner
-          ? 'Mensajes y leads capturados por el bot. Cambia estado, prioridad, asesor o pausa el bot por contacto.'
-          : 'Tus leads. Cambia el estado cuando los atiendas o pausa el bot si vas a escribirle tú.'}
-      </p>
+      <p className={styles.subtitle}>Mensajes y leads capturados por el bot. Cambia estado, prioridad, asesor o pausa el bot por contacto.</p>
 
-      <div className={styles.toolbar}>
+      <div className={styles.toolbar} style={{ flexWrap: 'wrap' }}>
         <button className={filtro === 'pendientes' ? styles.btn : styles.btnGhost} onClick={() => setFiltro('pendientes')}>
           Por atender ({porAtender.length})
         </button>
         <button className={filtro === 'todos' ? styles.btn : styles.btnGhost} onClick={() => setFiltro('todos')}>
-          Todos ({items.length})
+          Todos ({base.length})
         </button>
+        {user?.asesora && (
+          <button className={soloMios ? styles.btn : styles.btnGhost} onClick={() => setSoloMios((v) => !v)}
+            title={soloMios ? 'Mostrando solo tus leads; toca para ver los de todas' : 'Toca para ver solo tus leads'}>
+            {soloMios ? '✓ Solo mis leads' : 'Solo mis leads'}
+          </button>
+        )}
         <button className={styles.btnGhost} onClick={load}>↻ Actualizar</button>
       </div>
 
@@ -104,7 +108,6 @@ export default function ManageSolicitudes() {
                       </td>
                       <td data-label="Asesor">
                         <input className={styles.input} style={{ minWidth: 90 }} value={it.asesor || ''}
-                          readOnly={!isOwner} title={isOwner ? undefined : 'Solo la dueña puede reasignar leads'}
                           onChange={(e) => setField(it.id, 'asesor', e.target.value)} />
                       </td>
                       <td data-label="Bot">
@@ -118,7 +121,7 @@ export default function ManageSolicitudes() {
                         <div style={{ display: 'flex', gap: 6, alignItems: 'center' }}>
                           {savedId === it.id && <span className={styles.saved}>✓</span>}
                           <button className={styles.btn} onClick={() => save(it)}>Guardar</button>
-                          {isOwner && <button className={styles.btnDanger} onClick={() => remove(it.id)}>✕</button>}
+                          <button className={styles.btnDanger} onClick={() => remove(it.id)}>✕</button>
                         </div>
                       </td>
                     </tr>
