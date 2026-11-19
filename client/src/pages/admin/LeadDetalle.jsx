@@ -16,6 +16,8 @@ export default function LeadDetalle({ lead, onClose }) {
   const mensajes = parseHistorial(lead.historial);
   const wa = canal === 'WhatsApp' ? linkWhatsApp(lead.numero_whatsapp) : null;
   const chatwoot = linkChatwoot(lead);
+  // Messenger no pasa por Chatwoot: la asesora contesta desde la bandeja de Meta Business Suite.
+  const messenger = canal === 'Messenger' ? 'https://business.facebook.com/latest/inbox/messenger' : null;
 
   const datos = [
     ['Canal', canal],
@@ -78,9 +80,10 @@ export default function LeadDetalle({ lead, onClose }) {
           )}
         </section>
 
-        {(wa || chatwoot) && (
+        {(wa || chatwoot || messenger) && (
           <footer className={styles.pie}>
             {wa && <a className={styles.wa} href={wa} target="_blank" rel="noopener noreferrer">Abrir WhatsApp</a>}
+            {messenger && <a className={styles.wa} href={messenger} target="_blank" rel="noopener noreferrer">Abrir Messenger</a>}
             {chatwoot && <a className={styles.cw} href={chatwoot} target="_blank" rel="noopener noreferrer">Ver chat completo</a>}
           </footer>
         )}
